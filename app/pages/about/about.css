@@ -1,12 +1,4 @@
-/* .opcatity-bg{
-    /* background-color: white;
-    content: "";
+.bg-layout-screen{
     height: 100vh;
-    position: absolute;
-    top: 100%;
-    width: 100;
-    translate: none;
-    rotate: none;
-    scale: none;
-    transform: translate(0px, 0%);
-} */
+    background-color: white;
+}
