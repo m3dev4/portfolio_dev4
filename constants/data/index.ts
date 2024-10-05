@@ -4,7 +4,7 @@ export const BentoItems = [
     title:
       "je donne la priorité à la collaboration avec les clients et à la communication qui s'envenime",
     description: "",
-    className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
+    
   },
   {
     id: 2,

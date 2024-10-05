@@ -5,15 +5,15 @@ import { BentoItems } from '@/constants/data'
 
 const GridComponents = () => {
   return (
-    <section>
-        <BentoGrid>
+    <section id='about'>
+        <BentoGrid className='w-full h-full'>
             {BentoItems.map((item) => (
                 <BentoGridItem
                     id={item.id}
                     key={item.id}
                     title={item.title}
                     description={item.description}
-                    className={item.className}
+                    
                 />
             ))}
         </BentoGrid>

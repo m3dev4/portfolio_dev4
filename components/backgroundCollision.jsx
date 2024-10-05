@@ -5,7 +5,7 @@ import GridComponents from "./grid";
 
 export function BackgroundBeamsWithCollisionDemo() {
   return (
-    (<BackgroundBeamsWithCollision className="w-full h-full">
+    (<BackgroundBeamsWithCollision className="w-full">
       <>
         <GridComponents />
       </>

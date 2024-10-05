@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-"use client"
+"use client";
 import localFont from "next/font/local";
 import Image from "next/image";
 import Header from "@/components/header/header";
@@ -10,9 +10,10 @@ import StickyScroll from "@/components/stickyScroll";
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Footer from "@/components/footer/footer";
+import ScrollSmoother from "gsap-trial/ScrollSmoother";
 
 gsap.registerPlugin(ScrollTrigger);
-
 
 const mmFont = localFont({
   src: "../../fonts/mm-font.ttf",
@@ -28,66 +29,80 @@ const poppinsFont = localFont({
 // };
 
 const About = () => {
+  // const smoothWrapperRef = useRef(null)
+  // const smoothContentRef = useRef(null)
 
+  // useEffect(() => {
+  //   let smootehr = ScrollSmoother.create({
+  //     wrapper: smoothWrapperRef.current,
+  //     content: smoothContentRef.current,
+  //     smooth: 1.5,
+  //     effects: true
+  //   })
 
-    // gssap animation 
+  // }, [])
 
+  // gssap animation
 
-    useEffect(() => {
-      // Animation de l'image comme si elle se dépliait
-      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+  useEffect(() => {
+    // Animation de l'image comme si elle se dépliait
+    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
     // Animation de l'image
-    tl.fromTo(".image-unfold", 
+    tl.fromTo(
+      ".image-unfold",
       { scaleY: 0, transformOrigin: "top center", opacity: 0 },
       { scaleY: 1, opacity: 1, duration: 2, ease: "power2.out" }
     );
 
     // Animation du header
-    tl.fromTo(".anim-gs",
+    tl.fromTo(
+      ".anim-gs",
       { y: "-100%", opacity: 0 },
       { y: "0%", opacity: 1, duration: 1.5, stagger: 0.2 },
       "-=1.5" // Commencer un peu avant la fin de l'animation de l'image
     );
 
     // Animation du titre
-    tl.fromTo(".title", 
+    tl.fromTo(
+      ".title",
       { x: "-100%", opacity: 0 },
       { x: "0%", opacity: 1, duration: 2, ease: "power3.out" },
       "-=1" // Commencer avant la fin de l'animation précédente
     );
-    gsap.fromTo(".content-anim", 
+    gsap.fromTo(
+      ".content-anim",
       { y: 50, opacity: 0 },
-      { 
-        y: 0, 
-        opacity: 1, 
+      {
+        y: 0,
+        opacity: 1,
         duration: 1.5,
         stagger: 0.3,
         scrollTrigger: {
           trigger: ".content-anim",
           start: "top 100%",
           end: "bottom 70%",
-          toggleActions: "play none none reverse"
-        }
+          toggleActions: "play none none reverse",
+        },
       }
     );
-    gsap.fromTo(".content-pic", 
+    gsap.fromTo(
+      ".content-pic",
       { x: 50, opacity: 0 },
-      { 
-        x: 0, 
-        opacity: 1, 
+      {
+        x: 0,
+        opacity: 1,
         duration: 1.5,
         stagger: 0.3,
         scrollTrigger: {
           trigger: ".content-pic",
           start: "left 80%",
           end: "right 20%",
-          toggleActions: "play none none reverse"
-        }
+          toggleActions: "play none none reverse",
+        },
       }
     );
-    }, []);
-
+  }, []);
 
   return (
     <div className="w-full bg-gradient-to-r from-zinc-300 to-zinc-300/70 overflow-hidden ">
@@ -121,7 +136,9 @@ const About = () => {
 
         <div className="mx-auto my-28 max-w-[1730rem] px-40 tracking-widest py-28 absolute ">
           <div className="flex items-start justify-between">
-            <p className={`${mmFont.className} text-3xl w-[45%] uppercase content-anim `}>
+            <p
+              className={`${mmFont.className} text-3xl w-[45%] uppercase content-anim `}
+            >
               Ingénieur logiciel avec 3 ans d'expérience dans la création
               d'applications web performantes. Spécialisé dans l'utilisation de
               JavaScript et de ses frameworks comme React et Node.js, je conçois
@@ -150,9 +167,10 @@ const About = () => {
               expériences utilisateurs à la fois captivantes et performantes.
             </p>
           </div>
-          <div className=" w-full">
+          <div className=" w-full h-[300vh]">
             <StickyScroll />
           </div>
+          <Footer />
         </div>
       </div>
     </div>

@@ -31,7 +31,7 @@ body {
   overflow: hidden;
   position: sticky;
   top: 0;
-  height: 100vh;
+  height: 200vh;
   align-items: center;
   justify-content: center;
   mask-image: url('/medias/mask.svg');
@@ -39,4 +39,14 @@ body {
   mask-repeat: no-repeat;
   mask-size: 80%;
   background-color: #0a0a0a;
+}
+
+.no-visible-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.no-visible-scrollbar::-webkit-scrollbar {
+  display: none;
 }

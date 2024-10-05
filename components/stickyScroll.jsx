@@ -9,9 +9,9 @@ const StickyScroll = () => {
     const container = useRef(null);
     const stickyMask = useRef(null);
   
-    const initialMaskSize = .8;
-    const targetMaskSize = 30;
-    const easing = 0.15;
+    const initialMaskSize = .6;
+    const targetMaskSize = 200;
+    const easing = 0.95;
     let easedScrollProgress = 0;
   
     useEffect( () => {
@@ -33,17 +33,10 @@ const StickyScroll = () => {
 
 
   return (
-    <div className=''>
-        <div ref={container} className='absolute left-0 w-full  h-[300vh]'>
+    <div className='mt-[-500px]'>
+        <div ref={container} className='absolute left-0 w-full h-[300vh]'>
             <div className='stikimask' ref={stickyMask}>
-                {/* <Image 
-                src="/images/blackbg.jpg"
-                alt=''
-                width={1000}
-                height={1000}
-
-                className='w-full h-full object-cover bg-transparent'
-                /> */}
+         
                 <BackgroundBeamsWithCollisionDemo />
                 
             </div>
