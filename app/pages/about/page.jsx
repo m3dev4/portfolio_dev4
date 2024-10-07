@@ -12,6 +12,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "@/components/footer/footer";
 import ScrollSmoother from "gsap-trial/ScrollSmoother";
+import ModelAbout from "@/components/modelAbout";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -105,30 +106,15 @@ const About = () => {
   }, []);
 
   return (
-    <div className="w-full bg-gradient-to-r from-zinc-300 to-zinc-300/70 overflow-hidden ">
+    <div className="w-full bg-black  overflow-hidden ">
       <div className="flex justify-between items-center py-7 px-10 z-20 relative anim-gs">
-        <Link href="/" className="text-2xl font-bold text-black">
+        <Link href="/" className="text-2xl font-bold text-white">
           M3DEV4
         </Link>
         <Header />
       </div>
-      <div className="flex items-center justify-center flex-col bg-anim">
-        <Image
-          src="/images/noise-form.png"
-          alt="bg pointe"
-          width={700}
-          height={400}
-          className="image-unfold"
-        />
-        <div className="rond"></div>
-        <div className="absolute bottom-0">
-          <h1
-            className={`${poppinsFont.className} 
-            text-[200px] font-extrabold uppercase -tracking-tight title `}
-          >
-            About Myself
-          </h1>
-        </div>
+      <div className="w-full h-screen">
+        <ModelAbout />
       </div>
       <div className="">
         <CursorSticky />
