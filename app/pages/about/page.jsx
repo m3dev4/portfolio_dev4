@@ -11,11 +11,10 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "@/components/footer/footer";
-import ScrollSmoother from "gsap-trial/ScrollSmoother";
 import ModelAbout from "@/components/modelAbout";
 import Skills from "@/components/skill";
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(ScrollTrigger);
 
 const mmFont = localFont({
   src: "../../fonts/mm-font.ttf",
