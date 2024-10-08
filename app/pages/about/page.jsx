@@ -113,7 +113,7 @@ const About = () => {
         <Header />
       </div>
       <div className="w-full h-screen">
-        <ModelAbout />
+        {/* <ModelAbout /> */}
         </div>
       <div className="h-full w-full">
         <CursorSticky />
