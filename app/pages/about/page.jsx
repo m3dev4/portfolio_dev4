@@ -7,14 +7,15 @@ import Link from "next/link";
 import CursorSticky from "@/components/cursorSticky";
 import "./about.css";
 import StickyScroll from "@/components/stickyScroll";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "@/components/footer/footer";
 import ScrollSmoother from "gsap-trial/ScrollSmoother";
 import ModelAbout from "@/components/modelAbout";
+import Skills from "@/components/skill";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const mmFont = localFont({
   src: "../../fonts/mm-font.ttf",
@@ -30,18 +31,17 @@ const poppinsFont = localFont({
 // };
 
 const About = () => {
-  // const smoothWrapperRef = useRef(null)
-  // const smoothContentRef = useRef(null)
+  // const smoothWrapperRef = useRef(null);
+  // const smoothContentRef = useRef(null);
 
   // useEffect(() => {
-  //   let smootehr = ScrollSmoother.create({
+  //   let smoother = ScrollSmoother.create({
   //     wrapper: smoothWrapperRef.current,
   //     content: smoothContentRef.current,
   //     smooth: 1.5,
-  //     effects: true
-  //   })
-
-  // }, [])
+  //     effects: true,
+  //   });
+  // }, []);
 
   // gssap animation
 
@@ -115,15 +115,15 @@ const About = () => {
       </div>
       <div className="w-full h-screen">
         <ModelAbout />
-      </div>
-      <div className="">
+        </div>
+      <div className="h-full w-full">
         <CursorSticky />
         {/* <div className="bg-layout-screen"></div> */}
 
-        <div className="mx-auto my-28 max-w-[1730rem] px-40 tracking-widest py-28 absolute ">
-          <div className="flex items-start justify-between">
+        <div className="mx-auto my-8 sm:my-16 md:my-28 max-w-full overflow-hidden px-4 sm:px-8 md:px-16 lg:px-40 tracking-widest py-8 sm:py-16 md:py-28 bg-white ">
+          <div className="flex flex-col md:flex-row items-start w-full justify-between md:space-x-8 ">
             <p
-              className={`${mmFont.className} text-3xl w-[45%] uppercase content-anim `}
+              className={`${mmFont.className} text-lg sm:text-xl md:text-2xl lg:text-3xl w-full md:w-[45%] uppercase mb-8 md:mb-0`}
             >
               Ingénieur logiciel avec 3 ans d'expérience dans la création
               d'applications web performantes. Spécialisé dans l'utilisation de
@@ -133,17 +133,19 @@ const About = () => {
               qualité du code et l'optimisation des performances pour chaque
               projet.
             </p>
-            <Image
-              src="/images/med.jpeg"
-              alt="m3dev4"
-              width={600}
-              height={500}
-              className="object-cover w-[600px] h-[700px] content-pic"
-            />
+            <div className="w-full md:w-1/2">
+              <Image
+                src="/images/med.jpeg"
+                alt="m3dev4"
+                width={600}
+                height={700}
+                className="object-cover w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px]"
+              />
+            </div>
           </div>
-          <div className="mt-12">
+          <div className="mt-8 sm:mt-12 md:mt-16">
             <p
-              className={`${mmFont.className} text-2xl uppercase w-[70%] ml-auto`}
+              className={`${mmFont.className} text-lg sm:text-xl md:text-2xl uppercase w-full md:w-[70%] md:ml-auto`}
             >
               Je suis né à Dakar, Sénégal, et ma passion pour le développement
               logiciel a débuté en 2020. Depuis, je me suis spécialisé dans le
@@ -156,7 +158,9 @@ const About = () => {
           <div className=" w-full h-[300vh]">
             <StickyScroll />
           </div>
-          <Footer />
+          <div className="w-full h-[75vh] bg-black absolute left-0">
+            <Skills />
+          </div>
         </div>
       </div>
     </div>

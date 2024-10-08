@@ -1,3 +1,5 @@
+import { height } from "@/components/nav/anime";
+
 export const BentoItems = [
   {
     id: 1,
@@ -33,3 +35,127 @@ export const BentoItems = [
     description: "",
   },
 ];
+
+
+export const Frontend_skill = [
+  {
+    skill_name: "html",
+    image: "/icons/html-5.png",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "css",
+    image: "/icons/css-3.png",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "javascript",
+    image: "/icons/js.png",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "typescript",
+    image: "/icons/typescript.png",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "react",
+    image: "/icons/react.png",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "nextjs",
+    image: "/icons/nextjs.png",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "material Ui",
+    image: "/icons/mui.png",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "reduxjs",
+    image: "/icons/redux.png",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "tailwind",
+    image: "/icons/tailwind.svg",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "framer-motion",
+    image: "/icons/framer-motion.svg",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "gsap",
+    image: "/icons/gsap.svg",
+    width: 70,
+    height: 70
+  },
+]
+
+export const Backend_skill = [
+  {
+    skill_name: "nodejs",
+    image: "/icons/nodejs.png",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "express",
+    image: "/icons/expressjs.png",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "mongoDB",
+    image: "/icons/mongodb.png",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "postman",
+    image: "/icons/postman.svg",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "graphql",
+    image: "/icons/graphql.png",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "postgres",
+    image: "/icons/postgres.png",
+    width: 70,
+    height: 70
+  },
+  {
+    skill_name: "prisma",
+    image: "/icons/prisma.png",
+    width: 70,
+    height: 70
+  },
+]
+
+export const Fullstack_skill = [
+  {
+    skill_name: "docker",
+    image: "/icons/docker.png",
+    width: 70,
+    height: 70
+  },
+]
