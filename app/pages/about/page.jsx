@@ -11,11 +11,10 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "@/components/footer/footer";
-import ScrollSmoother from "gsap-trial/ScrollSmoother";
 import ModelAbout from "@/components/modelAbout";
 import Skills from "@/components/skill";
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(ScrollTrigger);
 
 const mmFont = localFont({
   src: "../../fonts/mm-font.ttf",
@@ -31,80 +30,6 @@ const poppinsFont = localFont({
 // };
 
 const About = () => {
-  // const smoothWrapperRef = useRef(null);
-  // const smoothContentRef = useRef(null);
-
-  // useEffect(() => {
-  //   let smoother = ScrollSmoother.create({
-  //     wrapper: smoothWrapperRef.current,
-  //     content: smoothContentRef.current,
-  //     smooth: 1.5,
-  //     effects: true,
-  //   });
-  // }, []);
-
-  // gssap animation
-
-  useEffect(() => {
-    // Animation de l'image comme si elle se dépliait
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-
-    // Animation de l'image
-    tl.fromTo(
-      ".image-unfold",
-      { scaleY: 0, transformOrigin: "top center", opacity: 0 },
-      { scaleY: 1, opacity: 1, duration: 2, ease: "power2.out" }
-    );
-
-    // Animation du header
-    tl.fromTo(
-      ".anim-gs",
-      { y: "-100%", opacity: 0 },
-      { y: "0%", opacity: 1, duration: 1.5, stagger: 0.2 },
-      "-=1.5" // Commencer un peu avant la fin de l'animation de l'image
-    );
-
-    // Animation du titre
-    tl.fromTo(
-      ".title",
-      { x: "-100%", opacity: 0 },
-      { x: "0%", opacity: 1, duration: 2, ease: "power3.out" },
-      "-=1" // Commencer avant la fin de l'animation précédente
-    );
-    gsap.fromTo(
-      ".content-anim",
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.5,
-        stagger: 0.3,
-        scrollTrigger: {
-          trigger: ".content-anim",
-          start: "top 100%",
-          end: "bottom 70%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-    gsap.fromTo(
-      ".content-pic",
-      { x: 50, opacity: 0 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1.5,
-        stagger: 0.3,
-        scrollTrigger: {
-          trigger: ".content-pic",
-          start: "left 80%",
-          end: "right 20%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-  }, []);
-
   return (
     <div className="w-full bg-black  overflow-hidden ">
       <div className="flex justify-between items-center py-7 px-10 z-20 relative anim-gs">
@@ -113,13 +38,8 @@ const About = () => {
         </Link>
         <Header />
       </div>
-      <div className="w-full h-screen">
-        <ModelAbout />
-        </div>
+      <div className="w-full h-screen">{/* <ModelAbout /> */}</div>
       <div className="h-full w-full">
-        <CursorSticky />
-        {/* <div className="bg-layout-screen"></div> */}
-
         <div className="mx-auto my-8 sm:my-16 md:my-28 max-w-full overflow-hidden px-4 sm:px-8 md:px-16 lg:px-40 tracking-widest py-8 sm:py-16 md:py-28 bg-white ">
           <div className="flex flex-col md:flex-row items-start w-full justify-between md:space-x-8 ">
             <p
