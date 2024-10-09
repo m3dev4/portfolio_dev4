@@ -159,7 +159,7 @@ const About = () => {
             <Skills />
           </div>
         </div>
-        <div className=" w-full" style={{ height: '300vh', zIndex: 50 }}>
+        <div className=" w-full" style={{ height: '300vh', zIndex: 100 }}>
             <StickyScroll />
           </div>
       </div>
