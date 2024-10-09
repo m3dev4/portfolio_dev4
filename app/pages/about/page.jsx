@@ -39,7 +39,7 @@ const About = () => {
         <Header />
       </div>
       <div className="w-full h-screen">
-        <ModelAbout />
+        {/* <ModelAbout /> */}
         </div>
       <div className="h-full w-full">
         <div className="mx-auto my-8 sm:my-16 md:my-28 max-w-full overflow-hidden px-4 sm:px-8 md:px-16 lg:px-40 tracking-widest py-8 sm:py-16 md:py-28 bg-white ">
