@@ -3,6 +3,7 @@ import {
   Environment,
   Lightformer,
   MeshTransmissionMaterial,
+  Text,
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
@@ -41,6 +42,7 @@ const ModelAbout = (props) => {
       gl={{ antialias: false }}
       camera={{ position: [0, 0, 15], fov: 17.5, near: 1, far: 20 }}
       {...props}
+      className=""
     >
       <color attach="background" args={["#141622"]} />
       <ambientLight intensity={0.4} />
@@ -51,12 +53,34 @@ const ModelAbout = (props) => {
         intensity={1}
         castShadow
       />
-      <Physics>
+      <Physics gravity={[0, 0, 0]}>
         <Pointer />
         {connectors.map((props, i) => (
           <Connector key={i} {...props} />
         ))}
         <Connector position={[10, 10, 5]}>
+        <Text
+          position={[0, 0, 0]}   // Centré dans la scène
+          fontSize={1.2}           // Taille du texte
+          color="white"            // Couleur de base avant l'effet
+          anchorX="center"         // Alignement horizontal centré
+          anchorY="middle"         // Alignement vertical centré
+          castShadow
+        >
+          About Myself
+          <MeshTransmissionMaterial
+            clearcoat={1}
+            thickness={0.2}
+            ior={1.2}
+            transmission={1}      // Effet de verre transparent
+            chromaticAberration={0.1}
+            anisotropicBlur={0.1}
+            distortion={0.05}
+            roughness={0.1}
+            envMapIntensity={1}   // Intensité de l'effet miroir
+            color="white"
+          />
+        </Text>
           <Model>
             <MeshTransmissionMaterial
               clearcoat={1}

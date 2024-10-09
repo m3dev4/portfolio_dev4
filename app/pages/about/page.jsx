@@ -25,7 +25,7 @@ const About = () => {
         </Link>
         <Header />
       </div>
-      <div className="h-screen w-full flex items-center justify-center">
+      <div className="h-screen w-full">
         <ModelAbout />
       </div>
       <div className="mx-auto my-8 sm:my-16 md:my-28 max-w-full px-4 sm:px-8 md:px-16 lg:px-40 tracking-wide py-8 sm:py-16 md:py-20 h-full">
