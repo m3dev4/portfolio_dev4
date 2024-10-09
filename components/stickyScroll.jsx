@@ -40,7 +40,8 @@ const StickyScroll = () => {
         <div ref={container} className='absolute left-0 w-full h-[300vh]'>
             <div className='stikimask' ref={stickyMask}>
          
-                <BackgroundBeamsWithCollisionDemo />
+                {/* <BackgroundBeamsWithCollisionDemo /> */}
+                <GridComponents />
                 
             </div>
         </div>

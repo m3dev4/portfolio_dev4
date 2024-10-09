@@ -7,7 +7,7 @@ export function BackgroundBeamsWithCollisionDemo() {
   return (
     (<BackgroundBeamsWithCollision className="w-full">
       <>
-        <GridComponents />
+       
       </>
     </BackgroundBeamsWithCollision>)
   );
