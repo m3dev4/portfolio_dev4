@@ -31,14 +31,16 @@ const poppinsFont = localFont({
 
 const About = () => {
   return (
-    <div className="w-full bg-black  overflow-hidden ">
+    <div className="w-full bg-black ">
       <div className="flex justify-between items-center py-7 px-10 z-20 relative anim-gs">
         <Link href="/" className="text-2xl font-bold text-white">
           M3DEV4
         </Link>
         <Header />
       </div>
-      <div className="w-full h-screen">{/* <ModelAbout /> */}</div>
+      <div className="w-full h-screen">
+        <ModelAbout />
+        </div>
       <div className="h-full w-full">
         <div className="mx-auto my-8 sm:my-16 md:my-28 max-w-full overflow-hidden px-4 sm:px-8 md:px-16 lg:px-40 tracking-widest py-8 sm:py-16 md:py-28 bg-white ">
           <div className="flex flex-col md:flex-row items-start w-full justify-between md:space-x-8 ">
@@ -75,7 +77,7 @@ const About = () => {
               expériences utilisateurs à la fois captivantes et performantes.
             </p>
           </div>
-          <div className=" w-full h-[300vh]">
+          <div className=" w-full h-[300vh] z-[100] ">
             <StickyScroll />
           </div>
           <div className="w-full h-[75vh] bg-black absolute left-0">
