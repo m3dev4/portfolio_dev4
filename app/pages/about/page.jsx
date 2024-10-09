@@ -119,7 +119,7 @@ const About = () => {
         <CursorSticky />
         {/* <div className="bg-layout-screen"></div> */}
 
-        <div className="mx-auto my-8 sm:my-16 md:my-28 max-w-full overflow-hidden px-4 sm:px-8 md:px-16 lg:px-40 tracking-widest py-8 sm:py-16 md:py-28 ">
+        <div className="mx-auto my-8  max-w-full overflow-hidden px-4  tracking-widest py-8 ">
           <div className="flex flex-col md:flex-row items-start w-full justify-between md:space-x-8 ">
             <p
               className={`${mmFont.className} text-lg sm:text-xl md:text-2xl lg:text-3xl w-full md:w-[45%] uppercase mb-8 md:mb-0`}
@@ -154,14 +154,13 @@ const About = () => {
               expériences utilisateurs à la fois captivantes et performantes.
             </p>
           </div>
-          
+          <div className=" w-full" style={{ height: '300vh', zIndex: 50 }}>
+            <StickyScroll />
+          </div>
           <div className="w-full h-[75vh] bg-black absolute left-0">
             <Skills />
           </div>
         </div>
-        <div className=" w-full" style={{ height: '300vh', zIndex: 100 }}>
-            <StickyScroll />
-          </div>
       </div>
     </div>
   );
