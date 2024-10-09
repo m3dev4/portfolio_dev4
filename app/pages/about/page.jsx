@@ -154,14 +154,14 @@ const About = () => {
               expériences utilisateurs à la fois captivantes et performantes.
             </p>
           </div>
-          <div className=" w-full" style={{ height: '300vh', zIndex: 200 }}>
+        </div>
+      </div>
+      <div className=" w-full">
             <StickyScroll />
           </div>
           <div className="w-full h-[75vh] bg-black absolute left-0">
             <Skills />
           </div>
-        </div>
-      </div>
     </div>
   );
 };
