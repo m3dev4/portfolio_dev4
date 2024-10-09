@@ -105,7 +105,7 @@ const About = () => {
   }, []);
 
   return (
-    <div className="w-full bg-black  overflow-hidden ">
+    <div className="w-full bg-black ">
       <div className="flex justify-between items-center py-7 px-10 z-20 relative anim-gs">
         <Link href="/" className="text-2xl font-bold text-white">
           M3DEV4
@@ -154,14 +154,14 @@ const About = () => {
               expériences utilisateurs à la fois captivantes et performantes.
             </p>
           </div>
-        </div>
-      </div>
-      <div className=" w-full">
+          <div className=" w-full z-index[100] ">
             <StickyScroll />
           </div>
           <div className="w-full h-[75vh] bg-black absolute left-0">
             <Skills />
           </div>
+        </div>
+      </div>
     </div>
   );
 };
