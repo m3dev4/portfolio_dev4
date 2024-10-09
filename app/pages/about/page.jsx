@@ -3,6 +3,7 @@ import Header from "@/components/header/header";
 import ModelAbout from "@/components/modelAbout";
 import Skills from "@/components/skill";
 import StickyScroll from "@/components/stickyScroll";
+import { MeshTransmissionMaterial, Text } from "@react-three/drei";
 import localFont from "next/font/local";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,6 +27,7 @@ const About = () => {
         <Header />
       </div>
       <div className="h-screen w-full">
+        
         <ModelAbout />
       </div>
       <div className="mx-auto my-8 sm:my-16 md:my-28 max-w-full px-4 sm:px-8 md:px-16 lg:px-40 tracking-wide py-8 sm:py-16 md:py-20 h-full">

@@ -53,19 +53,14 @@ const ModelAbout = (props) => {
         intensity={1}
         castShadow
       />
-      <Physics gravity={[0, 0, 0]}>
-        <Pointer />
-        {connectors.map((props, i) => (
-          <Connector key={i} {...props} />
-        ))}
-        <Connector position={[10, 10, 5]}>
-        <Text
+       <Text
           position={[0, 0, 0]}   // Centré dans la scène
           fontSize={1.2}           // Taille du texte
           color="white"            // Couleur de base avant l'effet
           anchorX="center"         // Alignement horizontal centré
           anchorY="middle"         // Alignement vertical centré
           castShadow
+          fontWeight='bold'
         >
           About Myself
           <MeshTransmissionMaterial
@@ -81,6 +76,12 @@ const ModelAbout = (props) => {
             color="white"
           />
         </Text>
+      <Physics gravity={[0, 0, 0]}>
+        <Pointer />
+        {connectors.map((props, i) => (
+          <Connector key={i} {...props} />
+        ))}
+        <Connector position={[10, 10, 5]}>
           <Model>
             <MeshTransmissionMaterial
               clearcoat={1}
@@ -205,7 +206,7 @@ function Model({ children, color = "white", roughness = 0, ...props }) {
       ref={ref}
       castShadow
       receiveShadow
-      scale={10}
+      scale={7}
       geometry={nodes.connector.geometry}
     >
       <meshStandardMaterial
