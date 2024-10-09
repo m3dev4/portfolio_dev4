@@ -1,29 +1,49 @@
 "use client";
-import { Canvas, extend, useFrame, useThree } from "@react-three/fiber";
-import * as THREE from "three";
 import {
-  AccumulativeShadows,
-  Center,
   Environment,
-  RandomizedLight,
-  Text,
-  PresentationControls,
-  Sparkles,
+  Lightformer,
   MeshTransmissionMaterial,
 } from "@react-three/drei";
-import Model from "./model"; // Assurez-vous que votre modèle est exporté correctement
-import { useRef, useEffect } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  BallCollider,
+  CuboidCollider,
+  Physics,
+  RigidBody,
+} from "@react-three/rapier";
+import { easing } from "maath";
+import { EffectComposer, N8AO } from "@react-three/postprocessing";
+import { useMemo, useReducer, useRef } from "react";
+import * as THREE from "three";
+import { useGLTF } from "@react-three/drei";
 
-const ModelAbout = () => {
+const accents = ["#4060ff", "#20ffa0", "#ff4060", "#ffcc00"];
+const shuffle = (accent = 0) => [
+  { color: "#444", roughness: 0.1 },
+  { color: "#444", roughness: 0.75 },
+  { color: "#444", roughness: 0.75 },
+  { color: "white", roughness: 0.1 },
+  { color: "white", roughness: 0.75 },
+  { color: "white", roughness: 0.1 },
+  { color: accents[accent], roughness: 0.1, accent: true },
+  { color: accents[accent], roughness: 0.75, accent: true },
+  { color: accents[accent], roughness: 0.1, accent: true },
+];
+
+const ModelAbout = (props) => {
+  const [accent, click] = useReducer((state) => ++state % accents.length, 0);
+  const connectors = useMemo(() => shuffle(accent), [accent]);
   return (
     <Canvas
-      eventPrefix="client"
+      onClick={click}
       shadows
-      camera={{ position: [1, 0.5, 10] }}
-      className="z-10"
+      dpr={[1, 1.5]}
+      gl={{ antialias: false }}
+      camera={{ position: [0, 0, 15], fov: 17.5, near: 1, far: 20 }}
+      {...props}
     >
-      <color attach="background" args={["#000"]} />
-      <ambientLight intensity={0.5} />
+      <color attach="background" args={["#141622"]} />
+      <ambientLight intensity={0.4} />
       <spotLight
         position={[10, 10, 10]}
         angle={0.15}
@@ -31,122 +51,145 @@ const ModelAbout = () => {
         intensity={1}
         castShadow
       />
-
-      <CameraIntroAnimation /> {/* Appel de l'animation de la caméra */}
-
-      <PresentationControls
-        global
-        config={{ mass: 2, tension: 500 }}
-        snap={{ mass: 4, tension: 1500 }}
-        rotation={[0, 0.3, 0]}
-        polar={[-Math.PI / 3, Math.PI / 3]}
-        azimuth={[-Math.PI / 1.4, Math.PI / 2]}
-      >
-        <group position={[0, -1, 0]} dispose={null}>
-          <Model scale={2} rotation={[0, -Math.PI / 4, 0]} />
-          <Center position={[0, 2, 0]}> {/* Ajustement de la position Y */}
-            <Text
-              fontSize={1.5} // Réduction de la taille de la police
-              fontWeight="bold"
-              color="#ffffff"
-              anchorX="center"
-              anchorY="middle"
-            >
-              About Myself
-              <MeshTransmissionMaterial
-                backside
-                samples={16}
-                resolution={512}
-                transmission={1}
-                roughness={0.1}
-                thickness={0.1}
-                ior={1.5}
-                chromaticAberration={0.06}
-                anisotropy={0.1}
-                distortion={0.0}
-                distortionScale={0.3}
-                temporalDistortion={0.5}
-                iridescence={1}
-                iridescenceIOR={1}
-                iridescenceThicknessRange={[0, 1400]}
-              />
-            </Text>
-          </Center>
-          <Sparkles count={200} scale={10} size={2} speed={0.4} />
+      <Physics>
+        <Pointer />
+        {connectors.map((props, i) => (
+          <Connector key={i} {...props} />
+        ))}
+        <Connector position={[10, 10, 5]}>
+          <Model>
+            <MeshTransmissionMaterial
+              clearcoat={1}
+              thickness={0.1}
+              anisotropicBlur={0.1}
+              chromaticAberration={0.1}
+              samples={8}
+              resolution={512}
+            />
+          </Model>
+        </Connector>
+      </Physics>
+      <EffectComposer disableNormalPass multisampling={8}>
+        <N8AO distanceFalloff={1} aoRadius={1} intensity={4} />
+      </EffectComposer>
+      <Environment resolution={256}>
+        <group rotation={[-Math.PI / 3, 0, 1]}>
+          <Lightformer
+            form="circle"
+            intensity={4}
+            rotation-x={Math.PI / 2}
+            position={[0, 5, -9]}
+            scale={2}
+          />
+          <Lightformer
+            form="circle"
+            intensity={2}
+            rotation-y={Math.PI / 2}
+            position={[-5, 1, -1]}
+            scale={2}
+          />
+          <Lightformer
+            form="circle"
+            intensity={2}
+            rotation-y={Math.PI / 2}
+            position={[-5, -1, -1]}
+            scale={2}
+          />
+          <Lightformer
+            form="circle"
+            intensity={2}
+            rotation-y={-Math.PI / 2}
+            position={[10, 1, 0]}
+            scale={8}
+          />
         </group>
-      </PresentationControls>
-
-      <AccumulativeShadows
-        temporal
-        frames={100}
-        alphaTest={0.85}
-        opacity={0.75}
-        scale={12}
-      >
-        <RandomizedLight
-          amount={8}
-          radius={4}
-          ambient={0.5}
-          intensity={1}
-          position={[2.5, 5, -10]}
-        />
-      </AccumulativeShadows>
-
-      <Environment preset="sunset" />
+      </Environment>
     </Canvas>
   );
 };
 
-// Composant pour l'animation d'intro de la caméra
-const CameraIntroAnimation = () => {
-  const { camera } = useThree();
-  const isAnimating = useRef(true);
-  const clock = new THREE.Clock(); // Pour contrôler le temps
-
-  // Position et rotation cibles
-  const targetPosition = new THREE.Vector3(1, 1, 4);
-  const targetRotation = new THREE.Euler(0, Math.PI / 4, 0);
-  
-  // Durée de l'animation
-  const duration = 3; // en secondes
-
-  useEffect(() => {
-    camera.position.set(0, 0, 10); // Position de départ
-    const animate = () => {
-      if (isAnimating.current) {
-        const elapsedTime = clock.getElapsedTime();
-        const progress = Math.min(elapsedTime / duration, 1); // Valeur entre 0 et 1
-
-        // Interpolation pour la position
-        camera.position.lerpVectors(
-          new THREE.Vector3(0, 0, 10), // Départ
-          targetPosition, // Cible
-          progress
-        );
-
-        // Interpolation pour la rotation
-        camera.rotation.x += (targetRotation.x - camera.rotation.x) * 0.1;
-        camera.rotation.y += (targetRotation.y - camera.rotation.y) * 0.1;
-
-        if (progress >= 1) {
-          isAnimating.current = false; // Arrêter l'animation une fois terminé
-        }
-      }
-    };
-
-    // Boucle d'animation
-    const frame = () => {
-      requestAnimationFrame(frame);
-      animate();
-    };
-    frame();
-
-    return () => {
-      isAnimating.current = false; // Nettoyage
-    };
-  }, [camera]);
-
-  return null; // Aucun rendu à afficher
-};
-
 export default ModelAbout;
+
+function Connector({
+  position,
+  children,
+  vec = new THREE.Vector3(),
+  scale,
+  r = THREE.MathUtils.randFloatSpread,
+  accent,
+  ...props
+}) {
+  const api = useRef();
+  const pos = useMemo(() => position || [r(10), r(10), r(10)], []);
+  useFrame((state, delta) => {
+    delta = Math.min(0.1, delta);
+    api.current?.applyImpulse(
+      vec.copy(api.current.translation()).negate().multiplyScalar(0.2)
+    );
+  });
+  return (
+    <RigidBody
+      linearDamping={4}
+      angularDamping={1}
+      friction={0.1}
+      position={pos}
+      ref={api}
+      colliders={false}
+    >
+      <CuboidCollider args={[0.38, 1.27, 0.38]} />
+      <CuboidCollider args={[1.27, 0.38, 0.38]} />
+      <CuboidCollider args={[0.38, 0.38, 1.27]} />
+      {children ? children : <Model {...props} />}
+      {accent && (
+        <pointLight intensity={4} distance={2.5} color={props.color} />
+      )}
+    </RigidBody>
+  );
+}
+
+function Pointer({ vec = new THREE.Vector3() }) {
+  const ref = useRef();
+  useFrame(({ mouse, viewport }) => {
+    ref.current?.setNextKinematicTranslation(
+      vec.set(
+        (mouse.x * viewport.width) / 2,
+        (mouse.y * viewport.height) / 2,
+        0
+      )
+    );
+  });
+  return (
+    <RigidBody
+      position={[0, 0, 0]}
+      type="kinematicPosition"
+      colliders={false}
+      ref={ref}
+    >
+      <BallCollider args={[1]} />
+    </RigidBody>
+  );
+}
+
+function Model({ children, color = "white", roughness = 0, ...props }) {
+  const ref = useRef();
+  const { nodes, materials } = useGLTF("/models/c-transformed.glb");
+  useFrame((state, delta) => {
+    easing.dampC(ref.current.material.color, color, 0.2, delta);
+  });
+  return (
+    <mesh
+      ref={ref}
+      castShadow
+      receiveShadow
+      scale={10}
+      geometry={nodes.connector.geometry}
+    >
+      <meshStandardMaterial
+        metalness={0.2}
+        roughness={roughness}
+        map={materials.base.map}
+      />
+      {children}
+    </mesh>
+  );
+}
