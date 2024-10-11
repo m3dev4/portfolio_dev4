@@ -1,13 +1,18 @@
 /* eslint-disable react/no-unescaped-entities */
+"use client";
 import Header from "@/components/header/header";
 import ModelAbout from "@/components/modelAbout";
 import Skills from "@/components/skill";
 import StickyScroll from "@/components/stickyScroll";
-import { MeshTransmissionMaterial, Text } from "@react-three/drei";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import localFont from "next/font/local";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useRef } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const mmFont = localFont({
   src: "../../fonts/mm-font.ttf",
@@ -15,25 +20,70 @@ const mmFont = localFont({
 });
 
 const About = () => {
+  const picAniamtion = useRef(null);
+  const menuAnimation = useRef(null);
+  const triggerScroll = useRef(null);
+
+  // timeline animation
+  useGSAP(() => {
+    // animation timeline with gsap
+    const tl = gsap.timeline();
+    tl.fromTo(
+      picAniamtion.current,
+      { opacity: 0, x: -50 },
+      { opacity: 1, x: 0, duration: 1, delay: 2, ease: "power2.out" }
+    );
+    tl.fromTo(
+      menuAnimation.current,
+      { opacity: 0, x: 50 },
+      { opacity: 1, x: 0, duration: 1, ease: "power2.out" }
+    );
+  });
+
+  // scrollTrigger animation
+
+  useGSAP(() => {
+    gsap.from(triggerScroll.current, {
+      scrollTrigger: {
+        trigger: triggerScroll.current,
+        start: "top top",
+        end: "+=500",
+        scrub: true,
+        pin: true,
+        anticipatePin: 1,
+        delay: 0.2,
+        snap: {
+          snapTo: 1,
+          duration: 0.5,
+          delay: 0.2,
+          ease: "power1.inOut",
+        },
+      },
+    });
+  });
+
   return (
     <section className="w-full h-full block ">
       <div className="flex py-5 px-11 fixed z-10 items-center justify-between w-full">
         <Link
           href="/"
           className="cursor-pointer text-2xl text-white font-extrabold uppercase"
+          ref={picAniamtion}
         >
-          M3dev4
+          <Image src="/images/m4.png" alt="logo dev" width={100} height={100} />
         </Link>
-        <Header />
+        <div ref={menuAnimation}>
+          <Header />
+        </div>
       </div>
       <div className="h-screen w-full">
-        
         <ModelAbout />
       </div>
       <div className="mx-auto my-8 sm:my-16 md:my-28 max-w-full px-4 sm:px-8 md:px-16 lg:px-40 tracking-wide py-8 sm:py-16 md:py-20 h-full">
         <div className="flex flex-col md:flex-row items-start w-full jutify-between md:space-x-8">
           <p
-            className={`${mmFont.className} text-lg sm:text-xl md:text-2xl lg:text-3xl w-full md:w-[45%] uppercase mb-8 md:mb-0`}
+            className={`${mmFont.className} text-lg sm:text-xl md:text-2xl lg:text-3xl w-full text-black md:w-[45%] uppercase mb-8 md:mb-0`}
+            ref={triggerScroll}
           >
             Ingénieur logiciel avec 3 ans d'expérience dans la création
             d'applications web performantes. Spécialisé dans l'utilisation de

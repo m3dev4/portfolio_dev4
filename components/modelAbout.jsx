@@ -14,11 +14,18 @@ import {
 } from "@react-three/rapier";
 import { easing } from "maath";
 import { EffectComposer, N8AO } from "@react-three/postprocessing";
-import { useMemo, useReducer, useRef } from "react";
+import { useMemo, useReducer, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 import { useGLTF } from "@react-three/drei";
 
-const accents = ["#4060ff", "#20ffa0", "#ff4060", "#ffcc00"];
+const accents = [
+  "#4060ff", "#20ffa0", "#ff4060", "#ffcc00", "#ff7f50", "#32cd32", 
+  "#8a2be2", "#00ced1", "#ff6347", "#7fffd4", "#ba55d3", "#ff1493", 
+  "#4682b4", "#ffa500", "#00fa9a", "#dc143c", "#f0e68c", "#00bfff", 
+  "#9acd32", "#da70d6", "#e9967a", "#00ff7f", "#ff00ff", "#98fb98", 
+  "#ff69b4", "#87cefa", "#ff4500", "#6a5acd", "#40e0d0", "#f08080"
+];
+
 const shuffle = (accent = 0) => [
   { color: "#444", roughness: 0.1 },
   { color: "#444", roughness: 0.75 },
@@ -34,6 +41,31 @@ const shuffle = (accent = 0) => [
 const ModelAbout = (props) => {
   const [accent, click] = useReducer((state) => ++state % accents.length, 0);
   const connectors = useMemo(() => shuffle(accent), [accent]);
+  const [fontSize, setFontSize] = useState(1.2); // Taille de départ
+
+  // Gestion du responsive en fonction de la largeur de l'écran
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth < 768) {
+        // Mobile
+        setFontSize(0.8); // Taille plus petite pour mobile
+      } else if (screenWidth >= 768 && screenWidth < 1200) {
+        // Tablettes et petits écrans
+        setFontSize(1.0);
+      } else {
+        // Grand écran
+        setFontSize(1.2); // Taille par défaut pour grands écrans
+      }
+    };
+
+    // Applique l'ajustement lors du premier rendu et à chaque redimensionnement
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Ajustement initial
+
+    // Cleanup pour éviter les fuites de mémoire
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   return (
     <Canvas
       onClick={click}
@@ -54,28 +86,28 @@ const ModelAbout = (props) => {
         castShadow
       />
        <Text
-          position={[0, 0, 0]}   // Centré dans la scène
-          fontSize={1.2}           // Taille du texte
-          color="white"            // Couleur de base avant l'effet
-          anchorX="center"         // Alignement horizontal centré
-          anchorY="middle"         // Alignement vertical centré
-          castShadow
-          fontWeight='bold'
-        >
-          About Myself
-          <MeshTransmissionMaterial
-            clearcoat={1}
-            thickness={0.2}
-            ior={1.2}
-            transmission={1}      // Effet de verre transparent
-            chromaticAberration={0.1}
-            anisotropicBlur={0.1}
-            distortion={0.05}
-            roughness={0.1}
-            envMapIntensity={1}   // Intensité de l'effet miroir
-            color="white"
-          />
-        </Text>
+      position={[0, 0, 0]} // Centré dans la scène
+      fontSize={fontSize} // Taille du texte responsive
+      color="white" // Couleur de base avant l'effet
+      anchorX="center" // Alignement horizontal centré
+      anchorY="middle" // Alignement vertical centré
+      castShadow
+      fontWeight="bold"
+    >
+      About Myself
+      <MeshTransmissionMaterial
+        clearcoat={1}
+        thickness={0.2}
+        ior={1.2}
+        transmission={0.5} // Limiter l'effet de verre pour plus de lisibilité
+        chromaticAberration={0.02} // Effet d'aberration chromatique réduit
+        anisotropicBlur={0.05} // Réduire le flou anisotropique
+        distortion={0.02} // Limiter la distorsion
+        roughness={0.15} // Un peu de rugosité pour adoucir l'effet miroir
+        envMapIntensity={0.8} // Moins d'intensité pour un reflet plus subtil
+        color="white" // Couleur du texte après effet
+      />
+    </Text>
       <Physics gravity={[0, 0, 0]}>
         <Pointer />
         {connectors.map((props, i) => (

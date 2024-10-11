@@ -6,6 +6,7 @@
      display: flex;
      gap: 50px;
      margin-bottom: 80px;
+     background-color: rgba(255, 228, 196, 0.829);
  }
  
  .container{
