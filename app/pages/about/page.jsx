@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+
 "use client";
 import Header from "@/components/header/header";
 import ModelAbout from "@/components/modelAbout";
@@ -50,7 +51,7 @@ const About = () => {
   useEffect(() => {
     if (isInView) {
       mainControls.start("visible")
-      slideAnimation.start("visible")
+      slideAnimation.start("visible") 
     }
   }, [isInView])
 
