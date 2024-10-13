@@ -70,7 +70,7 @@ const About = () => {
         </div>
       </div>
       <div className="h-screen w-full">
-        {/* <ModelAbout /> */}
+        <ModelAbout />
       </div>
       <div
         ref={ref}
