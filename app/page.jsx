@@ -31,15 +31,15 @@ const Home = () => {
   });
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-r from-black to-slate-950 overflow-x-hidden">
+    <div className="w-full min-h-screen bg-gradient-to-r from-black to-slate-950 overflow-hidden">
       <div className="flex px-7 py-7 justify-between z-10 relative">
         <Image
           ref={picAniamtion}
           src="/images/m4.png"
           alt="logo"
-          width={100}
-          height={100}
-          className="object-contain"
+          width={70}
+          height={70}
+          className="object-contain rounded-full"
         />
         {/* <Clock /> */}
         <div ref={menuAnimation}>

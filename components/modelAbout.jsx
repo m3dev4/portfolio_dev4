@@ -4,8 +4,9 @@ import {
   Lightformer,
   MeshTransmissionMaterial,
   Text,
+  useGLTF,
 } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   BallCollider,
   CuboidCollider,
@@ -16,7 +17,6 @@ import { easing } from "maath";
 import { EffectComposer, N8AO } from "@react-three/postprocessing";
 import { useMemo, useReducer, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
-import { useGLTF } from "@react-three/drei";
 
 const accents = [
   "#4060ff", "#20ffa0", "#ff4060", "#ffcc00", "#ff7f50", "#32cd32", 
@@ -38,134 +38,163 @@ const shuffle = (accent = 0) => [
   { color: accents[accent], roughness: 0.1, accent: true },
 ];
 
+function ResponsiveCamera({ children }) {
+  const { size } = useThree();
+  const [cameraSettings, setCameraSettings] = useState({
+    position: [0, 0, 15],
+    fov: 17.5,
+  });
+
+  useEffect(() => {
+    const updateCamera = () => {
+      if (size.width < 768) {
+        setCameraSettings({ position: [0, 0, 20], fov: 22 });
+      } else if (size.width < 1200) {
+        setCameraSettings({ position: [0, 0, 18], fov: 20 });
+      } else {
+        setCameraSettings({ position: [0, 0, 15], fov: 17.5 });
+      }
+    };
+
+    updateCamera();
+    window.addEventListener('resize', updateCamera);
+    return () => window.removeEventListener('resize', updateCamera);
+  }, [size]);
+
+  useThree(({ camera }) => {
+    camera.position.set(...cameraSettings.position);
+    camera.fov = cameraSettings.fov;
+    camera.updateProjectionMatrix();
+  });
+
+  return children;
+}
+
 const ModelAbout = (props) => {
   const [accent, click] = useReducer((state) => ++state % accents.length, 0);
   const connectors = useMemo(() => shuffle(accent), [accent]);
-  const [fontSize, setFontSize] = useState(1.2); // Taille de départ
+  const [fontSize, setFontSize] = useState(1.2);
+  const [modelScale, setModelScale] = useState(7);
 
-  // Gestion du responsive en fonction de la largeur de l'écran
   useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
       if (screenWidth < 768) {
-        // Mobile
-        setFontSize(0.8); // Taille plus petite pour mobile
-      } else if (screenWidth >= 768 && screenWidth < 1200) {
-        // Tablettes et petits écrans
-        setFontSize(1.0);
+        setFontSize(0.6);
+        setModelScale(5);
+      } else if (screenWidth < 1200) {
+        setFontSize(0.8);
+        setModelScale(6);
       } else {
-        // Grand écran
-        setFontSize(1.2); // Taille par défaut pour grands écrans
+        setFontSize(1.2);
+        setModelScale(7);
       }
     };
 
-    // Applique l'ajustement lors du premier rendu et à chaque redimensionnement
     window.addEventListener('resize', handleResize);
-    handleResize(); // Ajustement initial
-
-    // Cleanup pour éviter les fuites de mémoire
+    handleResize();
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
   return (
     <Canvas
       onClick={click}
       shadows
       dpr={[1, 1.5]}
       gl={{ antialias: false }}
-      camera={{ position: [0, 0, 15], fov: 17.5, near: 1, far: 20 }}
+      camera={{ near: 1, far: 20 }}
       {...props}
-      className=""
     >
-      <color attach="background" args={["#141622"]} />
-      <ambientLight intensity={0.4} />
-      <spotLight
-        position={[10, 10, 10]}
-        angle={0.15}
-        penumbra={1}
-        intensity={1}
-        castShadow
-      />
-       <Text
-      position={[0, 0, 0]} // Centré dans la scène
-      fontSize={fontSize} // Taille du texte responsive
-      color="white" // Couleur de base avant l'effet
-      anchorX="center" // Alignement horizontal centré
-      anchorY="middle" // Alignement vertical centré
-      castShadow
-      fontWeight="bold"
-    >
-      About Myself
-      <MeshTransmissionMaterial
-        clearcoat={1}
-        thickness={0.2}
-        ior={1.2}
-        transmission={0.5} // Limiter l'effet de verre pour plus de lisibilité
-        chromaticAberration={0.02} // Effet d'aberration chromatique réduit
-        anisotropicBlur={0.05} // Réduire le flou anisotropique
-        distortion={0.02} // Limiter la distorsion
-        roughness={0.15} // Un peu de rugosité pour adoucir l'effet miroir
-        envMapIntensity={0.8} // Moins d'intensité pour un reflet plus subtil
-        color="white" // Couleur du texte après effet
-      />
-    </Text>
-      <Physics gravity={[0, 0, 0]}>
-        <Pointer />
-        {connectors.map((props, i) => (
-          <Connector key={i} {...props} />
-        ))}
-        <Connector position={[10, 10, 5]}>
-          <Model>
-            <MeshTransmissionMaterial
-              clearcoat={1}
-              thickness={0.1}
-              anisotropicBlur={0.1}
-              chromaticAberration={0.1}
-              samples={8}
-              resolution={512}
+      <ResponsiveCamera>
+        <color attach="background" args={["#141622"]} />
+        <ambientLight intensity={0.4} />
+        <spotLight
+          position={[10, 10, 10]}
+          angle={0.15}
+          penumbra={1}
+          intensity={1}
+          castShadow
+        />
+        <Text
+          position={[0, 0, 0]}
+          fontSize={fontSize}
+          color="white"
+          anchorX="center"
+          anchorY="middle"
+          castShadow
+          fontWeight="bold"
+        >
+          About Myself
+          <MeshTransmissionMaterial
+            clearcoat={1}
+            thickness={0.2}
+            ior={1.2}
+            transmission={0.5}
+            chromaticAberration={0.02}
+            anisotropicBlur={0.05}
+            distortion={0.02}
+            roughness={0.15}
+            envMapIntensity={0.8}
+            color="white"
+          />
+        </Text>
+        <Physics gravity={[0, 0, 0]}>
+          <Pointer />
+          {connectors.map((props, i) => (
+            <Connector key={i} {...props} scale={modelScale} />
+          ))}
+          <Connector position={[10, 10, 5]} scale={modelScale}>
+            <Model scale={modelScale}>
+              <MeshTransmissionMaterial
+                clearcoat={1}
+                thickness={0.1}
+                anisotropicBlur={0.1}
+                chromaticAberration={0.1}
+                samples={8}
+                resolution={512}
+              />
+            </Model>
+          </Connector>
+        </Physics>
+        <EffectComposer disableNormalPass multisampling={8}>
+          <N8AO distanceFalloff={1} aoRadius={1} intensity={4} />
+        </EffectComposer>
+        <Environment resolution={256}>
+          <group rotation={[-Math.PI / 3, 0, 1]}>
+            <Lightformer
+              form="circle"
+              intensity={4}
+              rotation-x={Math.PI / 2}
+              position={[0, 5, -9]}
+              scale={2}
             />
-          </Model>
-        </Connector>
-      </Physics>
-      <EffectComposer disableNormalPass multisampling={8}>
-        <N8AO distanceFalloff={1} aoRadius={1} intensity={4} />
-      </EffectComposer>
-      <Environment resolution={256}>
-        <group rotation={[-Math.PI / 3, 0, 1]}>
-          <Lightformer
-            form="circle"
-            intensity={4}
-            rotation-x={Math.PI / 2}
-            position={[0, 5, -9]}
-            scale={2}
-          />
-          <Lightformer
-            form="circle"
-            intensity={2}
-            rotation-y={Math.PI / 2}
-            position={[-5, 1, -1]}
-            scale={2}
-          />
-          <Lightformer
-            form="circle"
-            intensity={2}
-            rotation-y={Math.PI / 2}
-            position={[-5, -1, -1]}
-            scale={2}
-          />
-          <Lightformer
-            form="circle"
-            intensity={2}
-            rotation-y={-Math.PI / 2}
-            position={[10, 1, 0]}
-            scale={8}
-          />
-        </group>
-      </Environment>
+            <Lightformer
+              form="circle"
+              intensity={2}
+              rotation-y={Math.PI / 2}
+              position={[-5, 1, -1]}
+              scale={2}
+            />
+            <Lightformer
+              form="circle"
+              intensity={2}
+              rotation-y={Math.PI / 2}
+              position={[-5, -1, -1]}
+              scale={2}
+            />
+            <Lightformer
+              form="circle"
+              intensity={2}
+              rotation-y={-Math.PI / 2}
+              position={[10, 1, 0]}
+              scale={8}
+            />
+          </group>
+        </Environment>
+      </ResponsiveCamera>
     </Canvas>
   );
 };
-
-export default ModelAbout;
 
 function Connector({
   position,
@@ -177,7 +206,7 @@ function Connector({
   ...props
 }) {
   const api = useRef();
-  const pos = useMemo(() => position || [r(10), r(10), r(10)], []);
+  const pos = useMemo(() => position || [r(10), r(10), r(10)], [position]);
   useFrame((state, delta) => {
     delta = Math.min(0.1, delta);
     api.current?.applyImpulse(
@@ -193,10 +222,10 @@ function Connector({
       ref={api}
       colliders={false}
     >
-      <CuboidCollider args={[0.38, 1.27, 0.38]} />
-      <CuboidCollider args={[1.27, 0.38, 0.38]} />
-      <CuboidCollider args={[0.38, 0.38, 1.27]} />
-      {children ? children : <Model {...props} />}
+      <CuboidCollider args={[0.38 * scale / 7, 1.27 * scale / 7, 0.38 * scale / 7]} />
+      <CuboidCollider args={[1.27 * scale / 7, 0.38 * scale / 7, 0.38 * scale / 7]} />
+      <CuboidCollider args={[0.38 * scale / 7, 0.38 * scale / 7, 1.27 * scale / 7]} />
+      {children ? children : <Model {...props} scale={scale} />}
       {accent && (
         <pointLight intensity={4} distance={2.5} color={props.color} />
       )}
@@ -227,7 +256,7 @@ function Pointer({ vec = new THREE.Vector3() }) {
   );
 }
 
-function Model({ children, color = "white", roughness = 0, ...props }) {
+function Model({ children, color = "white", roughness = 0, scale, ...props }) {
   const ref = useRef();
   const { nodes, materials } = useGLTF("/models/c-transformed.glb");
   useFrame((state, delta) => {
@@ -238,7 +267,7 @@ function Model({ children, color = "white", roughness = 0, ...props }) {
       ref={ref}
       castShadow
       receiveShadow
-      scale={7}
+      scale={scale}
       geometry={nodes.connector.geometry}
     >
       <meshStandardMaterial
@@ -250,3 +279,5 @@ function Model({ children, color = "white", roughness = 0, ...props }) {
     </mesh>
   );
 }
+
+export default ModelAbout;
