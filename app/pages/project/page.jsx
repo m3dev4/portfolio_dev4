@@ -1,3 +1,6 @@
+/* eslint-disable react/no-unescaped-entities */
+
+
 "use client";
 import { useGSAP } from "@gsap/react";
 import { useEffect, useRef, useState } from "react";
