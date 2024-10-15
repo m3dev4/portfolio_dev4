@@ -7,17 +7,31 @@ import Header from "@/components/header/header";
 import Link from "next/link";
 import { Canvas } from "@react-three/fiber";
 import ModelProject from "@/components/modelProject";
+import { Environment, MeshTransmissionMaterial, Text } from "@react-three/drei";
 import {
-  Environment,
-  MeshTransmissionMaterial,
-  Text,
-  useMotion,
-} from "@react-three/drei";
-import { useMotionValue, useSpring } from "framer-motion";
+  useMotionValue,
+  useSpring,
+  motion,
+  useAnimation,
+  useInView,
+} from "framer-motion";
+import { projects } from "@/constants";
+import ProjectAnim from "@/components";
 
 const Project = () => {
-  const picAniamtion = useRef(null);
+  const picAnimation = useRef(null);
   const menuAnimation = useRef(null);
+
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  const mainControls = useAnimation();
+
+  useEffect(() => {
+    if (isInView) {
+      mainControls.start("visible");
+    }
+  }, [isInView, mainControls]);
 
   const [fontSize, setFontSize] = useState(1.2);
   const [modelScale, setModelScale] = useState(7);
@@ -25,10 +39,13 @@ const Project = () => {
   useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
-      if (screenWidth < 768) {
+      if (screenWidth < 640) {
+        setFontSize(0.4);
+        setModelScale(3);
+      } else if (screenWidth < 768) {
         setFontSize(0.6);
         setModelScale(5);
-      } else if (screenWidth < 1200) {
+      } else if (screenWidth < 1024) {
         setFontSize(0.8);
         setModelScale(6);
       } else {
@@ -67,10 +84,9 @@ const Project = () => {
   }, []);
 
   useGSAP(() => {
-    // animation timeline with gsap
     const tl = gsap.timeline();
     tl.fromTo(
-      picAniamtion.current,
+      picAnimation.current,
       { opacity: 0, x: -50 },
       { opacity: 1, x: 0, duration: 1, delay: 2, ease: "power2.out" }
     );
@@ -80,20 +96,21 @@ const Project = () => {
       { opacity: 1, x: 0, duration: 1, ease: "power2.out" }
     );
   });
+
   return (
-    <section className="h-full w-full">
-      <div className="flex py-5 px-11 fixed z-10 items-center justify-between w-full">
+    <section className="min-h-screen w-full">
+      <div className="flex py-3 sm:py-5 px-4 sm:px-11 fixed z-10 items-center justify-between w-full">
         <Link
           href="/"
-          className="cursor-pointer text-2xl text-white font-extrabold uppercase"
-          ref={picAniamtion}
+          className="cursor-pointer text-xl sm:text-2xl text-white font-extrabold uppercase"
+          ref={picAnimation}
         >
           <Image
-            src="/images/lo.png"
+            src="/images/m4.png"
             alt="logo dev"
-            width={70}
-            height={70}
-            className="rounded-full"
+            width={50}
+            height={50}
+            className="rounded-full sm:w-[70px] sm:h-[70px]"
           />
         </Link>
         <div ref={menuAnimation}>
@@ -109,7 +126,7 @@ const Project = () => {
           <ModelProject mouse={smoothMouse} modelScale={modelScale} />
           <Text
             position={[0, 0, 0]}
-            fontSize={25} // Use responsive fontSize
+            fontSize={fontSize * 25}
             color="white"
             anchorX="center"
             anchorY="middle"
@@ -133,6 +150,38 @@ const Project = () => {
           <Environment preset="studio" />
         </Canvas>
       </div>
+      <div className="w-full bg-[#e0e0e2] flex items-center justify-center min-h-[80vh] py-10 sm:py-0">
+        <div
+          className="flex items-center justify-center px-6 sm:px-12 md:px-24"
+          ref={ref}
+        >
+          <motion.p
+            variants={{
+              hidden: { opacity: 0, y: 95 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            animate={mainControls}
+            transition={{ duration: 0.75, delay: 0.8 }}
+            className="text-lg sm:text-2xl md:text-3xl lg:text-[40px] font-semibold w-full md:w-3/4 lg:w-1/2"
+          >
+            En tant que développeur passionné, j'aime explorer les nouvelles
+            technologies et créer des expériences numériques innovantes. Chaque
+            projet que je réalise est une opportunité d'apprendre, de grandir et
+            de partager ma vision unique. Découvrez mes réalisations ci-dessous
+            et plongez dans mon univers créatif.
+          </motion.p>
+        </div>
+      </div>
+      <main className="flex min-h-screen items-center justify-center bg-white py-10">
+        <div className="w-full sm:w-[85%] md:w-[80%] lg:w-[70%] px-4 sm:px-0">
+          <h5 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            Featured Works
+          </h5>
+          {projects.map((project, index) => (
+            <ProjectAnim key={index} project={project} />
+          ))}
+        </div>
+      </main>
     </section>
   );
 };

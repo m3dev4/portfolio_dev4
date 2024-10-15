@@ -25,9 +25,8 @@ const About = () => {
   const picAniamtion = useRef(null);
   const menuAnimation = useRef(null);
 
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   // timeline animation
   useGSAP(() => {
@@ -45,16 +44,15 @@ const About = () => {
     );
   });
 
-  const mainControls = useAnimation()
-  const slideAnimation = useAnimation()
+  const mainControls = useAnimation();
+  const slideAnimation = useAnimation();
 
   useEffect(() => {
     if (isInView) {
-      mainControls.start("visible")
-      slideAnimation.start("visible") 
+      mainControls.start("visible");
+      slideAnimation.start("visible");
     }
-  }, [isInView])
-
+  }, [isInView]);
 
   return (
     <section className="w-full h-full block">
@@ -64,7 +62,13 @@ const About = () => {
           className="cursor-pointer text-2xl text-white font-extrabold uppercase"
           ref={picAniamtion}
         >
-          <Image src="/images/lo.png" alt="logo dev" width={70} height={70} className="rounded-full" />
+          <Image
+            src="/images/m4.png"
+            alt="logo dev"
+            width={70}
+            height={70}
+            className="rounded-full"
+          />
         </Link>
         <div ref={menuAnimation}>
           <Header />
@@ -75,12 +79,12 @@ const About = () => {
       </div>
       <div
         ref={ref}
-        className="mx-auto my-8 sm:my-16 md:my-28 max-w-full px-4 sm:px-8 md:px-16 lg:px-40 tracking-wide py-8 relative sm:py-16 md:py-20 h-full">
+        className="mx-auto my-8 sm:my-16 md:my-28 max-w-full px-4 sm:px-8 md:px-16 lg:px-40 tracking-wide py-8 relative sm:py-16 md:py-20 h-full"
+      >
         <motion.div
-
           variants={{
             hidden: { opacity: 0, y: 85 },
-            visible: { opacity: 1, y: 0 }
+            visible: { opacity: 1, y: 0 },
           }}
           initial="hidden"
           animate={mainControls}
