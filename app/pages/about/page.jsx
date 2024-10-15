@@ -122,7 +122,7 @@ const About = () => {
             </p>
           </div>
         </motion.div>
-        <motion.div
+        {/* <motion.div
           variants={{
             hidden: { left: 0 },
             visible: { left: "100%" }
@@ -141,7 +141,7 @@ const About = () => {
           }}
         >
 
-        </motion.div>
+        </motion.div> */}
       </div>
       <div className=" h-[300vh] w-ful">
         <StickyScroll />
