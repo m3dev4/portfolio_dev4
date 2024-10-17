@@ -135,7 +135,7 @@ const Project = () => {
             orthographic
             camera={{ position: [0, 0, 200], zoom: 10 }}
           >
-            {/* <ModelProject mouse={smoothMouse} modelScale={modelScale} /> */}
+            <ModelProject mouse={smoothMouse} modelScale={modelScale} />
             <Text
               position={[0, 0, 0]}
               fontSize={fontSize * 25}
