@@ -1,9 +1,9 @@
 "use client";
-import Clock from "@/components/clock/clock";
-import Header from "@/components/header/header";
-import Hero from "@/components/hero";
+
+
 import { useGSAP } from "@gsap/react";
-import { IconNumber6Small } from "@tabler/icons-react";
+import Hero from "../components/hero"
+import Header from "../components/header/header"
 import gsap from "gsap";
 import Image from "next/image";
 import React, { useRef } from "react";
@@ -41,7 +41,7 @@ const Home = () => {
           height={70}
           className="object-contain rounded-full"
         />
-        {/* <Clock /> */}
+        
         <div ref={menuAnimation}>
           <Header />
         </div>

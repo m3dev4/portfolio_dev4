@@ -2,8 +2,10 @@
 import { useEffect, useState } from "react";
 import localFont from "next/font/local";
 import "./globals.css";
-import PageTransition from "@/components/transition/pageTrasition";
-import Loader from "@/components/loader";
+import Loader from "../components/loader"
+import PageTransition from "../components/transition/pageTrasition"
+
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

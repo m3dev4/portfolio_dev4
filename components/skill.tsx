@@ -2,7 +2,7 @@ import {
   Backend_skill,
   Frontend_skill,
   Fullstack_skill,
-} from "@/constants/data";
+} from "../constants/data";
 import React from "react";
 import SkillProvider from "./skillProvider";
 import SkillText from "./skillText";

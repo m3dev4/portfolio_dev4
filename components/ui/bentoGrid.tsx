@@ -1,4 +1,4 @@
-import {cn} from "@/lib/utils";
+import {cn} from "../../lib/utils";
 import React, {useState} from "react";
 import {GlobeDemo} from "../gridGlobe";
 import Image from "next/image";
@@ -6,7 +6,7 @@ import {CompareDemo} from "../gridCompare";
 import {TabsDemo} from "../gridTab";
 import {BackgroundGradientAnimationDemo} from "../gridBackground";
 import MagicButton from "../MagicButton";
-import {HeroScrollDemo} from "@/components/heroScroll";
+import {HeroScrollDemo} from "../../components/heroScroll";
 
 export const BentoGrid = ({
     className,

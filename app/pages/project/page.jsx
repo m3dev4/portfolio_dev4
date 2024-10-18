@@ -5,10 +5,10 @@ import { useGSAP } from "@gsap/react";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Image from "next/image";
-import Header from "@/components/header/header";
+import Header from "../../../components/header/header";
 import Link from "next/link";
 import { Canvas } from "@react-three/fiber";
-import ModelProject from "@/components/modelProject";
+import ModelProject from "../../../components/modelProject";
 import { Environment, MeshTransmissionMaterial, Text } from "@react-three/drei";
 import {
   useMotionValue,
@@ -18,9 +18,9 @@ import {
   useInView,
 } from "framer-motion";
 import Lenis from "@studio-freight/lenis";
-import { projects } from "@/constants";
-import ProjectAnim from "@/components";
-import VelocityScroll from "@/components/velocityScroll";
+import { projects } from "../../../constants";
+import ProjectAnim from "../../../components";
+import VelocityScroll from "../../../components/velocityScroll";
 
 
 

@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 
 "use client";
-import Header from "@/components/header/header";
-import ModelAbout from "@/components/modelAbout";
-import Skills from "@/components/skill";
-import StickyScroll from "@/components/stickyScroll";
+import Header from "../../../components/header/header";
+import ModelAbout from "../../../components/modelAbout";
+import Skills from "../../../components/skill";
+import StickyScroll from "../../../components/stickyScroll";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import localFont from "next/font/local";
