@@ -1,6 +1,9 @@
+"use client"
+import { useEffect, useState } from "react";
 import localFont from "next/font/local";
 import "./globals.css";
 import PageTransition from "@/components/transition/pageTrasition";
+import Loader from "@/components/loader";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -13,19 +16,27 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata = {
-  title: "M4 | DEV",
-  description: "Software Engineer",
-  icons: [{ rel: "icon", url: "/images/lo.png" }],
-};
+export default function ClientLayout({ children }) {
+  const [isLoading, setIsLoading] = useState(true);
 
-export default function RootLayout({ children }) {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 7000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <html lang="en">
+    <html lang="fr">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <PageTransition>{children}</PageTransition>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <PageTransition>{children}</PageTransition>
+        )}
       </body>
     </html>
   );
