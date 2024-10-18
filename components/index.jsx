@@ -30,7 +30,7 @@ export default function ProjectAnim({ project }) {
   const { title, description, lien, img } = project;
 
   return (
-    <div className="flex flex-col w-full cursor-pointer py-[0.8vw] border-t-2 border-y-indigo-950">
+    <div className="flex flex-col w-full cursor-pointer py-[0.8vw] border-t-2 border-y-indigo-950 text-black">
       <div
         className="flex justify-center items-center w-full"
         onMouseEnter={() => setIsActive(true)}

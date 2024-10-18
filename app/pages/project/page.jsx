@@ -20,9 +20,6 @@ import {
 import Lenis from "@studio-freight/lenis";
 import { projects } from "@/constants";
 import ProjectAnim from "@/components";
-import VelocityScroll from "@/components/velocityScroll";
-
-
 
 const Project = () => {
   const picAnimation = useRef(null);
@@ -109,102 +106,90 @@ const Project = () => {
   });
 
   return (
-    <section className="min-h-screen w-full" id="smooth-wrapper">
-      
-      <div id="smooth-content">
-        <div className="flex py-3 sm:py-5 px-4 sm:px-11 fixed z-10 items-center justify-between w-full">
-          <Link
-            href="/"
-            className="cursor-pointer text-xl sm:text-2xl text-white font-extrabold uppercase"
-            ref={picAnimation}
-          >
-            <Image
-              src="/images/m4.png"
-              alt="logo dev"
-              width={50}
-              height={50}
-              className="rounded-full sm:w-[70px] sm:h-[70px]"
-            />
-          </Link>
-          <div ref={menuAnimation}>
-            <Header />
-          </div>
-        </div>
-        <div className="h-screen flex">
-          <Canvas
-            style={{ background: "#e0e0e2" }}
-            orthographic
-            camera={{ position: [0, 0, 200], zoom: 10 }}
-          >
-            <ModelProject mouse={smoothMouse} modelScale={modelScale} />
-            <Text
-              position={[0, 0, 0]}
-              fontSize={fontSize * 25}
-              color="white"
-              anchorX="center"
-              anchorY="middle"
-              castShadow
-              fontWeight="bold"
-            >
-              Project
-              <MeshTransmissionMaterial
-                clearcoat={1}
-                thickness={0.2}
-                ior={1.2}
-                transmission={0.5}
-                chromaticAberration={0.02}
-                anisotropicBlur={0.05}
-                distortion={0.02}
-                roughness={0.15}
-                envMapIntensity={0.8}
-                color="white"
-              />
-            </Text>
-            <Environment preset="studio" />
-          </Canvas>
-        </div>
-        <div className="w-full bg-[#e0e0e2] flex items-center justify-center min-h-[80vh] py-10 sm:py-0">
-          <div
-            className="flex items-center justify-center px-6 sm:px-12 md:px-24"
-            ref={ref}
-          >
-            <motion.p
-              initial={{ opacity: 0, y: 75 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ root: ref }}
-              transition={{ duration: 0.75, delay: 1.9 }}
-              className="text-lg sm:text-2xl md:text-3xl lg:text-[40px] font-semibold w-full md:w-3/4 lg:w-1/2 text-black"
-            >
-              En tant que développeur passionné, j'aime explorer les nouvelles
-              technologies et créer des expériences numériques innovantes.
-              Chaque projet que je réalise est une opportunité d'apprendre, de
-              grandir et de partager ma vision unique. Découvrez mes
-              réalisations ci-dessous et plongez dans mon univers créatif.
-            </motion.p>
-          </div>
-        </div>
-        <main className="flex min-h-screen items-center justify-center bg-white py-10">
-          <div
-            className="w-full sm:w-[85%] md:w-[80%] lg:w-[70%] px-4 sm:px-0"
-            ref={ref}
-          >
-            <motion.h5
-              initial={{ opacity: 0, x: -70 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.7, delay: 0.7 }}
-              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-black"
-            >
-              Featured Works
-            </motion.h5>
-            {projects.map((project, index) => (
-              <ProjectAnim key={index} project={project} />
-            ))}
-          </div>
-        </main>
-        <div>
-          <VelocityScroll />
+    <section className="min-h-screen w-full">
+      <div className="flex py-3 sm:py-5 px-4 sm:px-11 fixed z-10 items-center justify-between w-full">
+        <Link
+          href="/"
+          className="cursor-pointer text-xl sm:text-2xl text-white font-extrabold uppercase"
+          ref={picAnimation}
+        >
+          <Image
+            src="/images/m4.png"
+            alt="logo dev"
+            width={50}
+            height={50}
+            className="rounded-full sm:w-[70px] sm:h-[70px]"
+          />
+        </Link>
+        <div ref={menuAnimation}>
+          <Header />
         </div>
       </div>
+      <div className="h-screen flex">
+        <Canvas
+          style={{ background: "#e0e0e2" }}
+          orthographic
+          camera={{ position: [0, 0, 200], zoom: 10 }}
+        >
+          <ModelProject mouse={smoothMouse} modelScale={modelScale} />
+          <Text
+            position={[0, 0, 0]}
+            fontSize={fontSize * 25}
+            color="white"
+            anchorX="center"
+            anchorY="middle"
+            castShadow
+            fontWeight="bold"
+          >
+            Project
+            <MeshTransmissionMaterial
+              clearcoat={1}
+              thickness={0.2}
+              ior={1.2}
+              transmission={0.5}
+              chromaticAberration={0.02}
+              anisotropicBlur={0.05}
+              distortion={0.02}
+              roughness={0.15}
+              envMapIntensity={0.8}
+              color="white"
+            />
+          </Text>
+          <Environment preset="studio" />
+        </Canvas>
+      </div>
+      <div className="w-full bg-[#e0e0e2] flex items-center justify-center min-h-[80vh] py-10 sm:py-0">
+        <div
+          className="flex items-center justify-center px-6 sm:px-12 md:px-24"
+          ref={ref}
+        >
+          <motion.p
+            variants={{
+              hidden: { opacity: 0, y: 95 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            animate={mainControls}
+            transition={{ duration: 0.75, delay: 0.8 }}
+            className="text-lg sm:text-2xl md:text-3xl lg:text-[40px] font-semibold w-full md:w-3/4 lg:w-1/2"
+          >
+            En tant que développeur passionné, j'aime explorer les nouvelles
+            technologies et créer des expériences numériques innovantes. Chaque
+            projet que je réalise est une opportunité d'apprendre, de grandir et
+            de partager ma vision unique. Découvrez mes réalisations ci-dessous
+            et plongez dans mon univers créatif.
+          </motion.p>
+        </div>
+      </div>
+      <main className="flex min-h-screen items-center justify-center bg-white py-10">
+        <div className="w-full sm:w-[85%] md:w-[80%] lg:w-[70%] px-4 sm:px-0">
+          <h5 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8">
+            Featured Works
+          </h5>
+          {projects.map((project, index) => (
+            <ProjectAnim key={index} project={project} />
+          ))}
+        </div>
+      </main>
     </section>
   );
 };
