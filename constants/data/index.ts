@@ -1,4 +1,3 @@
-import { height } from "@/components/nav/anime";
 
 export const BentoItems = [
   {
