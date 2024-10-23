@@ -12,7 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import StrokeSvgAnimation from "../../../components/strokeSvgAnime"
+import StrokeSvgAnimation from "../../../components/strokeSvgAnime";
 import { useInView, motion, useAnimation } from "framer-motion";
 
 gsap.registerPlugin(useGSAP);
@@ -75,7 +75,7 @@ const About = () => {
           <Header />
         </div>
       </div>
-      <div className="h-screen w-full">{/* <ModelAbout /> */}</div>
+      <div className="h-screen w-full"><ModelAbout /></div>
       <div
         ref={ref}
         className="mx-auto my-8 sm:my-16 md:my-28 max-w-full px-4 sm:px-8 md:px-16 lg:px-40 tracking-wide py-8 relative sm:py-16 md:py-20 h-full"
@@ -111,7 +111,7 @@ const About = () => {
               />
             </div>
           </div>
-            <StrokeSvgAnimation />
+          <StrokeSvgAnimation />
           <div className="mt-8 sm:mt-12 md:mt-16">
             <p
               className={`${mmFont.className} text-lg sm:text-xl md:text-2xl text-white uppercase w-full md:w-[70%] md:ml-auto`}
@@ -126,7 +126,7 @@ const About = () => {
           </div>
         </motion.div>
       </div>
-      <div className="h-[30vh]"></div>
+      <div className="h-[30vh] py-56"></div>
       <div className=" h-[300vh] w-ful">
         <StickyScroll />
       </div>
