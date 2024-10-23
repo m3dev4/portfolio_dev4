@@ -1,5 +1,6 @@
+/* eslint-disable react/no-unescaped-entities */
+"use client"
 import { useScroll, useTransform } from "framer-motion";
-import Lenis from "lenis";
 import { useState } from "react";
 import { useRef } from "react";
 import Lenis from "@studio-freight/lenis";
