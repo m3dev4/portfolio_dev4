@@ -3,6 +3,7 @@
 import { useScroll, useTransform } from "framer-motion";
 import { useState } from "react";
 import { useRef } from "react";
+import { motion } from "framer-motion"
 import Lenis from "@studio-freight/lenis";
 import Image from "next/image";
 
