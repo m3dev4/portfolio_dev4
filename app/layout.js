@@ -37,7 +37,11 @@ export default function ClientLayout({ children }) {
         {isLoading ? (
           <Loader />
         ) : (
-          <PageTransition>{children}</PageTransition>
+          <PageTransition>
+            <main>
+            {children}
+            </main>
+            </PageTransition>
         )}
       </body>
     </html>

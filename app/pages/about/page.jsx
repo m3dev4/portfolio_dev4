@@ -15,6 +15,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import StrokeSvgAnimation from "../../../components/strokeSvgAnime";
 import { useInView, motion, useAnimation } from "framer-motion";
 
+
 gsap.registerPlugin(useGSAP);
 
 const mmFont = localFont({

@@ -17,6 +17,7 @@ import ProjectAnim from "../../../components";
 import VelocityScroll from "../../../components/velocityScroll";
 import localfont from "next/font/local";
 
+
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
@@ -277,6 +278,9 @@ const Project = () => {
         <motion.div style={{ y, opacity }}>
           <VelocityScroll />
         </motion.div>
+      </div>
+      <div>
+       
       </div>
     </section>
   );

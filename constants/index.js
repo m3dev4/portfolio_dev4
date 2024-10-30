@@ -78,3 +78,15 @@ export const projects = [
     img: "/conteo.png",
   },
 ];
+
+
+export const SocialMedia = [
+  {
+    img: "/images/github.png",
+    href: "https://github.com/m3dev4"
+  },
+  {
+    img: "/images/linkedin.png",
+    href: "https://www.linkedin.com/in/mouhamed-lo-287a06202/"
+  }
+]

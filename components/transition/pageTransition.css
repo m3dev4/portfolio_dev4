@@ -8,7 +8,7 @@
 
 .page__style {
   background-color: rgb(19, 19, 20);
-  position: fixed;
+  position: realtive;
   top: 0;
   right: 0;
   bottom: 0;
@@ -17,13 +17,11 @@
   width: 100%;
   margin: auto auto;
   overflow: hidden;
-  overflow-y: scroll;
-  
 }
 
 
 .animate_content {
-  animation: animate 3s ease-in-out;
+  animation: animate 3s ease-out;
 }
 
 @keyframes animate {
@@ -47,9 +45,9 @@
   }
 }
 
-.fadeIn {
+/* .fadeIn {
   z-index: 10;
-}
+} */
 
 /*****************************************************************
 ~ Mobile media-queries (max-width: 767px)
