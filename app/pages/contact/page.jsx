@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import { useEffect, useRef, useState } from "react";
 import styles from "./page.module.scss";
