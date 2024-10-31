@@ -227,10 +227,10 @@ const Project = () => {
           <motion.div 
             className="flex items-center justify-center px-6 sm:px-12 md:px-24"
             ref={textRef}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            // initial={{ opacity: 0, y: 50 }}
+            // whileInView={{ opacity: 1, y: 0 }}
+            // viewport={{ once: true }}
+            // transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <p className={`sm:text-2xl md:text-3xl lg:text-[60px] lg:leading-[63px] font-semibold w-full md:w-3/4 lg:w-2/3 text-black ${bonny.className}`}>
               En tant que développeur passionné, j'aime explorer les nouvelles
@@ -261,11 +261,11 @@ const Project = () => {
               {projects.map((project, index) => (
                 <motion.div
                   key={index}
-                  className="project-item"
-                  initial={{ opacity: 1, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  // className="project-item"
+                  // initial={{ opacity: 1, y: 50 }}
+                  // whileInView={{ opacity: 1, y: 0 }}
                   
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  // transition={{ duration: 0.6, delay: index * 0.2 }}
                 >
                   <ProjectAnim project={project} />
                 </motion.div>

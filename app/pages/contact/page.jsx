@@ -18,7 +18,7 @@ const popinsFont = localFont({
 
 const images = [
   "1.png", "2.png", "11.jpg", "3.png", "4.png", "5.jpg", 
-  "6.jpg", "1.jpg", "8.jpg", "9.jpg", "10.jpg", "12.jpg"
+  "6.jpg", "8.jpg", "9.jpg", "10.jpg", "12.jpg"
 ];
 
 export default function Home() {
@@ -81,7 +81,7 @@ export default function Home() {
   });
 
   return (
-    <main className={styles.main}>
+    <main className="bg-gradient-to-r from-gray-800 to-neutral-900">
       <div className="flex py-5 px-11 fixed z-10 items-center justify-between w-full">
         <Link
           href="/"
@@ -101,17 +101,17 @@ export default function Home() {
         </div>
       </div>
       <div className="flex flex-col items-center justify-center pt-60">
-        <p className={`text-white text-lg mb-4 ${popinsFont.className}`}>
+        <p className={`text-white text-lg mb-4 text-center ${popinsFont.className}`}>
           Vous avez des questions ou vous souhaitez travailler ensemble ?
         </p>
-        <p className="text-white text-lg">
+        <p className="text-white text-lg text-center">
           N'hésitez pas à me contacter à l'adresse suivante :
         </p>
         <Link
-          href="mailto:m3dev4@example.com"
+          href="mailto:m3dev4@gmail.com"
           className="text-white text-lg underline cursor-pointer"
         >
-          m3dev4@example.com
+          m3dev4@gmail.com
         </Link>
       </div>
       <div className={styles.spacer}></div>
@@ -123,7 +123,7 @@ export default function Home() {
       </div>
       <div className={styles.spacer}></div>
       <div className="flex w-full h-full relative -top-32 px-5">
-        <div className="flex items-center justify-between w-full px-9">
+        <div className="flex items-center justify-between w-full px-9 max-sm:flex-col">
           <div>
             <p className={`${popinsFont.className} text-white font-semibold`}>
               Local Time: {localTime}
@@ -133,8 +133,8 @@ export default function Home() {
             </p>
           </div>
           <div className="flex items-center justify-center gap-5">
-            {SocialMedia.map((media) => (
-              <div key={media} className="flex gap-10">
+            {SocialMedia.map((media, item) => (
+              <div key={item} className="flex gap-10">
                 <Link href={media.href}>
                   <Image
                     src={media.img}

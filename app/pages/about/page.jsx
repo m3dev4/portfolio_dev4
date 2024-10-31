@@ -57,7 +57,7 @@ const About = () => {
   }, [isInView]);
 
   return (
-    <section className="w-full h-full block">
+    <section className="w-full h-full block bg-gradient-to-r from-gray-800 to-neutral-900">
       <div className="flex py-5 px-11 fixed z-10 items-center justify-between w-full">
         <Link
           href="/"
@@ -90,7 +90,7 @@ const About = () => {
           animate={mainControls}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <div className="flex flex-col md:flex-row items-start w-full jutify-between md:space-x-8">
+          <div className="flex flex-col md:flex-row items-start w-full jutify-between md:space-x-8 ">
             <p
               className={`${mmFont.className} text-lg sm:text-xl md:text-2xl lg:text-3xl w-full text-white md:w-[45%] uppercase mb-8 md:mb-0`}
             >
