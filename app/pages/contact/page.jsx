@@ -101,15 +101,15 @@ export default function Home() {
         </div>
       </div>
       <div className="flex flex-col items-center justify-center pt-60">
-        <p className={`text-white text-lg mb-4 text-center ${popinsFont.className}`}>
+        <p className={`text-white text-lg mb-4 text-center font-semibold ${popinsFont.className}`}>
           Vous avez des questions ou vous souhaitez travailler ensemble ?
         </p>
-        <p className="text-white text-lg text-center">
+        <p className="text-white text-lg text-center font-semibold">
           N'hésitez pas à me contacter à l'adresse suivante :
         </p>
         <Link
           href="mailto:m3dev4@gmail.com"
-          className="text-white text-lg underline cursor-pointer"
+          className="text-white text-lg underline cursor-pointer font-bold"
         >
           m3dev4@gmail.com
         </Link>
@@ -124,23 +124,20 @@ export default function Home() {
       <div className={styles.spacer}></div>
       <div className="flex w-full h-full relative -top-32 px-5">
         <div className="flex items-center justify-between w-full px-9 max-sm:flex-col">
-          <div>
-            <p className={`${popinsFont.className} text-white font-semibold`}>
-              Local Time: {localTime}
-            </p>
-            <p className={`${popinsFont.className} text-white font-semibold`}>
+          <div className="relative">
+            <p className={`${popinsFont.className} text-white text-[37px] font-semibold`}>
               © 2024 Mouhamed Lo. All Rights Reserved.
             </p>
           </div>
-          <div className="flex items-center justify-center gap-5">
+          <div className="flex items-center md:flex-row max-sm:flex-row max-sm:py-6 flex-col justify-center gap-5">
             {SocialMedia.map((media, item) => (
-              <div key={item} className="flex gap-10">
+              <div key={item} className="flex gap-10 flex-col">
                 <Link href={media.href}>
                   <Image
                     src={media.img}
                     alt={media.href}
-                    width={30}
-                    height={30}
+                    width={70}
+                    height={70}
                   />
                 </Link>
               </div>
