@@ -210,7 +210,7 @@ html {
 }
 
 .grid-item__bg h1 {
-  font-size: 10rem; /* Très grand texte */
+  font-size: 5rem; /* Très grand texte */
   color: rgba(255, 255, 255, 0.15); /* Couleur claire et semi-transparente */
   position: absolute;
   top: 50%;
