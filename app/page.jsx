@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import gsap from "gsap";
 import Image from "next/image";
 import Link from "next/link";
-import splt from 'spltjs';
-import anime from 'animejs/lib/anime.es.js';
+
 
 const Home = () => {
 
@@ -69,6 +68,16 @@ const Home = () => {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    const timeline = gsap.timeline();
+
+    timeline.fromTo(
+      ".grid-item",
+      { opacity: 0, scale: 0.9 },
+      { opacity: 1, scale: 1, duration: 1, ease: "power2.out", stagger: 0.3 }
+    );
+  }, []);
+
   return (
     <main className="block">
       <section className="justify-center items-center max:w-full flex h-screen w-[100vw] bg-black">
@@ -88,7 +97,7 @@ const Home = () => {
             </Link>
           </div>
           <div className="grid-item col-span-3 work">
-            <Link href="/pages/projet" className="col-span-1">
+            <Link href="/pages/project" className="col-span-1">
               <div className="clip-reg">
                 <div text-split className="text-reg">
                   <span className="inline-block text-white">
@@ -115,7 +124,7 @@ const Home = () => {
               </div>
             </Link>
           </div>
-          <div className="grid-item">
+          <div className="grid-item max-sm:col-span-3">
             <div className="clip-reg">
               <div text-split className="text-reg">
                 <span className="inline-block text-white">
