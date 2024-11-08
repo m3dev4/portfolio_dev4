@@ -4,7 +4,6 @@ import gsap from "gsap";
 import Image from "next/image";
 import Link from "next/link";
 
-
 const Home = () => {
 
   const [localTime, setLocalTime] = useState(new Date().toLocaleTimeString());
@@ -69,17 +68,32 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    const timeline = gsap.timeline();
+    const timeline = gsap.timeline({ delay: 0.3 });
 
+    // Animation des éléments de grille
     timeline.fromTo(
       ".grid-item",
-      { opacity: 0, scale: 0.9 },
-      { opacity: 1, scale: 1, duration: 1, ease: "power2.out", stagger: 0.3 }
+      {
+        opacity: 0,
+        y: 100,          // Translation vers le bas
+        rotation: -15,    // Rotation légère
+        scale: 0.8,       // Zoom léger
+      },
+      {
+        opacity: 1,
+        y: 0,
+        rotation: 0,
+        scale: 1,
+        duration: 1.2,    // Durée d'animation plus longue pour plus de fluidité
+        ease: "expo.out", // Effet de décélération pour une finition douce
+        stagger: 0.25,    // Déclenche chaque élément avec un léger décalage
+      }
     );
+
   }, []);
 
   return (
-    <main className="block">
+    <main className="block overflow-hidden">
       <section className="justify-center items-center max:w-full flex h-screen w-[100vw] bg-black">
         <div className="grid-section">
           <div className="grid-item col-span-2 about">
