@@ -1,19 +1,26 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { Header } from "../../../components/ui/container-scroll-animation";
 import Link from "next/link";
 import Image from "next/image";
 import "./about.css";
 import gsap from "gsap";
 import { Flip } from "gsap/Flip";
+import Header from "../../../components/header/header";
+import AboutSkill from "../../../components/AboutSkill"
 
-import { preloadImages, lerp, getMousePos } from "../../../utils/index";
+
 
 gsap.registerPlugin(Flip);
 
 const About = () => {
   const [isInitialized, setIsInitialized] = useState(false);
+  const [isExplored, setIsExplored] = useState(false);
+
+const handleExploreClick = () => {
+  setIsExplored(true);
+  enterFullview();
+};
 
   const bodyRef = useRef(null);
   const frameRef = useRef(null);
@@ -27,7 +34,7 @@ const About = () => {
   const [loading, setLoading] = useState(true);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [winsize, setWinsize] = useState({ width: 0, height: 0 });
-  const requestIdRef = useRef(null);
+  const [requestId, setRequestId] = useState(null);
 
   // Configuration
   const config = {
@@ -38,7 +45,7 @@ const About = () => {
     brightness: true,
   };
 
-  const baseAmt = 0.1;
+  const baseAmt = 0.15;
   const minAmt = 0.05;
   const maxAmt = 0.1;
 
@@ -84,6 +91,15 @@ const About = () => {
     return getComputedStyle(element).getPropertyValue(variableName).trim();
   };
 
+  const lerp = (a, b, n) => (1 - n) * a + n * b;
+
+  const getMousePos = e => {
+    return { 
+        x : e.clientX, 
+        y : e.clientY 
+    };
+  };
+
   // Animation render loop
   const render = () => {
     const mappedValues = {
@@ -91,51 +107,44 @@ const About = () => {
       skewX: calculateMappedSkew(),
       contrast: calculateMappedContrast(),
       scale: calculateMappedScale(),
-      brightness: calculateMappedBrightness(),
+      brightness: calculateMappedBrightness()
     };
 
     gridRowsRef.current.forEach((row, index) => {
       const style = renderedStylesRef.current[index];
-
+  
+      // Update current positions and interpolate values
       for (let prop in config) {
         if (config[prop]) {
           style[prop].current = mappedValues[prop];
-          const amt = prop === "scale" ? style.scaleAmt : style.amt;
-          style[prop].previous = lerp(
-            style[prop].previous,
-            style[prop].current,
-            amt
-          );
+          const amt = prop === 'scale' ? style.scaleAmt : style.amt;
+          style[prop].previous = lerp(style[prop].previous, style[prop].current, amt);
         }
       }
 
       let gsapSettings = {};
-      if (config.translateX) gsapSettings.x = style.translateX.previous;
-      if (config.skewX) gsapSettings.skewX = style.skewX.previous;
-      if (config.scale) gsapSettings.scale = style.scale.previous;
-      if (config.contrast)
-        gsapSettings.filter = `contrast(${style.contrast.previous}%)`;
-      if (config.brightness)
-        gsapSettings.filter = `${
-          gsapSettings.filter ? gsapSettings.filter + " " : ""
-        }brightness(${style.brightness.previous}%)`;
+    if (config.translateX) gsapSettings.x = style.translateX.previous;
+    if (config.skewX) gsapSettings.skewX = style.skewX.previous;
+    if (config.scale) gsapSettings.scale = style.scale.previous;
+    if (config.contrast) gsapSettings.filter = `contrast(${style.contrast.previous}%)`;
+    if (config.brightness) gsapSettings.filter = `${gsapSettings.filter ? gsapSettings.filter + ' ' : ''}brightness(${style.brightness.previous}%)`;
 
-      gsap.set(row, gsapSettings);
-    });
+    gsap.set(row, gsapSettings);
+  });
 
-    requestIdRef.current = requestAnimationFrame(render);
+    setRequestId(requestAnimationFrame(render));
   };
 
   const startRendering = () => {
-    if (!requestIdRef.current) {
+    if (!requestId) {
       render();
     }
   };
 
   const stopRendering = () => {
-    if (requestIdRef.current) {
-      cancelAnimationFrame(requestIdRef.current);
-      requestIdRef.current = null;
+    if (requestId) {
+      cancelAnimationFrame(requestId);
+      setRequestId(null);
     }
   };
 
@@ -291,6 +300,7 @@ const About = () => {
   }, []);
 
   // Initialize window size and event listeners
+
   useEffect(() => {
     const handleResize = () => {
       setWinsize({
@@ -311,24 +321,17 @@ const About = () => {
       updateMousePosition(ev.touches[0])
     );
 
-    preloadImages(".row__item-img").then(() => {
-      if (bodyRef.current) {
-        bodyRef.current.classList.remove("loading");
-      }
-      setLoading(false);
-      startRendering();
-    });
-
+    startRendering()
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", updateMousePosition);
       window.removeEventListener("touchmove", updateMousePosition);
-      stopRendering();
+      stopRendering()
     };
   }, []);
 
   return (
-    <main className={`noscroll ${isInitialized && !loading ? '' : 'noscroll'}`}>
+    <main className={`${isExplored ? '' : 'noscroll'}`}>
       <header className="frame" ref={frameRef}>
         <div className="flex py-5 px-11 fixed z-10 items-center justify-between w-full">
           <Link
@@ -343,13 +346,13 @@ const About = () => {
               className="rounded-full"
             />
           </Link>
-          <div>
+          <div className="z-10">
             <Header />
           </div>
         </div>
       </header>
       <section className="intro">
-        <div className="grid" ref={gridRef}>
+        <div className="gride" ref={gridRef}>
           <div className="row">
             {Array.from({ length: 7 }).map((_, i) => (
               <div className="row__item" key={i}>
@@ -365,7 +368,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/2.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/css.png')" }}
                 ></div>
               </div>
             </div>
@@ -373,7 +376,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/3.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/html.png')" }}
                 ></div>
               </div>
             </div>
@@ -381,7 +384,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/4.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/js.png')" }}
                 ></div>
               </div>
             </div>
@@ -389,7 +392,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/5.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/typescript.png')" }}
                 ></div>
               </div>
             </div>
@@ -397,7 +400,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/6.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/reactjs.png')" }}
                 ></div>
               </div>
             </div>
@@ -405,65 +408,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/7.jpg')" }}
-                ></div>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div class="row__item">
-              <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/8.jpg')" }}
-                ></div>
-              </div>
-            </div>
-            <div class="row__item">
-              <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/9.jpg')" }}
-                ></div>
-              </div>
-            </div>
-            <div class="row__item">
-              <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/10.jpg')" }}
-                ></div>
-              </div>
-            </div>
-            <div class="row__item">
-              <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/11.jpg')" }}
-                ></div>
-              </div>
-            </div>
-            <div class="row__item">
-              <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/12.jpg')" }}
-                ></div>
-              </div>
-            </div>
-            <div class="row__item">
-              <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/13.jpg')" }}
-                ></div>
-              </div>
-            </div>
-            <div class="row__item">
-              <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/14.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/nextjs.png')" }}
                 ></div>
               </div>
             </div>
@@ -473,7 +418,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/15.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/docker.png')" }}
                 ></div>
               </div>
             </div>
@@ -481,7 +426,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/16.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/exjs.png')" }}
                 ></div>
               </div>
             </div>
@@ -489,7 +434,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/17.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/nodejs.png')" }}
                 ></div>
               </div>
             </div>
@@ -497,7 +442,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/18.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/python.png')" }}
                 ></div>
               </div>
             </div>
@@ -505,7 +450,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/19.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/db.png')" }}
                 ></div>
               </div>
             </div>
@@ -513,7 +458,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/20.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/dbgraph.png')" }}
                 ></div>
               </div>
             </div>
@@ -521,65 +466,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/21.jpg')" }}
-                ></div>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div class="row__item">
-              <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/22.jpg')" }}
-                ></div>
-              </div>
-            </div>
-            <div class="row__item">
-              <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/23.jpg')" }}
-                ></div>
-              </div>
-            </div>
-            <div class="row__item">
-              <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/24.jpg')" }}
-                ></div>
-              </div>
-            </div>
-            <div class="row__item">
-              <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/25.jpg')" }}
-                ></div>
-              </div>
-            </div>
-            <div class="row__item">
-              <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/26.jpg')" }}
-                ></div>
-              </div>
-            </div>
-            <div class="row__item">
-              <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/1.jpg')" }}
-                ></div>
-              </div>
-            </div>
-            <div class="row__item">
-              <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/2.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/postgres.png')" }}
                 ></div>
               </div>
             </div>
@@ -589,7 +476,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/3.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/firebase.png')" }}
                 ></div>
               </div>
             </div>
@@ -597,7 +484,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/4.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/tailwind.png')" }}
                 ></div>
               </div>
             </div>
@@ -605,7 +492,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/5.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/js.png')" }}
                 ></div>
               </div>
             </div>
@@ -613,7 +500,7 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/6.jpg')" }}
+                  style={{ backgroundImage: "url('/images/med-sn.png')" }}
                 ></div>
               </div>
             </div>
@@ -621,7 +508,123 @@ const About = () => {
               <div class="row__item-inner">
                 <div
                   class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/7.jpg')" }}
+                  style={{ backgroundImage: "url('/icons/typescript.png')" }}
+                ></div>
+              </div>
+            </div>
+            <div class="row__item">
+              <div class="row__item-inner">
+                <div
+                  class="row__item-img"
+                  style={{ backgroundImage: "url('/icons/html.png')" }}
+                ></div>
+              </div>
+            </div>
+            <div class="row__item">
+              <div class="row__item-inner">
+                <div
+                  class="row__item-img"
+                  style={{ backgroundImage: "url('/icons/css.png')" }}
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div class="row__item">
+              <div class="row__item-inner">
+                <div
+                  class="row__item-img"
+                  style={{ backgroundImage: "url('/icons/python.png')" }}
+                ></div>
+              </div>
+            </div>
+            <div class="row__item">
+              <div class="row__item-inner">
+                <div
+                  class="row__item-img"
+                  style={{ backgroundImage: "url('/icons/git.png')" }}
+                ></div>
+              </div>
+            </div>
+            <div class="row__item">
+              <div class="row__item-inner">
+                <div
+                  class="row__item-img"
+                  style={{ backgroundImage: "url('/icons/reactjs.png')" }}
+                ></div>
+              </div>
+            </div>
+            <div class="row__item">
+              <div class="row__item-inner">
+                <div
+                  class="row__item-img"
+                  style={{ backgroundImage: "url('/icons/nextjs.png')" }}
+                ></div>
+              </div>
+            </div>
+            <div class="row__item">
+              <div class="row__item-inner">
+                <div
+                  class="row__item-img"
+                  style={{ backgroundImage: "url('/icons/firebase.png')" }}
+                ></div>
+              </div>
+            </div>
+            <div class="row__item">
+              <div class="row__item-inner">
+                <div
+                  class="row__item-img"
+                  style={{ backgroundImage: "url('/icons/docker.png')" }}
+                ></div>
+              </div>
+            </div>
+            <div class="row__item">
+              <div class="row__item-inner">
+                <div
+                  class="row__item-img"
+                  style={{ backgroundImage: "url('/icons/exjs.png')" }}
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div class="row__item">
+              <div class="row__item-inner">
+                <div
+                  class="row__item-img"
+                  style={{ backgroundImage: "url('/icons/nodejs.png')" }}
+                ></div>
+              </div>
+            </div>
+            <div class="row__item">
+              <div class="row__item-inner">
+                <div
+                  class="row__item-img"
+                  style={{ backgroundImage: "url('/icons/dbgraph'.png)" }}
+                ></div>
+              </div>
+            </div>
+            <div class="row__item">
+              <div class="row__item-inner">
+                <div
+                  class="row__item-img"
+                  style={{ backgroundImage: "url('/icons/git.png')" }}
+                ></div>
+              </div>
+            </div>
+            <div class="row__item">
+              <div class="row__item-inner">
+                <div
+                  class="row__item-img"
+                  style={{ backgroundImage: "url('/icons/tailwind'.png)" }}
+                ></div>
+              </div>
+            </div>
+            <div class="row__item">
+              <div class="row__item-inner">
+                <div
+                  class="row__item-img"
+                  style={{ backgroundImage: "url('/icons/db.png')" }}
                 ></div>
               </div>
             </div>
@@ -645,20 +648,20 @@ const About = () => {
         </div>
         <div className="fullview" ref={fullviewRef}></div>
         <div
-          ref={enterButtonRef}
-          className={`enter ${!isInitialized ? "disabled" : ""}`}
-          onClick={isInitialized ? enterFullview : undefined}
-          onTouchStart={isInitialized ? enterFullview : undefined}
-        >
-          <span>Explore</span>
-        </div>
+      ref={enterButtonRef}
+      className={`enter ${!isInitialized ? "disabled" : ""}`}
+      onClick={isInitialized ? handleExploreClick : undefined}
+      onTouchStart={isInitialized ? handleExploreClick : undefined}
+    >
+      <span>Explore</span>
+    </div>
       </section>
-      <section className="content" ref={contentRef}>
+      <section className="content max-sm:h-auto w-full" ref={contentRef}>
       <div class="content__header">
 					<h2>Mouhamed Lo</h2>
 				</div>
-        <div className="context__text">
-          <p className="right">
+        <div className="text-balance flex flex-col gap-[10vh] px-[5vw]">
+          <p className="max-w-[700px] text-[1.5rem] ml-auto m-0 leading-[1.4]">
           Ingénieur logiciel avec 3 ans d'expérience dans la création
               d'applications web performantes. Spécialisé dans l'utilisation de
               JavaScript et de ses frameworks comme React et Node.js, je conçois
@@ -667,7 +670,7 @@ const About = () => {
               qualité du code et l'optimisation des performances pour chaque
               projet.
           </p>
-          <p className="highlight">
+          <p className="max-w-[1000px] text-[2rem] font-semibold">
           Je suis né à Dakar, Sénégal, et ma passion pour le développement
               logiciel a débuté en 2020. Depuis, je me suis spécialisé dans le
               développement frontend et backend, en particulier dans tout ce qui
@@ -675,6 +678,7 @@ const About = () => {
               l'optimisation des interfaces. Mon objectif est de créer des
               expériences utilisateurs à la fois captivantes et performantes.
           </p>
+          <AboutSkill />
         </div>
         <footer className="content__footer">
           <span>

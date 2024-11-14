@@ -110,7 +110,7 @@ main {
 	height: 80vh;
 }
 
-.grid {
+.gride {
 	gap: 1rem;
 	flex: none;
 	position: relative;
@@ -212,7 +212,7 @@ main {
 
 .content {
 	padding: var(--page-padding);
-	
+	position: relative;
 }
 
 .content::before {
@@ -232,12 +232,7 @@ main {
 	position: relative;
 }
 
-.content__nav {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 1rem;
-	justify-content: space-between;
-}
+
 
 .content__header h2 {
 	font-size: 2rem;
@@ -247,28 +242,7 @@ main {
 	line-height: 0.9;
 }
 
-.content__text {
-	text-wrap: balance;
-	display: flex;
-	flex-direction: column;
-	gap: 10vh;
-	padding: 0 5vw;
-}
 
-.content__text p {
-	max-width: 700px;
-	font-size: 1.5rem;
-	line-height: 1.4;
-	margin: 0;
-	margin-left: auto;
-}
-
-.content__text p.highlight {
-	max-width: 1000px;
-	font-size: 2rem;
-	font-family: new-science-extended, sans-serif;
-	font-weight: 400;
-}
 
 .content__footer {
 	display: flex;
@@ -278,7 +252,7 @@ main {
 }
 
 @media screen and (min-width: 53em) {
-	body {
+	main {
 		--page-padding: 2rem 3rem;
 	}
 	.frame {

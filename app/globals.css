@@ -229,3 +229,33 @@ html {
   background-color: rgba(0, 0, 0, 0.9); /* Changer la couleur de fond lors du survol */
   transform: scale(1.05); /* Légère mise à l'échelle de l'arrière-plan */
 }
+
+.table-row::after {
+  content: '';
+  width: 100%; /* Par défaut, prend 100% de la largeur */
+  max-width: 1600px; /* Limite maximale pour les grands écrans */
+  height: 2px;
+  position: absolute;
+  background-color: #0a0a0a;
+  margin-top: 10px;
+}
+
+@media (max-width: 1024px) {
+  .table-row::after {
+    width: 80%; /* Largeur réduite pour les tablettes */
+  }
+}
+
+@media (max-width: 768px) {
+  .table-row::after {
+    width: 60%; /* Largeur réduite pour les petits écrans */
+  }
+}
+
+@media (max-width: 480px) {
+  .table-row::after {
+    width: 70%; /* Largeur encore plus réduite pour les mobiles */
+  }
+}
+
+

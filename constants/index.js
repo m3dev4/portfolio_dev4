@@ -90,3 +90,79 @@ export const SocialMedia = [
     href: "https://www.linkedin.com/in/mouhamed-lo-287a06202/"
   }
 ]
+
+
+export const iconTech = [
+  {
+    name: "html",
+    img: "/medias/html.png"
+  },
+  {
+    name: "css",
+    img: "/medias/css.png"
+  },
+  {
+    name: "js",
+    img: "/icons/js.png"
+  },
+  {
+    name: "typescript",
+    img: "/icons/typescript.png"
+  },
+  {
+    name: "reactjs",
+    img: "/medias/react.png"
+  },
+  {
+    name: "nextjs",
+    img: "/medias/nextjs.png"
+  },
+  {
+    name: "python",
+    img: "/medias/python.png"
+  },
+  {
+    name: "nodejs",
+    img: "/medias/nodejs.png"
+  },
+  {
+    name: "tailwind",
+    img: "/medias/tailwind.png"
+  },
+  {
+    name: "docker",
+    img: "/medias/docker.png"
+  },
+  {
+    name: "postgres",
+    img: "/medias/postgresql.png"
+  },
+  {
+    name: "mongoDb",
+    img: "/medias/mongodb.png"
+  },
+  {
+    name: "graphql",
+    img: "/medias/graphql.png"
+  },
+  {
+    name: "adobe-illustrator",
+    img: "/medias/adobe-illustrator.png"
+  },
+  {
+    name: "adobe-photoshop",
+    img: "/medias/adobe-photoshop.png"
+  },
+ 
+  {
+    name: "figma",
+    img: "/medias/figma.png"
+  },
+ 
+  {
+    name: "redux",
+    img: "/medias/redux.png"
+  },
+ 
+  
+]
