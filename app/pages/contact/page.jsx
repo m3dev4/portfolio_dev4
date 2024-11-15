@@ -13,12 +13,21 @@ import { SocialMedia } from "../../../constants";
 import localFont from "next/font/local";
 
 const popinsFont = localFont({
-    src: "../../fonts/Poppins-Variable.ttf"
+  src: "../../fonts/Poppins-Variable.ttf",
 });
 
 const images = [
-  "1.png", "2.png", "11.jpg", "3.png", "4.png", "5.jpg", 
-  "6.jpg", "8.jpg", "9.jpg", "10.jpg", "12.jpg"
+  "1.png",
+  "2.png",
+  "11.jpg",
+  "3.png",
+  "4.png",
+  "5.jpg",
+  "6.jpg",
+  "8.jpg",
+  "9.jpg",
+  "10.jpg",
+  "12.jpg",
 ];
 
 export default function Home() {
@@ -101,7 +110,9 @@ export default function Home() {
         </div>
       </div>
       <div className="flex flex-col items-center justify-center pt-60">
-        <p className={`text-white text-lg mb-4 text-center font-semibold ${popinsFont.className}`}>
+        <p
+          className={`text-white text-lg mb-4 text-center font-semibold ${popinsFont.className}`}
+        >
           Vous avez des questions ou vous souhaitez travailler ensemble ?
         </p>
         <p className="text-white text-lg text-center font-semibold">
@@ -125,7 +136,9 @@ export default function Home() {
       <div className="flex w-full h-full relative -top-32 px-5">
         <div className="flex items-center justify-between w-full px-9 max-sm:flex-col">
           <div className="relative">
-            <p className={`${popinsFont.className} text-white text-[37px] font-semibold`}>
+            <p
+              className={`${popinsFont.className} text-white text-[37px] font-semibold`}
+            >
               © 2024 Mouhamed Lo. All Rights Reserved.
             </p>
           </div>

@@ -8,12 +8,21 @@ import gsap from "gsap";
 import { Flip } from "gsap/Flip";
 import Header from "../../../components/header/header";
 import AboutSkill from "../../../components/AboutSkill"
+import { motion } from "framer-motion";
 
 
 
 gsap.registerPlugin(Flip);
 
 const About = () => {
+  const fadeIn = {
+    hidden: {opacity: 0, y: 50 },
+    visible: {opacity: 1, y: 0 }
+  }
+  const fadeLeft = {
+    hidden: {opacity: 0, x: -50 },
+    visible: {opacity: 1, x: 0 }
+  }
   const [isInitialized, setIsInitialized] = useState(false);
   const [isExplored, setIsExplored] = useState(false);
 
@@ -658,10 +667,22 @@ const handleExploreClick = () => {
       </section>
       <section className="content max-sm:h-auto w-full" ref={contentRef}>
       <div class="content__header">
-					<h2>Mouhamed Lo</h2>
+					<motion.h2
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5}}
+          variants={fadeLeft}
+          >Mouhamed Lo</motion.h2>
 				</div>
         <div className="text-balance flex flex-col gap-[10vh] px-[5vw]">
-          <p className="max-w-[700px] text-[1.5rem] ml-auto m-0 leading-[1.4]">
+          <motion.p 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5}}
+            variants={fadeIn}
+          className="max-w-[700px] text-[1.5rem] ml-auto m-0 leading-[1.4]">
           Ingénieur logiciel avec 3 ans d'expérience dans la création
               d'applications web performantes. Spécialisé dans l'utilisation de
               JavaScript et de ses frameworks comme React et Node.js, je conçois
@@ -669,15 +690,21 @@ const handleExploreClick = () => {
               expérience utilisateur fluide et immersive. Je me concentre sur la
               qualité du code et l'optimisation des performances pour chaque
               projet.
-          </p>
-          <p className="max-w-[1000px] text-[2rem] font-semibold">
+          </motion.p>
+          <motion.p 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5}}
+          variants={fadeIn}
+          className="max-w-[1000px] text-[2rem] font-semibold">
           Je suis né à Dakar, Sénégal, et ma passion pour le développement
               logiciel a débuté en 2020. Depuis, je me suis spécialisé dans le
               développement frontend et backend, en particulier dans tout ce qui
               touche aux aspects visuels des sites web, aux animations, et à
               l'optimisation des interfaces. Mon objectif est de créer des
               expériences utilisateurs à la fois captivantes et performantes.
-          </p>
+          </motion.p>
           <AboutSkill />
         </div>
         <footer className="content__footer">
