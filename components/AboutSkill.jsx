@@ -6,7 +6,7 @@ import { iconTech } from "../constants";
 import { motion, useAnimation } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { UiGlobe } from "./uiGlobe";
+import Earth from "./earth";
 
 const AboutSkill = () => {
   const control = useAnimation();
@@ -54,11 +54,11 @@ const AboutSkill = () => {
   }, [inView, control]);
 
   return (
-    <div className="w-full h-auto">
+    <div className="w-full h-auto text-white">
       <div className="flex flex-col items-start py-5 w-full">
         <motion.div className="w-full">
           <div className="flex">
-            <h5>About</h5>
+            <h5 className="text-white">About</h5>
             <div className="table-row px-5"></div>
           </div>
           <div className="flex flex-col md:flex-row justify-evenly items-start py-5 w-full">
@@ -68,7 +68,7 @@ const AboutSkill = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5 }}
               variants={fadeIn}
-              className="text-[40px] md:text-[50px] lg:text-[70px] flex-auto normal-case font-serif font-semibold"
+              className="text-[40px] md:text-[50px] lg:text-[70px] flex-auto normal-case font-serif font-semibold text-white"
             >
               Skills
             </motion.h2>
@@ -279,13 +279,19 @@ const AboutSkill = () => {
               animate={control}
               className="border border-indigo-900 opacity-0 absolute"
             ></motion.div>
-            <h2>Available for a full-time position</h2>
-    
-              <Link href="https://www.linkedin.com/in/mouhamed-lo-287a06202/">
+            <h2 className="relative top-7 text-[17px] font-semibold">
+              Available for a full-time position
+            </h2>
+            <Earth />
+            <div className="flex justify-center items-center  gap-6">
+              <Link
+                href="https://www.linkedin.com/in/mouhamed-lo-287a06202/"
+                className=""
+              >
                 Linkedn
               </Link>
               <Link href="">Download Resume</Link>
-           
+            </div>
           </div>
         </div>
       </div>

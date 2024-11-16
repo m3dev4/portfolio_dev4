@@ -7,29 +7,27 @@ import "./about.css";
 import gsap from "gsap";
 import { Flip } from "gsap/Flip";
 import Header from "../../../components/header/header";
-import AboutSkill from "../../../components/AboutSkill"
+import AboutSkill from "../../../components/AboutSkill";
 import { motion } from "framer-motion";
-
-
 
 gsap.registerPlugin(Flip);
 
 const About = () => {
   const fadeIn = {
-    hidden: {opacity: 0, y: 50 },
-    visible: {opacity: 1, y: 0 }
-  }
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
   const fadeLeft = {
-    hidden: {opacity: 0, x: -50 },
-    visible: {opacity: 1, x: 0 }
-  }
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0 },
+  };
   const [isInitialized, setIsInitialized] = useState(false);
   const [isExplored, setIsExplored] = useState(false);
 
-const handleExploreClick = () => {
-  setIsExplored(true);
-  enterFullview();
-};
+  const handleExploreClick = () => {
+    setIsExplored(true);
+    enterFullview();
+  };
 
   const bodyRef = useRef(null);
   const frameRef = useRef(null);
@@ -102,10 +100,10 @@ const handleExploreClick = () => {
 
   const lerp = (a, b, n) => (1 - n) * a + n * b;
 
-  const getMousePos = e => {
-    return { 
-        x : e.clientX, 
-        y : e.clientY 
+  const getMousePos = (e) => {
+    return {
+      x: e.clientX,
+      y: e.clientY,
     };
   };
 
@@ -116,30 +114,38 @@ const handleExploreClick = () => {
       skewX: calculateMappedSkew(),
       contrast: calculateMappedContrast(),
       scale: calculateMappedScale(),
-      brightness: calculateMappedBrightness()
+      brightness: calculateMappedBrightness(),
     };
 
     gridRowsRef.current.forEach((row, index) => {
       const style = renderedStylesRef.current[index];
-  
+
       // Update current positions and interpolate values
       for (let prop in config) {
         if (config[prop]) {
           style[prop].current = mappedValues[prop];
-          const amt = prop === 'scale' ? style.scaleAmt : style.amt;
-          style[prop].previous = lerp(style[prop].previous, style[prop].current, amt);
+          const amt = prop === "scale" ? style.scaleAmt : style.amt;
+          style[prop].previous = lerp(
+            style[prop].previous,
+            style[prop].current,
+            amt
+          );
         }
       }
 
       let gsapSettings = {};
-    if (config.translateX) gsapSettings.x = style.translateX.previous;
-    if (config.skewX) gsapSettings.skewX = style.skewX.previous;
-    if (config.scale) gsapSettings.scale = style.scale.previous;
-    if (config.contrast) gsapSettings.filter = `contrast(${style.contrast.previous}%)`;
-    if (config.brightness) gsapSettings.filter = `${gsapSettings.filter ? gsapSettings.filter + ' ' : ''}brightness(${style.brightness.previous}%)`;
+      if (config.translateX) gsapSettings.x = style.translateX.previous;
+      if (config.skewX) gsapSettings.skewX = style.skewX.previous;
+      if (config.scale) gsapSettings.scale = style.scale.previous;
+      if (config.contrast)
+        gsapSettings.filter = `contrast(${style.contrast.previous}%)`;
+      if (config.brightness)
+        gsapSettings.filter = `${
+          gsapSettings.filter ? gsapSettings.filter + " " : ""
+        }brightness(${style.brightness.previous}%)`;
 
-    gsap.set(row, gsapSettings);
-  });
+      gsap.set(row, gsapSettings);
+    });
 
     setRequestId(requestAnimationFrame(render));
   };
@@ -330,17 +336,17 @@ const handleExploreClick = () => {
       updateMousePosition(ev.touches[0])
     );
 
-    startRendering()
+    startRendering();
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", updateMousePosition);
       window.removeEventListener("touchmove", updateMousePosition);
-      stopRendering()
+      stopRendering();
     };
   }, []);
 
   return (
-    <main className={`${isExplored ? '' : 'noscroll'}`}>
+    <main className={`${isExplored ? "" : "noscroll"}`}>
       <header className="frame" ref={frameRef}>
         <div className="flex py-5 px-11 fixed z-10 items-center justify-between w-full">
           <Link
@@ -657,63 +663,65 @@ const handleExploreClick = () => {
         </div>
         <div className="fullview" ref={fullviewRef}></div>
         <div
-      ref={enterButtonRef}
-      className={`enter ${!isInitialized ? "disabled" : ""}`}
-      onClick={isInitialized ? handleExploreClick : undefined}
-      onTouchStart={isInitialized ? handleExploreClick : undefined}
-    >
-      <span>Explore</span>
-    </div>
+          ref={enterButtonRef}
+          className={`enter ${!isInitialized ? "disabled" : ""}`}
+          onClick={isInitialized ? handleExploreClick : undefined}
+          onTouchStart={isInitialized ? handleExploreClick : undefined}
+        >
+          <span>Explore</span>
+        </div>
       </section>
       <section className="content max-sm:h-auto w-full" ref={contentRef}>
-      <div class="content__header">
-					<motion.h2
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5}}
-          variants={fadeLeft}
-          >Mouhamed Lo</motion.h2>
-				</div>
-        <div className="text-balance flex flex-col gap-[10vh] px-[5vw]">
-          <motion.p 
+        <div class="content__header">
+          <motion.h2
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5}}
+            transition={{ duration: 0.5 }}
+            variants={fadeLeft}
+          >
+            Mouhamed Lo
+          </motion.h2>
+        </div>
+        <div className="text-balance flex flex-col gap-[10vh] px-[5vw]">
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
             variants={fadeIn}
-          className="max-w-[700px] text-[1.5rem] ml-auto m-0 leading-[1.4]">
-          Ingénieur logiciel avec 3 ans d'expérience dans la création
-              d'applications web performantes. Spécialisé dans l'utilisation de
-              JavaScript et de ses frameworks comme React et Node.js, je conçois
-              des interfaces dynamiques et intègre des animations pour une
-              expérience utilisateur fluide et immersive. Je me concentre sur la
-              qualité du code et l'optimisation des performances pour chaque
-              projet.
+            className="max-w-[700px] text-[1.5rem] ml-auto m-0 leading-[1.4] text-white"
+          >
+            Ingénieur logiciel avec 3 ans d'expérience dans la création
+            d'applications web performantes. Spécialisé dans l'utilisation de
+            JavaScript et de ses frameworks comme React et Node.js, je conçois
+            des interfaces dynamiques et intègre des animations pour une
+            expérience utilisateur fluide et immersive. Je me concentre sur la
+            qualité du code et l'optimisation des performances pour chaque
+            projet.
           </motion.p>
-          <motion.p 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5}}
-          variants={fadeIn}
-          className="max-w-[1000px] text-[2rem] font-semibold">
-          Je suis né à Dakar, Sénégal, et ma passion pour le développement
-              logiciel a débuté en 2020. Depuis, je me suis spécialisé dans le
-              développement frontend et backend, en particulier dans tout ce qui
-              touche aux aspects visuels des sites web, aux animations, et à
-              l'optimisation des interfaces. Mon objectif est de créer des
-              expériences utilisateurs à la fois captivantes et performantes.
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
+            variants={fadeIn}
+            className="max-w-[1000px] text-[2rem] font-semibold text-white"
+          >
+            Je suis né à Dakar, Sénégal, et ma passion pour le développement
+            logiciel a débuté en 2020. Depuis, je me suis spécialisé dans le
+            développement frontend et backend, en particulier dans tout ce qui
+            touche aux aspects visuels des sites web, aux animations, et à
+            l'optimisation des interfaces. Mon objectif est de créer des
+            expériences utilisateurs à la fois captivantes et performantes.
           </motion.p>
           <AboutSkill />
         </div>
-        <footer className="content__footer">
+        <footer className="content__footer text-white font-bold">
           <span>
-            Made by <a href="https://www.instagram.com/codropsss/">@codrops</a>
+            Made by @M3dev4
           </span>
-          <a href="https://tympanus.net/codrops/collective/">
-            Subscribe to our frontend news
-          </a>
+          ©2024
         </footer>
       </section>
     </main>
