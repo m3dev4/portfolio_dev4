@@ -152,6 +152,9 @@ main {
   position: absolute;
   top: 0;
   left: 0;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 
 .row__item-img--large {
@@ -248,7 +251,6 @@ main {
 .content__footer {
   display: flex;
   justify-content: space-between;
-  margin-top: 20vh;
   transform: translateY(calc(-1 * var(--trans-content)));
 }
 

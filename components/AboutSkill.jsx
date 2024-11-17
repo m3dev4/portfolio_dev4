@@ -7,6 +7,11 @@ import { motion, useAnimation } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Earth from "./earth";
+import localFont from "next/font/local";
+
+const nueveMontrealFontLight = localFont({ src: "../app/fonts/NeueMontreal-Bold.otf"})
+const nueveMontrealFont = localFont({ src: "../app/fonts/NeueMontreal-Light.otf"})
+
 
 const AboutSkill = () => {
   const control = useAnimation();
@@ -72,7 +77,7 @@ const AboutSkill = () => {
             >
               Skills
             </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 w-full max-w-6xl">
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 w-full max-w-6xl ${nueveMontrealFontLight.className}`}>
               {/* Liste des compétences */}
               <div className="normal-case">
                 <motion.h3
@@ -279,18 +284,18 @@ const AboutSkill = () => {
               animate={control}
               className="border border-indigo-900 opacity-0 absolute"
             ></motion.div>
-            <h2 className="relative top-7 text-[17px] font-semibold">
-              Available for a full-time position
+            <h2 className="relative top-[75px] text-[17px] font-semibold">
+             <i className="avalaible"></i> Available for a full-time position
             </h2>
             <Earth />
-            <div className="flex justify-center items-center  gap-6">
+            <div className={`flex justify-center items-center gap-6 relative bottom-14 text-[23px] normal-case ${nueveMontrealFont.className}`}>
               <Link
                 href="https://www.linkedin.com/in/mouhamed-lo-287a06202/"
                 className=""
               >
-                Linkedn
+               <i className="btn-anime"></i> Linkedln
               </Link>
-              <Link href="">Download Resume</Link>
+              <Link href=""><i className="btn-anime"></i> Download CV</Link>
             </div>
           </div>
         </div>

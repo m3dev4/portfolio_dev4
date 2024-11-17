@@ -1,0 +1,226 @@
+.bar-left::before {
+  content: "";
+  width: 10rem;
+  position: absolute;
+  height: 1px;
+  background-color: #fff;
+  margin-top: 37px;
+  left: 30%;
+}
+
+.bar-right::before {
+  content: "";
+  width: 10rem;
+  position: absolute;
+  height: 1px;
+  background-color: #fff;
+  right: 30%;
+  margin-top: 37px;
+}
+
+.scroll-down {
+  transform: translate(-50%);
+  width: 1px;
+  height: 4rem;
+  background: #f1dada1a;
+  opacity: 1;
+  overflow: hidden;
+}
+
+.scroll-down::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fadada;
+  height: 100%;
+  width: 100%;
+  animation: scrolling 2s infinite ease-in-out;
+}
+
+@keyframes scrolling {
+  0% {
+    transform: translateY(-100%);
+  }
+  70% {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+.work {
+  margin-top: 16rem;
+  margin-top: var(--space-9);
+  overflow: hidden;
+  position: relative;
+}
+.container {
+  padding: 0 clamp(1rem, -0.699rem + 7.2492vw, 8rem);
+  padding: 0 var(--out-padding);
+  max-width: 120rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.work_categorie {
+  font-size: clamp(5rem, 3.7864rem + 5.178vw, 10rem);
+  
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.divider--center {
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.divider_line {
+  height: 7px;
+  flex-grow: 1;
+  transform: scale(0);
+  background-color: #f1dada1a;
+}
+
+.divider_line--left {
+  transform-origin: right;
+}
+.divider_line--right {
+  transform-origin: left;
+}
+.divider-text {
+  color: #f1dada99;
+    font-size: clamp(.9rem,.23vw + .85rem,1.13rem);
+    font-size: clamp(.9rem,.23vw + .85rem,1.13rem);
+    font-weight: 500
+}
+
+
+.work:not(.is-title) .work_categorie{
+  min-height: clamp(18rem,15.5728rem + 10.356vw,28rem);
+}
+
+.work:not(.is-title):before,.work:not(.is-title):after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: clamp(1rem,-.699rem + 7.2492vw,8rem);
+  width: var(--out-padding);
+  opacity: 0;
+  transition: opacity .6s;
+  z-index: 999;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  pointer-events: none
+}
+
+.work:not(.is-title):before {
+  left: 0;
+  background: linear-gradient(to right,#0e090d,#0e090dfa 10.31%,#0e090dec 20.25%,#0e090dd7 29.83%,#0e090dbd 39.04%,#0e090d9f 47.88%,#0e090d80 56.38%,#0e090d60 64.51%,#0e090d42 72.3%,#0e090d28 79.73%,#0e090d13 86.83%,#0e090d05 93.58%,#0e090d00)
+}
+
+.work_categorie span{
+  padding: 0 30px;
+}
+
+/* Style de base pour les catégories */
+.work_categorie {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Style de base pour toutes les images de pattern */
+.design-patter-img,
+.img-anime,
+.wb-img-anime {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, visibility, transform;
+  pointer-events: none;
+}
+
+/* Quand on survole une catégorie */
+.work_categorie:hover {
+  opacity: 1;
+}
+
+/* Les autres catégories diminuent en opacité */
+section.work:hover .work_categorie:not(:hover) {
+  opacity: 0.3;
+}
+
+/* Apparition de l'image au hover */
+.work_categorie:hover .design-patter-img,
+.work_categorie:hover .img-anime,
+.work_categorie:hover .wb-img-anime {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+/* Animation spécifique pour le design pattern */
+.work_categorie:hover .design-patter-img {
+  animation: 
+    float 3s ease-in-out infinite,
+    rotate 6s linear infinite;
+}
+
+/* Animation spécifique pour l'app mobile */
+.work_categorie:hover .img-anime {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Animation spécifique pour le web dev */
+.work_categorie:hover .wb-img-anime {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Animation de flottement */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Animation de rotation */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Style pour le focus des liens pour l'accessibilité */
+.work_categorie:focus-within {
+  opacity: 1;
+}
+
+/* Amélioration de la transition pour les textes */
+.work_categorie span {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.work_categorie:hover span {
+  opacity: 1;
+}
+
+/* Pour assurer une transition fluide au hover */
+.work_categorie {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}

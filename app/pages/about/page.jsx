@@ -9,8 +9,14 @@ import { Flip } from "gsap/Flip";
 import Header from "../../../components/header/header";
 import AboutSkill from "../../../components/AboutSkill";
 import { motion } from "framer-motion";
+import localFont from "next/font/local";
 
 gsap.registerPlugin(Flip);
+
+
+const nueveMontrealFont = localFont({ src: "../../fonts/NeueMontreal-Bold.otf"})
+const nueveMontrealFontLight = localFont({ src: "../../fonts/NeueMontreal-Light.otf"})
+
 
 const About = () => {
   const fadeIn = {
@@ -343,6 +349,44 @@ const About = () => {
       window.removeEventListener("touchmove", updateMousePosition);
       stopRendering();
     };
+  }, []);
+
+  
+  useEffect(() => {
+    // Animation des images du grid
+    const allImages = document.querySelectorAll('.row__item-img');
+    
+    allImages.forEach((img) => {
+      // Vérifie si l'image n'est pas celle à exclure
+      if (!img.style.backgroundImage.includes('/images/med-sn.png')) {
+        // Position initiale aléatoire
+        const randomY = Math.random() * 100 - 50; // Valeur entre -50 et 50
+        
+        gsap.set(img, {
+          y: randomY,
+          opacity: 0
+        });
+
+        // Animation avec un délai aléatoire
+        gsap.to(img, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          delay: Math.random() * 0.5,
+          ease: "power3.out"
+        });
+
+        // Animation continue
+        gsap.to(img, {
+          y: randomY * 0.3, // Amplitude réduite pour le mouvement continu
+          duration: 2 + Math.random() * 2, // Durée aléatoire entre 2 et 4 secondes
+          yoyo: true,
+          repeat: -1,
+          ease: "sine.inOut",
+          delay: Math.random() * 2 // Délai aléatoire pour désynchroniser les animations
+        });
+      }
+    });
   }, []);
 
   return (
@@ -690,7 +734,7 @@ const About = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5 }}
             variants={fadeIn}
-            className="max-w-[700px] text-[1.5rem] ml-auto m-0 leading-[1.4] text-white"
+            className={`max-w-[700px] text-[1.5rem] ml-auto m-0 leading-[1.4] text-[#f1dada] ${nueveMontrealFont.className}`}
           >
             Ingénieur logiciel avec 3 ans d'expérience dans la création
             d'applications web performantes. Spécialisé dans l'utilisation de
@@ -706,7 +750,7 @@ const About = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5 }}
             variants={fadeIn}
-            className="max-w-[1000px] text-[2rem] font-semibold text-white"
+            className={`max-w-[1000px] text-[2rem] font-bold text-[#f1dada] ${nueveMontrealFont.className}`}
           >
             Je suis né à Dakar, Sénégal, et ma passion pour le développement
             logiciel a débuté en 2020. Depuis, je me suis spécialisé dans le
@@ -721,7 +765,7 @@ const About = () => {
           <span>
             Made by @M3dev4
           </span>
-          ©2024
+          ©2024 M.Lo
         </footer>
       </section>
     </main>
