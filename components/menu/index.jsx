@@ -1,7 +1,7 @@
 import { mountAnim, opacity, slideLeft } from "../../utils/anime";
 import styles from "./style.module.scss";
 import { motion } from "framer-motion";
-import Link from './link';
+import DataLink from "./link";
 
 
 const menu = [
@@ -40,7 +40,7 @@ const Menu = ({ closeMenu }) => {
     
             <div className={styles.body}>
              {menu.map((el, index) => {
-                return <Link data={el} index={index} key={index}/>
+                return <DataLink data={el} index={index} key={index}/>
              })}
             </div>
     
