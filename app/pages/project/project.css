@@ -1,22 +1,4 @@
-.bar-left::before {
-  content: "";
-  width: 10rem;
-  position: absolute;
-  height: 1px;
-  background-color: #fff;
-  margin-top: 37px;
-  left: 30%;
-}
 
-.bar-right::before {
-  content: "";
-  width: 10rem;
-  position: absolute;
-  height: 1px;
-  background-color: #fff;
-  right: 30%;
-  margin-top: 37px;
-}
 
 .scroll-down {
   transform: translate(-50%);
@@ -80,18 +62,20 @@
   gap: 3rem;
 }
 
+
+
 .divider_line {
-  height: 7px;
+  height: 1px;
   flex-grow: 1;
-  transform: scale(0);
-  background-color: #f1dada1a;
+  transform: scale(1);
+  background-color: #f1dadab0;
 }
 
 .divider_line--left {
-  transform-origin: right;
+  transform-origin: left;
 }
 .divider_line--right {
-  transform-origin: left;
+  transform-origin: right;
 }
 .divider-text {
   color: #f1dada99;
@@ -224,3 +208,15 @@ section.work:hover .work_categorie:not(:hover) {
   backface-visibility: hidden;
   perspective: 1000px;
 }
+@media not all and (min-width: 640px) {
+  .bar-left{
+    display: none;
+  }
+  .bar-right{
+    display: none;
+  }
+  .img-anime, .design-patter-img, .wb-img-anime{
+    max-width: 150px;
+  }
+}
+

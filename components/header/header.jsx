@@ -1,41 +1,32 @@
-"use client"
-import { useState } from "react";
-import styles from "./style.module.css";
-import { AnimatePresence, motion } from "framer-motion";
-import { opacity } from "./anim";
-import Nav from "../nav/nav";
+"use client";
+import React, { useState } from "react";
+import Burger from "../burger";
+import Stairs from "../stairs";
+import Menu from "../menu"
+import { AnimatePresence } from "framer-motion";
 
 const Header = () => {
-  const [isActive, setIsActive] = useState();
-  return (
-    <div className={styles.header}>
-      <div className={styles.bar}>
-        <div
-          onClick={() => {
-            setIsActive(!isActive);
-          }}
-          className={styles.el}
-        >
-          <div
-            className={`${styles.burger} ${
-              isActive ? styles.burgerActive : ""
-            }`}
-          ></div>
-          <div className={styles.label}>
-            <motion.p
-              variants={opacity}
-              animate={!isActive ? "open" : "closed"}
-            >
-              Menu
-            </motion.p>
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
 
-            <motion.p variants={opacity} animate={isActive ? "open" : "closed"}>
-              Close
-            </motion.p>
-          </div>
-        </div>
-      </div>
-      <AnimatePresence mode="wait">{isActive && <Nav />}</AnimatePresence>
+  return (
+    <div>
+      <Burger
+        openMenu={() => {
+          setMenuIsOpen(true);
+        }}
+      />
+      <AnimatePresence mode="wait">
+        {menuIsOpen && (
+          <>
+            <Stairs />
+            <Menu
+              closeMenu={() => {
+                setMenuIsOpen(false);
+              }}
+            />
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

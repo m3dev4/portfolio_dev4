@@ -6,16 +6,19 @@ import Image from "next/image";
 import "./about.css";
 import gsap from "gsap";
 import { Flip } from "gsap/Flip";
-import Header from "../../../components/header/header";
 import AboutSkill from "../../../components/AboutSkill";
 import { motion } from "framer-motion";
 import localFont from "next/font/local";
+import Header from "../../../components/header/header";
 
 gsap.registerPlugin(Flip);
 
 
 const nueveMontrealFont = localFont({ src: "../../fonts/NeueMontreal-Bold.otf"})
 const nueveMontrealFontLight = localFont({ src: "../../fonts/NeueMontreal-Light.otf"})
+const mangoGrotesqueMedium = localFont({
+  src: "../../fonts/MangoGrotesque-Medium.ttf",
+});
 
 
 const About = () => {
@@ -392,23 +395,12 @@ const About = () => {
   return (
     <main className={`${isExplored ? "" : "noscroll"}`}>
       <header className="frame" ref={frameRef}>
-        <div className="flex py-5 px-11 fixed z-10 items-center justify-between w-full">
-          <Link
-            href="/"
-            className="cursor-pointer text-2xl text-white font-extrabold uppercase"
-          >
-            <Image
-              src="/images/m4.png"
-              alt="logo dev"
-              width={70}
-              height={70}
-              className="rounded-full"
-            />
-          </Link>
-          <div className="z-10">
-            <Header />
-          </div>
-        </div>
+      <Header />
+      <div className="px-14 py-14 z-50 fixed max-sm:px-2 max-sm:py-7 ">
+        <Link href="/" className="realtive">
+          <span className={`${mangoGrotesqueMedium.className} text-white text-[60px] max-sm:text-[25px] relative -top-8`}>M.Lo</span>
+        </Link>
+      </div>
       </header>
       <section className="intro">
         <div className="gride" ref={gridRef}>

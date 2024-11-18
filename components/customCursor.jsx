@@ -75,7 +75,7 @@ const CustomCursor = () => {
 
   return (
     <div 
-      className="fixed pointer-events-none z-50 mix-blend-difference"
+      className="fixed pointer-events-none z-50 mix-blend-difference max-sm:hidden"
       style={{
         left: `${cursorPos.x}px`,
         top: `${cursorPos.y}px`,

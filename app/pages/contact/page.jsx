@@ -8,9 +8,9 @@ import { useTransform, useScroll, motion } from "framer-motion";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import Header from "../../../components/header/header";
 import { SocialMedia } from "../../../constants";
 import localFont from "next/font/local";
+import Header from ".././../../components/header/header"
 
 const popinsFont = localFont({
   src: "../../fonts/Poppins-Variable.ttf",
@@ -91,23 +91,8 @@ export default function Home() {
 
   return (
     <main className="bg-gradient-to-r from-gray-800 to-neutral-900">
-      <div className="flex py-5 px-11 fixed z-10 items-center justify-between w-full">
-        <Link
-          href="/"
-          className="cursor-pointer text-2xl text-white font-extrabold uppercase"
-          ref={picAniamtion}
-        >
-          <Image
-            src="/images/m4.png"
-            alt="logo dev"
-            width={70}
-            height={70}
-            className="rounded-full"
-          />
-        </Link>
-        <div ref={menuAnimation}>
-          <Header />
-        </div>
+      <div>
+        <Header />
       </div>
       <div className="flex flex-col items-center justify-center pt-60">
         <p
