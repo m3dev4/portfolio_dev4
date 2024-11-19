@@ -1,0 +1,96 @@
+.ctn {
+  padding: 0 clamp(1rem, 0.699rem + 7.249vw, 8rem);
+}
+
+.hder {
+  padding: 0 clamp(1rem, 0.699rem + 7.249vw, 8rem);
+  text-decoration: none;
+  color: #f1dada;
+  height: clamp(5.5rem, 4.7718rem + 3.1068vw, 8.5rem);
+}
+
+.title-link {
+  font-size: clamp(1.41rem, 0.61vw + 1.26rem, 2rem);
+  font-size: clamp(1.41rem, 0.61vi + 1.26rem, 2rem);
+  line-height: 1;
+  letter-spacing: 0.9px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: opacity 0.6s;
+  height: 100%;
+  width: clamp(1rem, -0.699rem + 7.2492vw, 8rem);
+  background: linear-gradient(
+    to right,
+    #0e090d,
+    #0e090dfa 10.31%,
+    #0e090dec 20.25%,
+    #0e090dd7 29.83%,
+    #0e090dbd 39.04%,
+    #0e090d9f 47.88%,
+    #0e090d80 56.38%,
+    #0e090d60 64.51%,
+    #0e090d42 72.3%,
+    #0e090d28 79.73%,
+    #0e090d13 86.83%,
+    #0e090d05 93.58%,
+    #0e090d00
+  );
+}
+
+.img_hero{
+    transform: scale(1);
+}
+
+.img-hero{
+    filter: drop-shadow(-4rem 2rem 2rem #0e090d);
+}
+.is-title{
+    margin-top: 0;
+}
+
+.is-title .work-row{
+    width: 100vw;
+    display: flex;
+    position: relative;
+}
+.is-title .work-row:hover{
+    transform: none;
+}
+
+.work-inner{
+    font-size: clamp(5rem, 3.7864rem + 5.178vw, 10rem);
+    color: #f1dada;
+    will-change: transform;
+}
+
+.is-title .work-inner{
+    gap: 0;
+}
+.work_inner-text{
+transition: opacity .3s;
+}
+
+.work-separator{
+    transition: all .3s;
+    min-width: .3em;
+    height: .3em;
+    margin: 0 .5em;
+    border-radius: 50%;
+    background: #fb4566;
+
+}
+
+ul li:not(:first-child):before {
+    content: "";
+    width: .25rem;
+    height: .25rem;
+    background: #fb4566;
+    display: block;
+    border-radius: 50%
+}
