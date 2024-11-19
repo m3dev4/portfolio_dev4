@@ -94,3 +94,7 @@ ul li:not(:first-child):before {
     display: block;
     border-radius: 50%
 }
+
+.prj{
+  grid-template-columns: 1fr 5fr;
+}
