@@ -1,9 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "../app/globals.css";
 import localFont from "next/font/local";
 import Image from "next/image";
 import { useInView, motion, inView } from "framer-motion";
-
 
 const MangoGrotesque = localFont({
   src: "../app/fonts/MangoGrotesque-Medium.ttf",
@@ -57,48 +56,83 @@ const projects = [
 
 const WebDevProject = () => {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
-  const contentRef = useRef(null)
-  const isInView = useInView(contentRef, {once: true, margin: "-75%"})
+  const contentRef = useRef(null);
+  const [markerPosition, setMarkerPosition] = useState(0);
+  const titleRefs = useRef([]);
 
-  //Animation mask text with framer motion
-  const animationContent = {
-    initial: {y: "100%"},
+  // Met à jour la position du marqueur en fonction du projet actif
+  useEffect(() => {
+    if (titleRefs.current[activeProjectIndex]) {
+      const activeTitle = titleRefs.current[activeProjectIndex];
+      const rect = activeTitle.getBoundingClientRect();
+      setMarkerPosition(rect.top + window.scrollY); // Calcul de la position du marqueur
+    }
+  }, [activeProjectIndex]);
 
-    enter: i => ({y: "0", transition: {duration: 0.75, ease: [0.33, 1, 0.68, 1],  delay: 0.075 * i}})
-  }
+  // Fonction pour gérer le clic sur un projet dans le menu
+  const handleClick = (index) => {
+    setActiveProjectIndex(index);
+    const projectElement = document.getElementById(`project-${index}`);
+    if (projectElement) {
+      projectElement.scrollIntoView({ behavior: "smooth" }); // Défilement fluide vers le projet sélectionné
+    }
+  };
 
+  const imageVariants = {
+    hidden: { clipPath: "inset(100% 0% 0% 0%)", opacity: 0 },
+    visible: {
+      clipPath: "inset(0% 0% 0% 0%)",
+      opacity: 1,
+      transition: { duration: 1, ease: "easeOut" },
+    },
+  };
+
+  const textVariants = {
+    hidden: {
+      clipPath: "inset(100% 0% 0% 0%)",
+      opacity: 0,
+    },
+    visible: {
+      clipPath: "inset(0% 0% 0% 0% )",
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
 
   return (
     <>
-      <nav className="block self-start sticky pr-2 top-custom-top max-sm:hidden ">
+      <nav className="block self-start sticky pr-2 top-custom-top max-sm:hidden">
         <div className="flex items-center gap-5">
-          <div className="mb-12 ">
+          <div className="mb-12">
             <div className="justify-left origin-left">
-              <div className="text-left whitespace-nowrap text-clamp text-custom-pink font-medium">
+              <div className="text-left whitespace-nowrap text-clamp text-custom-pink font-medium underline pb-7">
                 Project
               </div>
-              <div className="h-1 flex-grow scale-1 bg-primary relative">
-                <div className="origin-right absolute"></div>
+              <div className="h-1 flex-grow scale-1 bg-primary absolute">
+                <motion.div
+                  className="origin-right absolute bg-custom-pink"
+                  style={{
+                    width: "2px",
+                    height: "20px",
+                    top: markerPosition, // Position dynamique du marqueur
+                  }}
+                  initial={{ top: markerPosition }}
+                  animate={{ top: markerPosition }}
+                  transition={{ duration: 0.3 }}
+                ></motion.div>
               </div>
               <ul className="flex flex-col gap-[.5em] text-clampSub tracking-[.05m] pl-0 font-[400] ">
                 {projects.map((project, index) => (
                   <li
                     key={index}
+                    ref={(el) => (titleRefs.current[index] = el)} // Associe chaque titre à un ref
                     className={`w-fit whitespace-nowrap cursor-pointer list-none
                       ${
                         activeProjectIndex === index
                           ? "text-white"
                           : "text-custom-pink hover:text-white"
                       }`}
-                    onClick={() => {
-                      const projectElement = document.getElementById(
-                        `project-${index}`
-                      );
-                      if (projectElement) {
-                        projectElement.scrollIntoView({ behavior: "smooth" });
-                        setActiveProjectIndex(index);
-                      }
-                    }}
+                    onClick={() => handleClick(index)} // Clic pour changer le projet actif et faire défiler
                   >
                     {project.title}
                   </li>
@@ -108,9 +142,17 @@ const WebDevProject = () => {
           </div>
         </div>
       </nav>
-      <div className="flex flex-col gap-48 pl-24 border-l max:sm:border-l-0 max-sm:pl-0 max-sm:border-l-0  border-gray-200" ref={contentRef}>
+
+      <div
+        className="flex flex-col gap-48 pl-24 border-l max:sm:border-l-0 max-sm:pl-0 max-sm:border-l-0 border-gray-200"
+        ref={contentRef}
+      >
         {projects.map((project, index) => (
-          <div key={index} className="flex flex-col gap-16">
+          <div
+            key={index}
+            id={`project-${index}`}
+            className="flex flex-col gap-16"
+          >
             <div className="flex items-center gap-6 justify-left">
               <div className="text-clampSub font-[200] text-left text-custom-pink whitespace-nowrap">
                 Web Development
@@ -120,21 +162,38 @@ const WebDevProject = () => {
                 {`0${index + 1}`}
               </span>
             </div>
-            <div className={`w-full flex pb-16 ${MangoGrotesque.className}`}>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
+              className={`w-full flex pb-16 ${MangoGrotesque.className}`}
+            >
               <div className="flex justify-between w-full max-sm:flex-col">
-                <motion.h2 className="max-w-[72%] leading-3 mb-8 text-[70px] max-sm:text-[50px] text-custom-pink">
+                <motion.h2
+                  // variants={textVariants}
+                  className="max-w-[72%] leading-3 mb-8 text-[70px] max-sm:text-[50px] text-custom-pink"
+                >
                   {project.title}
                 </motion.h2>
-                <p
+                <motion.p
+                  variants={textVariants}
                   className={`font-[300] text-[24px] max-sm:text-[14px] text-custom-pink leading-2 w-[65%] max-sm:w-[165%] max-sm:pr-3 ${ppNueve.className}`}
                 >
                   {project.description}
-                </p>
+                </motion.p>
               </div>
-            </div>
+            </motion.div>
             {project.title !== "Apple landing" && (
-              <div className="flex self-stretch gap-8 overflow-hidden">
-                <div className="rounded-[.5em] relative overflow-hidden w-full">
+              <motion.div
+                className="flex self-stretch gap-8 overflow-hidden"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }} // Animation dès que 50% de l'élément est visible
+              >
+                <motion.div
+                  className="rounded-[.5em] relative overflow-hidden w-full"
+                  variants={imageVariants}
+                >
                   <Image
                     src={project.img}
                     alt={project.title}
@@ -142,12 +201,20 @@ const WebDevProject = () => {
                     height={1080}
                     className="object-cover"
                   />
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             )}
             {project.title !== "Apple landing" && (
-              <div className="flex self-stretch gap-8 overflow-hidden">
-                <div className="rounded-[.5em] relative overflow-hidden w-full">
+              <motion.div
+                className="flex self-stretch gap-8 overflow-hidden"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+              >
+                <motion.div
+                  className="rounded-[.5em] relative overflow-hidden w-full"
+                  variants={imageVariants}
+                >
                   <Image
                     src={project.img2}
                     alt={project.title}
@@ -155,8 +222,8 @@ const WebDevProject = () => {
                     height={1080}
                     className="object-cover"
                   />
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             )}
             {project.title === "Apple landing" && (
               <div className="flex self-stretch gap-8 overflow-hidden">
@@ -181,4 +248,5 @@ const WebDevProject = () => {
     </>
   );
 };
+
 export default WebDevProject;
