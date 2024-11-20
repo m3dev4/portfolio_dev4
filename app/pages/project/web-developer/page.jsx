@@ -8,8 +8,8 @@ import localFont from "next/font/local";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import CustomCursor from "../../../../components/customCursor"
-import WebDevProject from "../../../../components/webDevProject"
+import CustomCursor from "../../../../components/customCursor";
+import WebDevProject from "../../../../components/webDevProject";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,14 +21,6 @@ const ppNueve = localFont({
 });
 
 const Webdeveloper = () => {
-
-
-
-
-
- 
-
-
   const firstText = useRef(null);
   const secondText = useRef(null);
   const slider = useRef(null);
@@ -51,23 +43,22 @@ const Webdeveloper = () => {
       },
       x: "-500px",
     });
-    
 
     // Animation function
     const animate = () => {
       if (!isHovered) {
-        // Reset position if out of bounds
+        // Réinitialiser la position si hors limites
         if (xPercentRef.current < -100) {
           xPercentRef.current = 0;
         } else if (xPercentRef.current > 0) {
           xPercentRef.current = -100;
         }
 
-        // Update text positions
+        // Mettre à jour les positions du texte
         gsap.set(firstText.current, { xPercent: xPercentRef.current });
         gsap.set(secondText.current, { xPercent: xPercentRef.current });
 
-        // Increment position
+        // Position d'incrémentation
         xPercentRef.current += 0.1 * directionRef.current;
       }
 
@@ -75,10 +66,10 @@ const Webdeveloper = () => {
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    // Start animation
+    // Démarrer l'animation
     animationFrameRef.current = requestAnimationFrame(animate);
 
-    // Cleanup
+    // Nettoyage
     return () => {
       scrollTrigger.kill();
       if (animationFrameRef.current) {
@@ -88,15 +79,14 @@ const Webdeveloper = () => {
   }, [isHovered]);
 
   useEffect(() => {
-    // Clone the text to create seamless infinite loop
     gsap.set(secondText, { x: firstText.offsetWidth });
 
     const tl = gsap.timeline({ repeat: -1 });
-    
+
     tl.to(slider, {
       x: `-${firstText.offsetWidth}px`,
-      duration: 5, // Adjust speed as needed
-      ease: "linear"
+      duration: 5,
+      ease: "linear",
     }).set(slider, { x: 0 });
 
     return () => tl.kill();
@@ -200,8 +190,8 @@ const Webdeveloper = () => {
         </div>
       </section>
       <section className="grid prj h-auto ctn self-start">
-          <WebDevProject />
-        </section>
+        <WebDevProject />
+      </section>
     </main>
   );
 };
