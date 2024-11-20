@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "../app/globals.css";
 import localFont from "next/font/local";
 import Image from "next/image";
+import { useInView, motion, inView } from "framer-motion";
+
 
 const MangoGrotesque = localFont({
   src: "../app/fonts/MangoGrotesque-Medium.ttf",
@@ -55,10 +57,20 @@ const projects = [
 
 const WebDevProject = () => {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  const contentRef = useRef(null)
+  const isInView = useInView(contentRef, {once: true, margin: "-75%"})
+
+  //Animation mask text with framer motion
+  const animationContent = {
+    initial: {y: "100%"},
+
+    enter: i => ({y: "0", transition: {duration: 0.75, ease: [0.33, 1, 0.68, 1],  delay: 0.075 * i}})
+  }
+
 
   return (
     <>
-      <nav className="block self-start sticky pr-2 top-custom-top ">
+      <nav className="block self-start sticky pr-2 top-custom-top max-sm:hidden ">
         <div className="flex items-center gap-5">
           <div className="mb-12 ">
             <div className="justify-left origin-left">
@@ -96,25 +108,25 @@ const WebDevProject = () => {
           </div>
         </div>
       </nav>
-      <div className="flex flex-col gap-48 pl-24 border-l border-gray-200">
+      <div className="flex flex-col gap-48 pl-24 border-l max:sm:border-l-0 max-sm:pl-0 max-sm:border-l-0  border-gray-200" ref={contentRef}>
         {projects.map((project, index) => (
           <div key={index} className="flex flex-col gap-16">
             <div className="flex items-center gap-6 justify-left">
               <div className="text-clampSub font-[200] text-left text-custom-pink whitespace-nowrap">
-                Product Design
+                Web Development
               </div>
               <div className="h-[1px] flex-grow scale-1 bg-primary origin-left"></div>
               <span className="text-clampSub font-[200] text-left text-custom-pink whitespace-nowrap">
                 {`0${index + 1}`}
               </span>
             </div>
-            <div className={`w-full flex pb-96 ${MangoGrotesque.className}`}>
-              <div className="flex justify-between">
-                <h2 className="max-w-[72%] leading-3 mb-8 text-[70px] text-custom-pink">
+            <div className={`w-full flex pb-16 ${MangoGrotesque.className}`}>
+              <div className="flex justify-between w-full max-sm:flex-col">
+                <motion.h2 className="max-w-[72%] leading-3 mb-8 text-[70px] max-sm:text-[50px] text-custom-pink">
                   {project.title}
-                </h2>
+                </motion.h2>
                 <p
-                  className={`font-[300] text-[24px] text-custom-pink leading-2 w-[65%] ${ppNueve.className}`}
+                  className={`font-[300] text-[24px] max-sm:text-[14px] text-custom-pink leading-2 w-[65%] max-sm:w-[165%] max-sm:pr-3 ${ppNueve.className}`}
                 >
                   {project.description}
                 </p>

@@ -10,6 +10,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomCursor from "../../../../components/customCursor";
 import WebDevProject from "../../../../components/webDevProject";
+import { useInView, motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,6 +22,8 @@ const ppNueve = localFont({
 });
 
 const Webdeveloper = () => {
+  const contentRef = useRef(null)
+  const isInView = useInView(contentRef, {once: true, margin: "-75%"})
   const firstText = useRef(null);
   const secondText = useRef(null);
   const slider = useRef(null);
@@ -91,6 +94,12 @@ const Webdeveloper = () => {
 
     return () => tl.kill();
   }, []);
+
+  //Animation mask text with framer motion
+    const animationContent = {
+      initial: {y: "100%"},
+      enter: i => ({ y: "0", transition: { duration: 0.75, ease: [0.33, 1, 0.68, 1], delay: 0.075 * 1}})
+    }
 
   return (
     <main className="bg-[#0e090d] w-full h-full min-h-screen">
