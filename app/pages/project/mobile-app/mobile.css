@@ -98,3 +98,16 @@ transition: opacity .3s;
 .prj{
   grid-template-columns: 1fr 5fr;
 }
+
+.img-anime{
+  animation: float 3s infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}

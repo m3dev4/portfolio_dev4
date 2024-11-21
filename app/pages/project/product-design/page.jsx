@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import "./design.css";
+import "../project.css";
 import Link from "next/link";
 import Header from "../../../../components/header/header";
 import localFont from "next/font/local";
@@ -9,7 +10,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomCursor from "../../../../components/customCursor";
-import { useInView, motion } from "framer-motion";
+import { useInView, motion, useScroll, useTransform } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +21,11 @@ const ppNueve = localFont({
   src: "../../../fonts/NeueMontreal-Light.otf",
 });
 
-const Webdeveloper = () => {
+const projects = [
+
+]
+
+const DesignProduct = () => {
   const contentRef = useRef(null)
   const isInView = useInView(contentRef, {once: true, margin: "-75%"})
   const firstText = useRef(null);
@@ -30,6 +35,15 @@ const Webdeveloper = () => {
   const xPercentRef = useRef(0);
   const directionRef = useRef(1);
   const animationFrameRef = useRef(null);
+  const containerRef = useRef(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+    smooth: true, // Enable smooth scrolling
+  });
+
+  const translateX = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   useEffect(() => {
     // ScrollTrigger setup
@@ -122,7 +136,7 @@ const Webdeveloper = () => {
             alt="wbe dev"
             width={700}
             height={700}
-            className="object-cover img-hero h-auto select-none w-full pointer-events-none"
+            className="object-cover img-hero h-auto select-none w-full pointer-events-none design-patter-img"
           />
         </div>
         <div className="overflow-hidden absolute mt-4 is-title">
@@ -186,22 +200,152 @@ const Webdeveloper = () => {
               <li
                 className={`whitespace-nowrap flex items-center gap-4 text-[28px] ${ppNueve.className} `}
               >
-                Frontend Development
+                Ux/Ui Design
               </li>
               <li
                 className={`whitespace-nowrap flex items-center gap-4 text-[28px] ${ppNueve.className} `}
               >
-                Backend Development
+                Prototyping & System Design
               </li>
             </ul>
           </div>
         </div>
       </section>
       <section className="grid prj h-auto ctn self-start">
-        
+          <div className="flex items-center flex-col justify-start pb-32 m-auto">
+          {projects.length === 0 ? (
+        <p className="text-center  w-full text-custom-pink text-lg mt-8">
+          Des projets arrivent bientôt ! 😉
+        </p>
+      ) : null}
+          </div>
       </section>
+      <section className="w-full ctn">
+        <div className="flex items-center flex-col justify-center pb-32 m-auto">
+          <div className="divider divider--center mt-24">
+            <div className="divider_line divider_line--left"></div>
+            <h2
+              className={`${mangoGrotes.className} py-20 text-[45px] font-semibold text-custom-pink`}
+            >
+              Discover more project
+            </h2>
+            <div className="divider_line divider_line--left"></div>
+          </div>
+          <div className="work container" ref={containerRef}>
+            <div className="flex flex-col overflow-visible">
+            <Link href="mobile-app" className="relative">
+                <motion.div
+                  style={{
+                    x: useTransform(scrollYProgress, [0, 1], [-100, 100]),
+                  }}
+                  className={`text-center relative flex flex-row items-center justify-center will-change-transform text-[#f1dada] work_categorie ${mangoGrotes.className}`}
+                >
+                  <Image
+                    src="/pattern/mobileapp.png"
+                    alt="design"
+                    width={350}
+                    height={350}
+                    className="object-cover absolute inset-0 m-auto filter img-anime"
+                  />
+                  <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                    Mobile App
+                  </span>
+                  <span className="transition-all min-w-[.3em] h-[.3em] mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+                </motion.div>
+              </Link>
+              <div className="divider divider--center">
+                <div className="divider_line divider_line--left"></div>
+                <div className={`${ppNueve.className} divider-text`}>
+                  Click to view project
+                </div>
+                <div className="divider_line divider_line--left"></div>
+              </div>
+              <Link href="project/web-developer" className="relative">
+              <motion.div
+               style={{x: translateX,}}
+                className={`text-center relative flex flex-row items-center justify-center will-change-transform text-[#f1dada] work_categorie ${mangoGrotes.className}`}
+              >
+                <Image
+                  src="/pattern/webdev.png"
+                  alt="design"
+                  width={350}
+                  height={350}
+                  className="object-cover absolute inset-0 m-auto filter wb-img-anime"
+                />
+                <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                  web Development
+                </span>
+                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+                <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                  web Development
+                </span>
+                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+                <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                  web Development
+                </span>
+                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+                <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                  web Development
+                </span>
+                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+                <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                  web Development
+                </span>
+                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+                <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                  web Development
+                </span>
+                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+                <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                  web Development
+                </span>
+                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+                <span className="whitespace-nowrap font-thin text-[#f1dada] transition-[opacity .3s] ">
+                  web Development
+                </span>
+                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] m-[0 .5em] rounded-[50%] bg-[#fb4566]"></span>
+              </motion.div>
+            </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer className="flex justify-between items-center px-7 text-white font-bold">
+          <span>
+            Made by @M3dev4
+          </span>
+          ©2024 M.Lo
+        </footer>
     </main>
   );
 };
 
-export default Webdeveloper;
+export default DesignProduct;

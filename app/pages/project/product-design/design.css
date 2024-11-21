@@ -98,3 +98,28 @@ transition: opacity .3s;
 .prj{
   grid-template-columns: 1fr 5fr;
 }
+
+.design-patter-img {
+  animation: 
+    float 3s ease-in-out infinite ,
+    rotate 61s linear infinite ;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Animation de rotation */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
