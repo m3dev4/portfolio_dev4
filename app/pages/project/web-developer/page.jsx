@@ -134,7 +134,7 @@ const Webdeveloper = () => {
         <Header />
       </header>
       <section className="overflow-hidden relative flex flex-col items-center justify-center h-screen min-h-10 ctn hero">
-        <div className="self-end flex h-full max-w-[50vw] items-center justify-center pointer-events-none z-20 right-0 img_hero">
+        <div className="self-end flex h-full max-w-[50vw] items-center justify-center pointer-events-none z-20 right-0 ">
           <Image
             src="/pattern/webdev.png"
             alt="wbe dev"

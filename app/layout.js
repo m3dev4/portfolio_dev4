@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import localFont from "next/font/local";
 import "./globals.css";
-import Loader from "../components/loader"
+import Loader from "../components/loader/loader"
 import PageTransition from "../components/transition/pageTrasition"
 
 
@@ -19,15 +19,18 @@ const geistMono = localFont({
 });
 
 export default function ClientLayout({ children }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); // État pour gérer le loader
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 7000);
+    if (!isLoading) {
+      document.body.style.overflow = "visible"; // Assurez-vous de réactiver le défilement
+    }
+  }, [isLoading]);
 
-    return () => clearTimeout(timer);
-  }, []);
+  const handleLoaderComplete = () => {
+    // Appelé lorsque le Loader termine
+    setIsLoading(false);
+  };
 
   return (
     <html lang="fr">
@@ -35,7 +38,7 @@ export default function ClientLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {isLoading ? (
-          <Loader />
+          <Loader onComplete={handleLoaderComplete} />
         ) : (
           <PageTransition>
             <main>

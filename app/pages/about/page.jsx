@@ -395,7 +395,9 @@ const About = () => {
   return (
     <main className={`${isExplored ? "" : "noscroll"}`}>
       <header className="frame" ref={frameRef}>
+      <div className="z-50">
       <Header />
+      </div>
       <div className="px-14 py-14 z-50 fixed max-sm:px-2 max-sm:py-7 ">
         <Link href="/" className="realtive">
           <span className={`${mangoGrotesqueMedium.className} text-white text-[60px] max-sm:text-[25px] relative -top-8`}>M.Lo</span>

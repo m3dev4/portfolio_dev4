@@ -31,15 +31,18 @@ const Project = () => {
     smooth: true, // Enable smooth scrolling
   });
 
-  const translateX = useTransform(scrollYProgress, [0, 1], [100, -100], );
-
+  const translateX = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
     <main className="h-auto min-h-screen w-full bg-[#0e090d]">
       <Header />
       <div className="px-14 py-14 z-50 fixed max-sm:px-2 max-sm:py-7 ">
         <Link href="/" className="realtive">
-          <span className={`${mangoGrotesqueMedium.className} text-white text-[60px] max-sm:text-[25px] relative -top-8`}>M.Lo</span>
+          <span
+            className={`${mangoGrotesqueMedium.className} text-white text-[60px] max-sm:text-[25px] relative -top-8`}
+          >
+            M.Lo
+          </span>
         </Link>
       </div>
       <div className=" w-full px-auto">
@@ -76,7 +79,7 @@ const Project = () => {
           <div className="flex flex-col overflow-visible">
             <Link href="project/product-design" className="relative">
               <motion.div
-                style={{x: translateX,}}
+                style={{ x: translateX }}
                 className={`text-center relative flex flex-row items-center justify-center will-change-transform text-[#f1dada] work_categorie ${mangoGrotesqueRegular.className}`}
               >
                 <Image
@@ -128,8 +131,10 @@ const Project = () => {
               <div className="divider_line divider_line--left"></div>
             </div>
             <Link href="project/mobile-app" className="relative">
-              <motion.div 
-              style={{ x: useTransform(scrollYProgress, [0, 1], [-100, 100]) }}
+              <motion.div
+                style={{
+                  x: useTransform(scrollYProgress, [0, 1], [-100, 100]),
+                }}
                 className={`text-center relative flex flex-row items-center justify-center will-change-transform text-[#f1dada] work_categorie ${mangoGrotesqueRegular.className}`}
               >
                 <Image
@@ -182,7 +187,7 @@ const Project = () => {
             </div>
             <Link href="project/web-developer" className="relative">
               <motion.div
-               style={{x: translateX,}}
+                style={{ x: translateX }}
                 className={`text-center relative flex flex-row items-center justify-center will-change-transform text-[#f1dada] work_categorie ${mangoGrotesqueRegular.className}`}
               >
                 <Image
@@ -229,6 +234,10 @@ const Project = () => {
           </div>
         </section>
       </div>
+      <footer className="flex justify-between items-center px-7 text-white font-bold">
+        <span>Made by @M3dev4</span>
+        ©2024 M.Lo
+      </footer>
     </main>
   );
 };

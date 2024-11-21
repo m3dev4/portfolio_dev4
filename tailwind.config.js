@@ -23,6 +23,7 @@ module.exports = {
         clamp: 'clamp(.9rem, .23vw + .85rem, 1.13rem)',
         clampSub: '(1.13rem, .39vw + 1.03rem, 1.5rem)',
         titletext: "(2.75rem, 2.06vw + 2.26rem, 4.74rem)",
+        custom: "2vw"
       },
       colors: {
         'custom-pink': '#f1dada',
@@ -33,8 +34,15 @@ module.exports = {
       },
       gridTemplateColumns: {
         'custom': '2fr, 3fr'
+      },
+      width:{
+         'custom': '80%'
+      },
+      height: {
+        'loader': "calc(100vh + 200px)"
       }
     },
+    
   },
   plugins: [
     function ({ addUtilities }) {
@@ -45,6 +53,7 @@ module.exports = {
         '.scale-1': {
           transform: 'scale(1)',
         },
+        
       });
     },
   ],
