@@ -201,6 +201,15 @@ const Webdeveloper = () => {
       <section className="grid prj h-auto ctn self-start">
         <WebDevProject />
       </section>
+      <section className="w-full ctn">
+        <div className="flex items-center justify-center pb-32 m-auto">
+          <div className="flex items-center justify-between gap-12">
+              <div className="flex-grow h-[1px] scale-1 bg-primary origin-bottom-left"></div>
+              Discorver more projects
+              <div className="flex-grow h-[1px] scale-1 bg-primary origin-bottom-right"></div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 };
