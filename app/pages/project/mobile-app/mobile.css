@@ -99,7 +99,7 @@ transition: opacity .3s;
   grid-template-columns: 1fr 5fr;
 }
 
-.img-anime{
+.imganime{
   animation: float 3s infinite;
 }
 

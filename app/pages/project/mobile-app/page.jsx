@@ -141,7 +141,7 @@ const MobileApp = () => {
             alt="wbe dev"
             width={700}
             height={700}
-            className="object-cover img-hero h-auto select-none w-full pointer-events-none img-anime"
+            className="object-cover img-hero h-auto select-none w-full pointer-events-none imganime"
           />
         </div>
         <div className="overflow-hidden absolute mt-4 is-title">
@@ -286,7 +286,7 @@ const MobileApp = () => {
                 </div>
                 <div className="divider_line divider_line--left"></div>
               </div>
-              <Link href="project/web-developer" className="relative">
+              <Link href="web-developer" className="relative">
                 <motion.div
                   style={{ x: translateX }}
                   className={`text-center relative flex flex-row items-center justify-center will-change-transform text-[#f1dada] work_categorie ${mangoGrotes.className}`}

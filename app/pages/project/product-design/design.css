@@ -99,7 +99,7 @@ transition: opacity .3s;
   grid-template-columns: 1fr 5fr;
 }
 
-.design-patter-img {
+.design-img {
   animation: 
     float 3s ease-in-out infinite ,
     rotate 61s linear infinite ;

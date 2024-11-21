@@ -140,7 +140,7 @@ const Webdeveloper = () => {
             alt="wbe dev"
             width={700}
             height={700}
-            className="object-cover img-hero h-auto select-none w-full pointer-events-none"
+            className="object-cover img-hero h-auto select-none w-full pointer-events-none flt-img"
           />
         </div>
         <div className="overflow-hidden absolute mt-4 is-title">

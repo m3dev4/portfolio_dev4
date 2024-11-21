@@ -130,13 +130,13 @@ const DesignProduct = () => {
         <Header />
       </header>
       <section className="overflow-hidden relative flex flex-col items-center justify-center h-screen min-h-10 ctn hero">
-        <div className="self-end flex h-full max-w-[50vw] items-center justify-center pointer-events-none z-20 right-0 img_hero">
+        <div className="self-end flex h-full max-w-[50vw] items-center justify-center pointer-events-none z-20 right-0">
           <Image
             src="/pattern/design.png"
             alt="wbe dev"
             width={700}
             height={700}
-            className="object-cover img-hero h-auto select-none w-full pointer-events-none design-patter-img"
+            className="object-cover img-hero h-auto select-none w-full pointer-events-none design-img"
           />
         </div>
         <div className="overflow-hidden absolute mt-4 is-title">
@@ -288,7 +288,7 @@ const DesignProduct = () => {
                 </div>
                 <div className="divider_line divider_line--left"></div>
               </div>
-              <Link href="project/web-developer" className="relative">
+              <Link href="web-developer" className="relative">
               <motion.div
                style={{x: translateX,}}
                 className={`text-center relative flex flex-row items-center justify-center will-change-transform text-[#f1dada] work_categorie ${mangoGrotes.className}`}
