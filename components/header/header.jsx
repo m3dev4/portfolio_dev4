@@ -1,34 +1,33 @@
-"use client";
-import React, { useState } from "react";
-import Burger from "../burger";
-import Stairs from "../stairs";
-import Menu from "../menu"
-import { AnimatePresence } from "framer-motion";
+'use client'
+import styles from './style.module.scss'
+import { useEffect, useState } from 'react';
+import Nav from "../nav/nav"
+import { AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
-const Header = () => {
-  const [menuIsOpen, setMenuIsOpen] = useState(false);
+export default function Home() {
+
+  const [isActive, setIsActive] = useState(false);
+  const pathname = usePathname();
+
+  useEffect( () => {
+    if(isActive) setIsActive(false)
+  }, [pathname])
 
   return (
-    <div>
-      <Burger
-        openMenu={() => {
-          setMenuIsOpen(true);
-        }}
-      />
-      <AnimatePresence mode="wait">
-        {menuIsOpen && (
-          <>
-            <Stairs />
-            <Menu
-              closeMenu={() => {
-                setMenuIsOpen(false);
-              }}
-            />
-          </>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-};
+    <>
+    <div className={styles.main}>
 
-export default Header;
+      <div className={styles.header}>
+        <div onClick={() => {setIsActive(!isActive)}} className={styles.button}>
+          <div className={`${styles.burger} ${isActive ? styles.burgerActive : ""}`}></div>
+        </div>
+      </div>
+
+    </div>
+    <AnimatePresence mode="wait">
+      {isActive && <Nav />}
+    </AnimatePresence>
+    </>
+  )
+}

@@ -130,8 +130,8 @@ const Home = () => {
   }, []);
 
   return (
-    <main className="block overflow-hidden">
-      <section className="justify-center items-center max:w-full flex h-screen w-[100vw] bg-black">
+    <main className="block overflow-hidden w-full">
+      <section className="justify-center items-center max:w-full  flex h-screen w-[100vw] bg-black">
         <div className="grid-section">
           <div className="grid-item col-span-2 about">
             <Link href="/pages/about">

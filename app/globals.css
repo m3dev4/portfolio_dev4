@@ -309,37 +309,3 @@ html {
 
 }
 
-.nav-project{
-  top: clamp(5.5rem, 4.7718rem + 3.1068vw, 8.5rem);
-}
-
-.divider {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  gap: var(--space-2)
-}
-
-.divider--left {
-  justify-content: left
-}
-
-.divider__text {
-  font-size: clamp(.9rem,.23vw + .85rem,1.13rem);
-  font-size: clamp(.9rem,.23vi + .85rem,1.13rem);
-  font-size: var(--fs-sm);
-  font-weight: 200;
-  text-align: left;
-  color: #f1dada99;
-  white-space: nowrap
-}
-.divider--left .divider__line {
-  transform-origin: left;
-}
-.divider__line {
-  height: 1px;
-  flex-grow: 1;
-  transform: scaleX(0);
-  background: #b38484e7;
-}
-

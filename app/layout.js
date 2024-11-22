@@ -41,9 +41,9 @@ export default function ClientLayout({ children }) {
           <Loader onComplete={handleLoaderComplete} />
         ) : (
           <PageTransition>
-            <main>
+            <>
             {children}
-            </main>
+            </>
             </PageTransition>
         )}
       </body>

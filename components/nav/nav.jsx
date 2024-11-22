@@ -1,25 +1,64 @@
-"use client"
-import { useState } from "react";
+import React, { useState } from "react";
+import styles from "./style.module.scss";
 import { motion } from "framer-motion";
-import { height } from "./anime";
-import Body from "../body/body";
-import { navLinks } from "../../constants";
-import styles from "./style.module.css";
+import { usePathname } from "next/navigation";
 
+import Link from "./link";
+import Curve from "./curve/curve";
+import Footer from "./footer/footer";
+import { menuSlide } from "../../utils/anime";
 
+const navItems = [
+  {
+    title: "Work",
+    href: "/pages/project",
+  },
+  {
+    title: "About",
+    href: "/pages/about",
+  },
+  {
+    title: "Contact",
+    href: "/pages/contact",
+  },
+];
 
-const Nav = () => {
-    const [slectedLink, setSelectedLink] = useState({isActive: false, index: 0});
-    
-    return (
-        <motion.div variants={height} initial="initial" animate="enter" exit="exit" className={styles.nav}>
-            <div className={styles.wrapper}>
-                <div className={styles.container}>
-                    <Body navLinks={navLinks} selectedLink={slectedLink} setSelectedLink={setSelectedLink} key={navLinks.id}/>
-                </div>
-            </div>
-        </motion.div>
-    );
-};
+export default function index() {
+  const pathname = usePathname();
+  const [selectedIndicator, setSelectedIndicator] = useState(pathname);
 
-export default Nav;
+  return (
+    <motion.div
+      variants={menuSlide}
+      initial="initial"
+      animate="enter"
+      exit="exit"
+      className={styles.menu}
+    >
+      <div className={styles.body}>
+        <div
+          onMouseLeave={() => {
+            setSelectedIndicator(pathname);
+          }}
+          className={styles.nav}
+        >
+          <div className={styles.header}>
+            <p>Navigation</p>
+          </div>
+          {navItems.map((data, index) => {
+            return (
+              <Link
+                key={index}
+                data={{ ...data, index }}
+                isActive={selectedIndicator == data.href}
+                setSelectedIndicator={setSelectedIndicator}
+              ></Link>
+            );
+          })}
+        </div>
+        <Footer />
+      </div>
+      <Curve />
+    </motion.div>
+  );
+}

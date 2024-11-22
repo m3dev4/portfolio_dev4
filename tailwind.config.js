@@ -16,24 +16,48 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        float: 'float 3s ease-in-out infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-15px)' },
+        },
+        
+      },
       spacing: {
         "custom-top": "clamp(5.5rem, 4.7718rem + 3.1068vw, 8.5rem)",
       },
       fontSize: {
-        clamp: 'clamp(.9rem, .23vw + .85rem, 1.13rem)',
+        clamp: '25px',
         clampSub: '(1.13rem, .39vw + 1.03rem, 1.5rem)',
         titletext: "(2.75rem, 2.06vw + 2.26rem, 4.74rem)",
+        titleproject: "212px",
+        titlemobile: "100px",
+        titledesktop: "100px",
+        paradesktop: "56px",
+        paramobile: "30px",
+        veloanim : "clamp(5rem, 3.7864rem + 5.178vw, 10rem)"
       },
       colors: {
         'custom-pink': '#f1dada',
       },
       backgroundColor: {
         'primary': "#f1dada1a",
-        'secondery': "#0e090d"
+        'secondery': "#0e090d",
+        'layout': "#0e090d"
       },
       gridTemplateColumns: {
         'custom': '2fr, 3fr'
-      }
+      },
+      padding: {
+        'custom': 'clamp(1rem, -0.699rem + 7.249vw, 8rem)'
+      },
+      maxWidth: {
+        "custom": '120rem'
+      },
+     
     },
   },
   plugins: [
@@ -45,6 +69,7 @@ module.exports = {
         '.scale-1': {
           transform: 'scale(1)',
         },
+        
       });
     },
   ],

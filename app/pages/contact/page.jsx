@@ -16,6 +16,16 @@ const popinsFont = localFont({
   src: "../../fonts/Poppins-Variable.ttf",
 });
 
+const mangoGrotesqueMedium = localFont({
+  src: "../../fonts/MangoGrotesque-Medium.ttf",
+});
+const mangoGrotesqueRegular = localFont({
+  src: "../../fonts/MangoGrotesque-Regular.ttf",
+});
+const mangoGrotesqueBold = localFont({
+  src: "../../fonts/MangoGrotesque-Bold.ttf",
+});
+
 const images = [
   "1.png",
   "2.png",
@@ -29,6 +39,7 @@ const images = [
   "10.jpg",
   "12.jpg",
 ];
+
 
 export default function Home() {
   const picAniamtion = useRef(null);
@@ -91,9 +102,21 @@ export default function Home() {
 
   return (
     <main className="bg-gradient-to-r from-gray-800 to-neutral-900">
-      <div>
-        <Header />
-      </div>
+      <header className="fixed flex justify-between items-center left-0 z-50 top-0">
+        <div className="flex  space-between items-center  mx-auto ">
+          <Link href="/" className="mt-8">
+            <span
+              className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotesqueMedium.className}`}
+            >
+              M.Lo
+            </span>
+          </Link>
+          <div className="absolute top-0">
+          <Header />
+          </div>
+        </div>
+        
+      </header>
       <div className="flex flex-col items-center justify-center pt-60">
         <p
           className={`text-white text-lg mb-4 text-center font-semibold ${popinsFont.className}`}
