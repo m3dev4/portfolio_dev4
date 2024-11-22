@@ -13,13 +13,15 @@ import Header from "../../../components/header/header";
 
 gsap.registerPlugin(Flip);
 
-
-const nueveMontrealFont = localFont({ src: "../../fonts/NeueMontreal-Bold.otf"})
-const nueveMontrealFontLight = localFont({ src: "../../fonts/NeueMontreal-Light.otf"})
+const nueveMontrealFont = localFont({
+  src: "../../fonts/NeueMontreal-Bold.otf",
+});
+const nueveMontrealFontLight = localFont({
+  src: "../../fonts/NeueMontreal-Light.otf",
+});
 const mangoGrotesqueMedium = localFont({
   src: "../../fonts/MangoGrotesque-Medium.ttf",
 });
-
 
 const About = () => {
   const fadeIn = {
@@ -354,20 +356,19 @@ const About = () => {
     };
   }, []);
 
-  
   useEffect(() => {
     // Animation des images du grid
-    const allImages = document.querySelectorAll('.row__item-img');
-    
+    const allImages = document.querySelectorAll(".row__item-img");
+
     allImages.forEach((img) => {
       // Vérifie si l'image n'est pas celle à exclure
-      if (!img.style.backgroundImage.includes('/images/med-sn.png')) {
+      if (!img.style.backgroundImage.includes("/images/med-sn.png")) {
         // Position initiale aléatoire
         const randomY = Math.random() * 100 - 50; // Valeur entre -50 et 50
-        
+
         gsap.set(img, {
           y: randomY,
-          opacity: 0
+          opacity: 0,
         });
 
         // Animation avec un délai aléatoire
@@ -376,7 +377,7 @@ const About = () => {
           opacity: 1,
           duration: 1,
           delay: Math.random() * 0.5,
-          ease: "power3.out"
+          ease: "power3.out",
         });
 
         // Animation continue
@@ -386,7 +387,7 @@ const About = () => {
           yoyo: true,
           repeat: -1,
           ease: "sine.inOut",
-          delay: Math.random() * 2 // Délai aléatoire pour désynchroniser les animations
+          delay: Math.random() * 2, // Délai aléatoire pour désynchroniser les animations
         });
       }
     });
@@ -395,14 +396,18 @@ const About = () => {
   return (
     <main className={`${isExplored ? "" : "noscroll"}`}>
       <header className="frame" ref={frameRef}>
-      <div className="z-50">
-      <Header />
-      </div>
-      <div className="px-14 py-14 z-50 fixed max-sm:px-2 max-sm:py-7 ">
-        <Link href="/" className="realtive">
-          <span className={`${mangoGrotesqueMedium.className} text-white text-[60px] max-sm:text-[25px] relative -top-8`}>M.Lo</span>
-        </Link>
-      </div>
+        <div className="z-50">
+          <Header />
+        </div>
+        <div className="px-14 py-14 z-50 fixed max-sm:px-2 max-sm:py-7 ">
+          <Link href="/" className="realtive">
+            <span
+              className={`${mangoGrotesqueMedium.className} text-white text-[60px] max-sm:text-[25px] relative -top-8`}
+            >
+              M.Lo
+            </span>
+          </Link>
+        </div>
       </header>
       <section className="intro">
         <div className="gride" ref={gridRef}>
@@ -756,9 +761,7 @@ const About = () => {
           <AboutSkill />
         </div>
         <footer className="content__footer text-white font-bold">
-          <span>
-            Made by @M3dev4
-          </span>
+          <span>Made by @M3dev4</span>
           ©2024 M.Lo
         </footer>
       </section>

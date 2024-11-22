@@ -134,13 +134,13 @@ const Webdeveloper = () => {
         <Header />
       </header>
       <section className="overflow-hidden relative flex flex-col items-center justify-center h-screen min-h-10 ctn hero">
-        <div className="self-end flex h-full max-w-[50vw] items-center justify-center pointer-events-none z-20 right-0 ">
+        <div className="self-end flex h-full max-w-[50vw] items-center mb-version  justify-center pointer-events-none z-20 right-0 ">
           <Image
             src="/pattern/webdev.png"
             alt="wbe dev"
             width={700}
             height={700}
-            className="object-cover img-hero h-auto select-none w-full pointer-events-none flt-img"
+            className="object-cover img-hero h-auto select-none w-full pointer-events-none "
           />
         </div>
         <div className="overflow-hidden absolute mt-4 is-title">

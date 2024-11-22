@@ -99,7 +99,7 @@ transition: opacity .3s;
   grid-template-columns: 1fr 5fr;
 }
 
-.design-img {
+.img-hero {
   animation: 
     float 3s ease-in-out infinite ,
     rotate 61s linear infinite ;
@@ -121,5 +121,23 @@ transition: opacity .3s;
   }
   to {
     transform: rotate(360deg);
+  }
+}
+@media not all and (min-width: 640px) {
+  .mb-version{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-wrap: wrap;
+    bottom: 0;
+    left: 0;
+    
+  }
+  .img-hero{
+    position: absolute;
+    top: 0;
+    margin-top: 70px;
+    margin-left: 100%;
   }
 }

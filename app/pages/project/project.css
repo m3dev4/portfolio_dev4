@@ -37,6 +37,7 @@
   margin-top: var(--space-9);
   overflow: hidden;
   position: relative;
+  height: 160vh;
 }
 .container {
   padding: 0 clamp(1rem, -0.699rem + 7.2492vw, 8rem);
@@ -44,6 +45,20 @@
   max-width: 120rem;
   margin-left: auto;
   margin-right: auto;
+}
+
+.hder {
+  padding: 0 clamp(1rem, 0.699rem + 7.249vw, 8rem);
+  text-decoration: none;
+  color: #f1dada;
+  height: clamp(5.5rem, 4.7718rem + 3.1068vw, 8.5rem);
+}
+
+.title-link {
+  font-size: clamp(1.41rem, 0.61vw + 1.26rem, 2rem);
+  font-size: clamp(1.41rem, 0.61vi + 1.26rem, 2rem);
+  line-height: 1;
+  letter-spacing: 0.9px;
 }
 
 .work_categorie {

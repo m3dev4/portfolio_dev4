@@ -130,7 +130,7 @@ const DesignProduct = () => {
         <Header />
       </header>
       <section className="overflow-hidden relative flex flex-col items-center justify-center h-screen min-h-10 ctn hero">
-        <div className="self-end flex h-full max-w-[50vw] items-center justify-center pointer-events-none z-20 right-0">
+        <div className="self-end flex h-full max-w-[50vw] mb-version items-center justify-center pointer-events-none z-20 right-0">
           <Image
             src="/pattern/design.png"
             alt="wbe dev"
@@ -211,7 +211,7 @@ const DesignProduct = () => {
           </div>
         </div>
       </section>
-      <section className="grid prj h-auto ctn self-start">
+      <section className="grid  h-auto  self-start">
           <div className="flex items-center flex-col justify-start pb-32 m-auto">
           {projects.length === 0 ? (
         <p className="text-center  w-full text-custom-pink text-lg mt-8">
@@ -220,9 +220,9 @@ const DesignProduct = () => {
       ) : null}
           </div>
       </section>
-      <section className="w-full ctn">
-        <div className="flex items-center flex-col justify-center pb-32 m-auto">
-          <div className="divider divider--center mt-24">
+      <section className="w-full">
+        <div className="flex items-center flex-col justify-center  m-auto">
+          <div className="divider divider--center ">
             <div className="divider_line divider_line--left"></div>
             <h2
               className={`${mangoGrotes.className} py-20 text-[45px] font-semibold text-custom-pink`}

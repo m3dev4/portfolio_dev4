@@ -99,14 +99,21 @@ transition: opacity .3s;
   grid-template-columns: 1fr 5fr;
 }
 
-.flt_img{
-  animation: 3s infinite;
-}
-@keyframes flt_img {
-  0%, 100% {
-    transform: translateY(0);
+@media not all and (min-width: 640px) {
+  .mb-version{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-wrap: wrap;
+    bottom: 0;
+    left: 0;
+    
   }
-  50% {
-    transform: translateY(-15px);
+  .img-hero{
+    position: absolute;
+    top: 0;
+    margin-top: 70px;
+    margin-left: 100%;
   }
 }

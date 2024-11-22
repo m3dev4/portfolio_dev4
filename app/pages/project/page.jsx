@@ -35,16 +35,18 @@ const Project = () => {
 
   return (
     <main className="h-auto min-h-screen w-full bg-[#0e090d]">
-      <Header />
-      <div className="px-14 py-14 z-50 fixed max-sm:px-2 max-sm:py-7 ">
-        <Link href="/" className="realtive">
-          <span
-            className={`${mangoGrotesqueMedium.className} text-white text-[60px] max-sm:text-[25px] relative -top-8`}
-          >
-            M.Lo
-          </span>
-        </Link>
-      </div>
+     <header className="fixed left-0 z-50 top-0">
+        <div className="flex my-auto space-between items-center max-w-28 mx-auto ctn hder">
+          <Link href="/">
+            <span
+              className={`title-link uppercase pointer-events-auto text-nowrap overflow-hidden block relative ${mangoGrotesqueMedium.className}`}
+            >
+              M.Lo
+            </span>
+          </Link>
+        </div>
+        <Header />
+      </header>
       <div className=" w-full px-auto">
         <section className="flex justify-center py-7 space-y-5 overflow-hidden ">
           <div className="flex justify-center items-center flex-col py-10 w-full">
@@ -74,7 +76,7 @@ const Project = () => {
             </div>
           </div>
         </section>
-        <section className="work container" ref={containerRef}>
+        <section className="work container " ref={containerRef}>
           <CustomCursor />
           <div className="flex flex-col overflow-visible">
             <Link href="project/product-design" className="relative">

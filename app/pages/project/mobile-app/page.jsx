@@ -135,10 +135,10 @@ const MobileApp = () => {
         <Header />
       </header>
       <section className="overflow-hidden relative flex flex-col items-center justify-center h-screen min-h-10 ctn hero">
-        <div className="self-end flex h-full max-w-[50vw] items-center justify-center pointer-events-none z-20 right-0 img_hero">
+        <div className="self-end flex h-full max-w-[50vw] mb-version items-center justify-center pointer-events-none z-20 right-0 img_hero">
           <Image
             src="/pattern/mobileapp.png"
-            alt="wbe dev"
+            alt="mobile app"
             width={700}
             height={700}
             className="object-cover img-hero h-auto select-none w-full pointer-events-none imganime"
@@ -211,7 +211,7 @@ const MobileApp = () => {
           </div>
         </div>
       </section>
-      <section className="grid prj h-auto ctn self-start">
+      <section className="grid h-auto  self-start">
         <div className="flex items-center flex-col justify-start pb-32 m-auto">
           {projects.length === 0 ? (
             <p className="text-center  w-full text-custom-pink text-lg mt-8">
@@ -220,9 +220,9 @@ const MobileApp = () => {
           ) : null}
         </div>
       </section>
-      <section className="w-full ctn">
-        <div className="flex items-center flex-col justify-center pb-32 m-auto">
-          <div className="divider divider--center mt-24">
+      <section className="w-full ">
+        <div className="flex items-center flex-col justify-center m-auto">
+          <div className="divider divider--center ">
             <div className="divider_line divider_line--left"></div>
             <h2
               className={`${mangoGrotes.className} py-20 text-[45px] font-semibold text-custom-pink`}
@@ -286,7 +286,7 @@ const MobileApp = () => {
                 </div>
                 <div className="divider_line divider_line--left"></div>
               </div>
-              <Link href="web-developer" className="relative">
+              <Link href="/" className="relative">
                 <motion.div
                   style={{ x: translateX }}
                   className={`text-center relative flex flex-row items-center justify-center will-change-transform text-[#f1dada] work_categorie ${mangoGrotes.className}`}

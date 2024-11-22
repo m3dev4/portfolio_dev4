@@ -144,7 +144,7 @@ const WebDevProject = () => {
       </nav>
 
       <div
-        className="flex flex-col gap-48 pl-24 border-l max:sm:border-l-0 max-sm:pl-0 max-sm:border-l-0 border-gray-200"
+        className="flex flex-col gap-48 pl-24 border-l  max-sm:pl-0 max-sm:border-l-0 border-gray-200"
         ref={contentRef}
       >
         {projects.map((project, index) => (
@@ -153,7 +153,7 @@ const WebDevProject = () => {
             id={`project-${index}`}
             className="flex flex-col gap-16"
           >
-            <div className="flex items-center gap-6 justify-left">
+            <div className="flex items-center overflow-hidden gap-6 max-sm:gap-24 justify-left">
               <div className="text-clampSub font-[200] text-left text-custom-pink whitespace-nowrap">
                 Web Development
               </div>
@@ -177,7 +177,7 @@ const WebDevProject = () => {
                 </motion.h2>
                 <motion.p
                   variants={textVariants}
-                  className={`font-[300] text-[24px] max-sm:text-[14px] text-custom-pink leading-2 w-[65%] max-sm:w-[165%] max-sm:pr-3 ${ppNueve.className}`}
+                  className={`font-[300] text-[24px] max-sm:text-[14px] text-custom-pink leading-2 w-[65%] max-sm:w-[100%] max-sm:pr-7 ${ppNueve.className}`}
                 >
                   {project.description}
                 </motion.p>
@@ -199,7 +199,7 @@ const WebDevProject = () => {
                     alt={project.title}
                     width={1080}
                     height={1080}
-                    className="object-cover"
+                    className="object-cover "
                   />
                 </motion.div>
               </motion.div>
