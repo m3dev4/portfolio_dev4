@@ -123,7 +123,7 @@ const MobileApp = () => {
     <main className="bg-[#0e090d] w-full h-full min-h-screen">
       <CustomCursor />
       <header className="fixed flex justify-between items-center left-0 z-50 top-0">
-        <div className="flex space-between items-center mx-auto ">
+        <div className="flex space-between items-center mx-auto max-sm:-ml-20">
           <Link href="/" className="mt-8">
             <span
               className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotes.className}`}

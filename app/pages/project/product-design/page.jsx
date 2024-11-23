@@ -124,7 +124,7 @@ const DesignProduct = () => {
       <CustomCursor />
       <header className="fixed flex justify-between items-center left-0 z-50 top-0">
         <div className="flex  space-between items-center  mx-auto ">
-          <Link href="/" className="mt-8">
+          <Link href="/" className="mt-8 max-sm:-ml-20">
             <span
               className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotes.className}`}
             >

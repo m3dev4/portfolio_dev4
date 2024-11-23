@@ -11,6 +11,8 @@ import gsap from "gsap";
 import { SocialMedia } from "../../../constants";
 import localFont from "next/font/local";
 import Header from ".././../../components/header/header"
+import { BackgroundLines } from "../../../components/ui/background-ilne";
+import { CoverDemo } from "../../../components/faster";
 
 const popinsFont = localFont({
   src: "../../fonts/Poppins-Variable.ttf",
@@ -101,12 +103,12 @@ export default function Home() {
   });
 
   return (
-    <main className="bg-gradient-to-r from-gray-800 to-neutral-900">
+    <main className="bg-layout">
       <header className="fixed flex justify-between items-center left-0 z-50 top-0">
         <div className="flex  space-between items-center  mx-auto ">
-          <Link href="/" className="mt-8">
+          <Link href="/" className="mt-8 max-sm:-ml-20">
             <span
-              className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotesqueMedium.className}`}
+              className={` uppercase px-28 text-[60px] max-sm:absolute max:sm:left-0 text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotesqueMedium.className}`}
             >
               M.Lo
             </span>
@@ -118,20 +120,9 @@ export default function Home() {
         
       </header>
       <div className="flex flex-col items-center justify-center pt-60">
-        <p
-          className={`text-white text-lg mb-4 text-center font-semibold ${popinsFont.className}`}
-        >
-          Vous avez des questions ou vous souhaitez travailler ensemble ?
-        </p>
-        <p className="text-white text-lg text-center font-semibold">
-          N'hésitez pas à me contacter à l'adresse suivante :
-        </p>
-        <Link
-          href="mailto:m3dev4@gmail.com"
-          className="text-white text-lg underline cursor-pointer font-bold"
-        >
-          m3dev4@gmail.com
-        </Link>
+        <BackgroundLines className="bg-layout">
+          <CoverDemo />
+        </BackgroundLines>
       </div>
       <div className={styles.spacer}></div>
       <div ref={gallery} className={styles.gallery}>
@@ -141,31 +132,10 @@ export default function Home() {
         <Column images={[images[9], images[10], images[11]]} y={y4} />
       </div>
       <div className={styles.spacer}></div>
-      <div className="flex w-full h-full relative -top-32 px-5">
-        <div className="flex items-center justify-between w-full px-9 max-sm:flex-col">
-          <div className="relative">
-            <p
-              className={`${popinsFont.className} text-white text-[37px] font-semibold`}
-            >
-              © 2024 Mouhamed Lo. All Rights Reserved.
-            </p>
-          </div>
-          <div className="flex items-center md:flex-row max-sm:flex-row max-sm:py-6 flex-col justify-center gap-5">
-            {SocialMedia.map((media, item) => (
-              <div key={item} className="flex gap-10 flex-col">
-                <Link href={media.href}>
-                  <Image
-                    src={media.img}
-                    alt={media.href}
-                    width={70}
-                    height={70}
-                  />
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <footer className="flex justify-between items-center px-7 text-white font-bold">
+          <span>Made by @M3dev4</span>
+          ©2024 M.Lo
+        </footer>
     </main>
   );
 }
