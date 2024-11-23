@@ -1,11 +1,9 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import localFont from "next/font/local";
 import "./globals.css";
-import Loader from "../components/loader/loader"
-import PageTransition from "../components/transition/pageTrasition"
-
-
+import Loader from "../components/loader/loader";
+import PageTransition from "../components/transition/pageTrasition";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -41,10 +39,8 @@ export default function ClientLayout({ children }) {
           <Loader onComplete={handleLoaderComplete} />
         ) : (
           <PageTransition>
-            <>
-            {children}
-            </>
-            </PageTransition>
+            <>{children}</>
+          </PageTransition>
         )}
       </body>
     </html>

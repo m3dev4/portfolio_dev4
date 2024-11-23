@@ -396,17 +396,19 @@ const About = () => {
   return (
     <main className={`${isExplored ? "" : "noscroll"}`}>
       <header className="frame" ref={frameRef}>
-        <div className="z-50">
-          <Header />
-        </div>
-        <div className="px-14 py-14 z-50 fixed max-sm:px-2 max-sm:py-7 ">
-          <Link href="/" className="realtive">
+        <div className="flex  space-between items-center  mx-auto ">
+          <Link href="/" className=" max-sm:ml-[-300px]">
             <span
-              className={`${mangoGrotesqueMedium.className} text-white text-[60px] max-sm:text-[25px] relative -top-8`}
+              className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotesqueMedium.className}`}
             >
               M.Lo
             </span>
           </Link>
+          <div className="absolute top-0">
+            <Link href="#">
+            <Header />
+            </Link>
+          </div>
         </div>
       </header>
       <section className="intro">
@@ -711,7 +713,7 @@ const About = () => {
           onClick={isInitialized ? handleExploreClick : undefined}
           onTouchStart={isInitialized ? handleExploreClick : undefined}
         >
-          <span>Explore</span>
+          <span className="font-extrabold">Explore Me</span>
         </div>
       </section>
       <section className="content max-sm:h-auto w-full" ref={contentRef}>

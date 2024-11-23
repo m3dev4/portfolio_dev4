@@ -5,22 +5,29 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import "./pageTransition.css";
 
-const PageTransition = ({ children }) => {
+const PageTransition = ({ children, isFirstLoad }) => {
   const pathname = usePathname();
-  const [isTransitioning, setIsTransitioning] = useState(true);
-  const [showContent, setShowContent] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [showContent, setShowContent] = useState(true);
 
   useEffect(() => {
-    setIsTransitioning(true);
-    setShowContent(false);
-
-    const transitionTimer = setTimeout(() => {
-      setIsTransitioning(false);
+    if (isFirstLoad) {
+      // Si c'est le premier chargement, ignore les transitions
       setShowContent(true);
-    }, 3000); // La durée de l'animation (3s)
+      setIsTransitioning(false);
+    } else {
+      // Applique les transitions uniquement entre les pages
+      setIsTransitioning(true);
+      setShowContent(false);
 
-    return () => clearTimeout(transitionTimer);
-  }, [pathname]);
+      const transitionTimer = setTimeout(() => {
+        setIsTransitioning(false);
+        setShowContent(true);
+      }, 3000); // Durée de l'animation (3s)
+
+      return () => clearTimeout(transitionTimer);
+    }
+  }, [pathname, isFirstLoad]);
 
   return (
     <>

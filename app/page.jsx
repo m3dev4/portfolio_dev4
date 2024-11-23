@@ -1,13 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import gsap from "gsap";
 import Link from "next/link";
 import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
 import SplitType from "split-type";
+import { DateTime } from "luxon";
 
 const Home = () => {
-  const [localTime, setLocalTime] = useState(new Date().toLocaleTimeString());
+  const [dakarTime, setDakarTime] = useState("");
 
   useEffect(() => {
     const elements = document.querySelectorAll(".grid-item");
@@ -17,7 +19,7 @@ const Home = () => {
         // Animation fluide de l'arrière-plan et du texte
         gsap.to(element.querySelector(".grid-item__bg"), {
           scale: 1.05,
-          backgroundColor: "rgba(0, 0, 0, 0.9)",
+          backgroundColor: "rgba(255, 255, 255, 0.14)",
           duration: 0.5,
           ease: "power2.out",
         });
@@ -61,36 +63,44 @@ const Home = () => {
     });
   }, []);
 
+  
+  
+
   useEffect(() => {
-    const timer = setInterval(() => {
-      setLocalTime(new Date().toLocaleTimeString());
-    }, 1000);
-    return () => clearInterval(timer);
+    const updateTime = () => {
+      // Obtenir l'heure actuelle de Dakar
+      const time = DateTime.now().setZone("Africa/Dakar").toFormat("HH:mm:ss");
+      setDakarTime(time);
+    };
+
+    // Mettre à jour l'heure immédiatement
+    updateTime();
+
+    // Mettre à jour chaque seconde
+    const interval = setInterval(updateTime, 1000);
+
+    // Nettoyer l'intervalle lorsque le composant est démonté
+    return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const timeline = gsap.timeline({ delay: 0.3 });
-
-    // Animation des éléments de grille
-    timeline.fromTo(
-      ".grid-item",
-      {
-        opacity: 0,
-        y: 100, // Translation vers le bas
-        rotation: -15, // Rotation légère
-        scale: 0.8, // Zoom léger
+  const gridVariant = {
+    hidden: {
+      clipPath: "inset(100% 0% 0% 0%)",
+      opacity: 0,
+      transform: "rotateX(-10deg) translateZ(-50px)",
+    },
+    visible: {
+      clipPath: "inset(0% 0% 0% 0%)",
+      opacity: 1,
+      transform: "rotateX(0deg) translateZ(0px)",
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        delayChildren: 0.2,
+        staggerChildren: 0.1, // Stagger for immersive effect
       },
-      {
-        opacity: 1,
-        y: 0,
-        rotation: 0,
-        scale: 1,
-        duration: 1.2, // Durée d'animation plus longue pour plus de fluidité
-        ease: "expo.out", // Effet de décélération pour une finition douce
-        stagger: 0.25, // Déclenche chaque élément avec un léger décalage
-      }
-    );
-  }, []);
+    },
+  };
 
   useEffect(() => {
     const gridItems = document.querySelectorAll(".grid-item");
@@ -133,7 +143,13 @@ const Home = () => {
     <main className="block overflow-hidden w-full">
       <section className="justify-center items-center max:w-full  flex h-screen w-[100vw] bg-black">
         <div className="grid-section">
-          <div className="grid-item col-span-2 about">
+          <motion.div
+            variants={gridVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid-item col-span-2 about"
+          >
             <Link href="/pages/about">
               <div className="clip-reg">
                 <div className="text-reg">
@@ -144,8 +160,15 @@ const Home = () => {
                 <h1>About Me</h1>
               </div>
             </Link>
-          </div>
-          <div className="grid-item col-span-3 work">
+          </motion.div>
+
+          <motion.div
+            variants={gridVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid-item col-span-3 work"
+          >
             <Link href="/pages/project" className="col-span-1">
               <div className="clip-reg">
                 <div className="text-reg">
@@ -156,8 +179,15 @@ const Home = () => {
                 <h1>Work</h1>
               </div>
             </Link>
-          </div>
-          <div className="grid-item col-span-2 contact">
+          </motion.div>
+
+          <motion.div
+            variants={gridVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid-item col-span-2 contact"
+          >
             <Link href="/pages/contact">
               <div className="clip-reg">
                 <div className="text-reg">
@@ -168,8 +198,15 @@ const Home = () => {
                 <h1>Contact</h1>
               </div>
             </Link>
-          </div>
-          <div className="grid-item max-sm:col-span-3">
+          </motion.div>
+
+          <motion.div
+            variants={gridVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid-item max-sm:col-span-3"
+          >
             <div className="clip-reg">
               <div className="text-reg">
                 <span className="inline-block text-white">Location 🇸🇳</span>
@@ -179,9 +216,9 @@ const Home = () => {
               <h1>Senegal</h1>
             </div>
             <span className="absolute top-4 text-neutral-200 font-semibold text-[20px]">
-              {localTime}
+              {dakarTime}
             </span>
-          </div>
+          </motion.div>
         </div>
       </section>
     </main>

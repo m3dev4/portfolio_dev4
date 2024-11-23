@@ -44,7 +44,7 @@ main {
   grid-column-gap: 2rem;
   pointer-events: none;
   justify-items: start;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
