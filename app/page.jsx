@@ -7,9 +7,8 @@ import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
 import SplitType from "split-type";
 import { DateTime } from "luxon";
-
 const Home = () => {
-  const [dakarTime, setDakarTime] = useState("");
+  const [time, setTime] = useState("");
 
   useEffect(() => {
     const elements = document.querySelectorAll(".grid-item");
@@ -67,20 +66,20 @@ const Home = () => {
   
 
   useEffect(() => {
-    const updateTime = () => {
-      // Obtenir l'heure actuelle de Dakar
-      const time = DateTime.now().setZone("Africa/Dakar").toFormat("HH:mm:ss");
-      setDakarTime(time);
+    const updateClock = () => {
+      const dakarTime = new Date().toLocaleTimeString("fr-FR", {
+        timeZone: "Africa/Dakar",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      });
+      setTime(dakarTime);
     };
 
-    // Mettre à jour l'heure immédiatement
-    updateTime();
+    updateClock(); // Initialisation immédiate
+    const intervalId = setInterval(updateClock, 1000);
 
-    // Mettre à jour chaque seconde
-    const interval = setInterval(updateTime, 1000);
-
-    // Nettoyer l'intervalle lorsque le composant est démonté
-    return () => clearInterval(interval);
+    return () => clearInterval(intervalId); // Nettoyage à la fin
   }, []);
 
   const gridVariant = {
@@ -216,7 +215,7 @@ const Home = () => {
               <h1>Senegal</h1>
             </div>
             <span className="absolute top-4 text-neutral-200 font-semibold text-[20px]">
-              {dakarTime}
+              {time}
             </span>
           </motion.div>
         </div>
