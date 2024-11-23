@@ -6,7 +6,7 @@ import Link from "next/link";
 import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
 import SplitType from "split-type";
-import { DateTime } from "luxon";
+
 const Home = () => {
   const [time, setTime] = useState("");
 
