@@ -25,7 +25,7 @@ export function CoverDemo() {
       >
         Designing innovative and high-performing websites <br />
         <Link href="mailto:m3dev4@gmail.com">
-          <Cover children={undefined} className={undefined}>
+          <Cover>
             m3dev4@gmail.com
           </Cover>
         </Link>
