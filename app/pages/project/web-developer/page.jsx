@@ -22,6 +22,18 @@ const ppNueve = localFont({
   src: "../../../fonts/NeueMontreal-Light.otf",
 });
 
+const containerVariant = {
+  hidden: {
+    clipPath: "inset(100% 0% 0% 0%)",
+    opacity: 0,
+  },
+  visible: {
+    clipPath: "inset(0% 0% 0% 0%)",
+    opacity: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
 const Webdeveloper = () => {
   const contentRef = useRef(null);
   const isInView = useInView(contentRef, { once: true, margin: "-75%" });
@@ -135,7 +147,13 @@ const Webdeveloper = () => {
           </div>
         </div>
       </header>
-      <section className="overflow-hidden relative flex flex-col items-center justify-center h-screen min-h-10 ctn hero">
+      <motion.section
+        variants={containerVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="overflow-hidden relative flex flex-col items-center justify-center h-screen min-h-10 ctn hero"
+      >
         <div className="self-end flex h-full max-w-[50vw] items-center mb-version  justify-center pointer-events-none z-20 right-0 ">
           <Image
             src="/pattern/webdev.png"
@@ -216,7 +234,7 @@ const Webdeveloper = () => {
             </ul>
           </div>
         </div>
-      </section>
+      </motion.section>
       <section className="grid prj h-auto ctn self-start">
         <WebDevProject />
       </section>
@@ -231,115 +249,120 @@ const Webdeveloper = () => {
             </h2>
             <div className="divider_line divider_line--left"></div>
           </div>
-          <div className="overflow-hidden work relative mx-auto px-custom max-w-custom w-full flex items-center justify-center h-[120vh]" ref={containerRef}>
-          <div className="flex flex-col overflow-visible gap-20">
-            <Link href="product-design" className="relative">
-              <motion.div style={{ x: translateX }} 
-              className={`${mangoGrotes.className} work_categorie flex relative text-center flex-row items-center justify-center will-change-transform text-custom-pink text-veloanim`}
-              >
-                <Image 
-                  src="/pattern/design.png"
-                  alt="design"
-                  width={350}
-                  height={350}
-                  className="absolute inset-0 object-cover m-auto pattern-view animate-rotate"
-                />
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Product Design
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Product Design
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Product Design
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Product Design
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Product Design
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Product Design
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Product Design
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Product Design
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-              </motion.div>
-            </Link>
-            <div className="divider divider--center">
-              <div className="divider_line divider_line--left"></div>
-              <div className={`${ppNueve.className} divider-text`}>
-                Click to view project
+          <div
+            className="overflow-hidden work relative mx-auto px-custom max-w-custom w-full flex items-center justify-center h-[120vh]"
+            ref={containerRef}
+          >
+            <div className="flex flex-col overflow-visible gap-20">
+              <Link href="product-design" className="relative">
+                <motion.div
+                  style={{ x: translateX }}
+                  className={`${mangoGrotes.className} work_categorie flex relative text-center flex-row items-center justify-center will-change-transform text-custom-pink text-veloanim`}
+                >
+                  <Image
+                    src="/pattern/design.png"
+                    alt="design"
+                    width={350}
+                    height={350}
+                    className="absolute inset-0 object-cover m-auto pattern-view animate-rotate"
+                  />
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Product Design
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Product Design
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Product Design
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Product Design
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Product Design
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Product Design
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Product Design
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Product Design
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                </motion.div>
+              </Link>
+              <div className="divider divider--center">
+                <div className="divider_line divider_line--left"></div>
+                <div className={`${ppNueve.className} divider-text`}>
+                  Click to view project
+                </div>
+                <div className="divider_line divider_line--left"></div>
               </div>
-              <div className="divider_line divider_line--left"></div>
+              <Link href="mobile-app" className="relative">
+                <motion.div
+                  style={{
+                    x: useTransform(scrollYProgress, [0, 1], [-100, 100]),
+                  }}
+                  className={`${mangoGrotes.className} work_categorie flex relative text-center flex-row items-center justify-center will-change-transform text-custom-pink text-veloanim`}
+                >
+                  <Image
+                    src="/pattern/mobileapp.png"
+                    alt="design"
+                    width={350}
+                    height={350}
+                    className="absolute inset-0 object-cover m-auto pattern-view animate-float"
+                  />
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                  <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
+                    Mobile App
+                  </span>
+                  <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
+                </motion.div>
+              </Link>
             </div>
-            <Link href="mobile-app" className="relative">
-              <motion.div style={{ x: useTransform(scrollYProgress, [0, 1], [-100, 100]) }} 
-              className={`${mangoGrotes.className} work_categorie flex relative text-center flex-row items-center justify-center will-change-transform text-custom-pink text-veloanim`}
-              >
-                <Image 
-                  src="/pattern/mobileapp.png"
-                  alt="design"
-                  width={350}
-                  height={350}
-                  className="absolute inset-0 object-cover m-auto pattern-view animate-float"
-                />
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Mobile App
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Mobile App
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Mobile App
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Mobile App
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Mobile App
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Mobile App
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Mobile App
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-                <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
-                  Mobile App
-                </span>
-                <span className="transition-[all .3s] min-w-[.3em] h-[.3em] my-0 mx-[.5em] rounded-[50%] bg-[#fb4566]"></span>
-              </motion.div>
-            </Link>
-          </div>
           </div>
         </div>
       </section>
       <footer className="flex justify-between items-center px-7 text-white font-bold">
-          <span>
-            Made by @M3dev4
-          </span>
-          ©2024 M.Lo
-        </footer>
+        <span>Made by @M3dev4</span>
+        ©2024 M.Lo
+      </footer>
     </main>
   );
 };

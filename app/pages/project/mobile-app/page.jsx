@@ -119,6 +119,18 @@ const MobileApp = () => {
     }),
   };
 
+  const containerVariant = {
+    hidden: {
+      clipPath: "inset(100% 0% 0% 0%)",
+      opacity: 0,
+    },
+    visible: {
+      clipPath: "inset(0% 0% 0% 0%)",
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
   return (
     <main className="bg-[#0e090d] w-full h-full min-h-screen">
       <CustomCursor />
@@ -136,7 +148,13 @@ const MobileApp = () => {
           </div>
         </div>
       </header>
-      <section className="overflow-hidden relative flex flex-col items-center justify-center h-screen min-h-10 ctn hero">
+      <motion.section
+        variants={containerVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="overflow-hidden relative flex flex-col items-center justify-center h-screen min-h-10 ctn hero"
+      >
         <div className="self-end flex h-full max-w-[50vw] mb-version items-center justify-center pointer-events-none z-20 right-0 img_hero">
           <Image
             src="/pattern/mobileapp.png"
@@ -212,7 +230,7 @@ const MobileApp = () => {
             </ul>
           </div>
         </div>
-      </section>
+      </motion.section>
       <section className="grid h-auto  self-start">
         <div className="flex items-center flex-col justify-start pb-32 m-auto">
           {projects.length === 0 ? (
@@ -293,7 +311,9 @@ const MobileApp = () => {
               </div>
               <Link href="web-developer" className="relative">
                 <motion.div
-                  style={{ x: useTransform(scrollYProgress, [0, 1], [-100, 100]) }}
+                  style={{
+                    x: useTransform(scrollYProgress, [0, 1], [-100, 100]),
+                  }}
                   className={`${mangoGrotes.className} work_categorie flex relative text-center flex-row items-center justify-center will-change-transform text-custom-pink text-veloanim`}
                 >
                   <Image

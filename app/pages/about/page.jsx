@@ -397,14 +397,14 @@ const About = () => {
     <main className={`${isExplored ? "" : "noscroll"}`}>
       <header className="frame" ref={frameRef}>
         <div className="flex  space-between items-center  mx-auto ">
-          <Link href="/" className=" max-sm:ml-[-300px]">
+          <Link href="/" className=" max-sm:ml-[-250px]">
             <span
               className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotesqueMedium.className}`}
             >
               M.Lo
             </span>
           </Link>
-          <div className="absolute top-0">
+          <div className="absolute top-0 max-sm:-mt-6">
             <Link href="#">
             <Header />
             </Link>
@@ -751,7 +751,7 @@ const About = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5 }}
             variants={fadeIn}
-            className={`max-w-[1000px] text-[2rem] font-bold text-[#f1dada] ${nueveMontrealFont.className}`}
+            className={`max-w-[1000px] text-[2rem] max-sm:text-[17px]  max-sm:max-w-[120%] max:sm:pr-20 font-bold text-[#f1dada] ${nueveMontrealFont.className}`}
           >
             Je suis né à Dakar, Sénégal, et ma passion pour le développement
             logiciel a débuté en 2020. Depuis, je me suis spécialisé dans le

@@ -119,6 +119,18 @@ const DesignProduct = () => {
     }),
   };
 
+  const containerVariant = {
+    hidden: {
+      clipPath: "inset(100% 0% 0% 0%)",
+      opacity: 0,
+    },
+    visible: {
+      clipPath: "inset(0% 0% 0% 0%)",
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
   return (
     <main className="bg-[#0e090d] w-full h-full min-h-screen">
       <CustomCursor />
@@ -136,7 +148,13 @@ const DesignProduct = () => {
           </div>
         </div>
       </header>
-      <section className="overflow-hidden relative flex flex-col items-center justify-center h-screen min-h-10 ctn hero">
+      <motion.section
+        variants={containerVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="overflow-hidden relative flex flex-col items-center justify-center h-screen min-h-10 ctn hero"
+      >
         <div className="self-end flex h-full max-w-[50vw] mb-version items-center justify-center pointer-events-none z-20 right-0">
           <Image
             src="/pattern/design.png"
@@ -217,7 +235,7 @@ const DesignProduct = () => {
             </ul>
           </div>
         </div>
-      </section>
+      </motion.section>
       <section className="grid  h-auto  self-start">
         <div className="flex items-center flex-col justify-start pb-32 m-auto">
           {projects.length === 0 ? (
