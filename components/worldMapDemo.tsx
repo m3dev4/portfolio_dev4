@@ -1,6 +1,6 @@
 "use client";;
 import { motion } from "motion/react";
-import { WorldMap } from "./ui/world-map";
+import WorldMap from "./ui/world-map";
 
 export default function WorldMapDemo() {
   const senegalCoordinates = { lat: 14.4974, lng: -14.4524 }; // Sénégal
