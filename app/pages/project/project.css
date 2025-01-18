@@ -1,0 +1,105 @@
+.scroll-down {
+  transform: translate(-50%);
+  width: 1px;
+  height: 4rem;
+  background-color: #f1dada1a;
+  opacity: 1;
+  overflow: hidden;
+}
+.scroll-down::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fadada;
+  height: 100%;
+  width: 100%;
+  animation: scrolling 2s infinite ease-in-out;
+}
+
+@keyframes scrolling {
+  0% {
+    transform: translateY(-100%);
+  }
+  70% {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.divider--center {
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.divider_line {
+  height: 1px;
+  flex-grow: 1;
+  transform: scale(1);
+  background-color: #f1dadab0;
+}
+
+.divider_line--left {
+  transform-origin: left;
+}
+.divider_line--right {
+  transform-origin: right;
+}
+.divider-text {
+  color: #f1dada99;
+  font-size: clamp(0.9rem, 0.23vw + 0.85rem, 1.13rem);
+  font-size: clamp(0.9rem, 0.23vw + 0.85rem, 1.13rem);
+  font-weight: 500;
+}
+
+.pattern-view {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, visibility, transform;
+  pointer-events: none;
+}
+
+.work_categorie:hover {
+  opacity: 1;
+}
+
+/* Les autres catégories diminuent en opacité */
+section.work:hover .work_categorie:not(:hover) {
+  opacity: 0.3;
+}
+
+.work_categorie:hover .pattern-view {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.animate-rotate{
+    animation: 60s infinite rotate ease-in-out;
+}
+
+@keyframes rotate  {
+    from {
+            transform: rotate(0deg);
+    }
+    to{
+            transform: rotate(360deg);
+    }
+}
+
+@media not all and (min-width: 640px) {
+
+    .pattern-view{
+      max-width: 150px;
+    }
+  }
