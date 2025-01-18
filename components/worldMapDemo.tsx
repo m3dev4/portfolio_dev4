@@ -6,7 +6,7 @@ export default function WorldMapDemo() {
   const senegalCoordinates = { lat: 14.4974, lng: -14.4524 }; // Sénégal
 
   return (
-    <div className="py-40 dark:bg-black bg-black w-full">
+    <div className="py-40 dark:bg-black absolute  bg-black w-full">
       <div className="max-w-7xl mx-auto text-center">
         <motion.h1 
           className="font-bold text-3xl md:text-5xl dark:text-white text-black mb-4"
