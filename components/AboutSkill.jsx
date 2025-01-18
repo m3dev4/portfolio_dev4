@@ -7,10 +7,7 @@ import localFont from "next/font/local";
 import dynamic from 'next/dynamic';
 
 // Chargement dynamique de WorldMapDemo
-const WorldMapDemo = dynamic(() => import('./worldMapDemo'), {
-  loading: () => <div>Loading...</div>,
-  ssr: false
-});
+
 
 const nueveMontrealFontLight = localFont({ src: "../app/fonts/NeueMontreal-Bold.otf"})
 
