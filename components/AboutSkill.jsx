@@ -161,7 +161,7 @@ const AboutSkill = () => {
       </div>
 
       <div className="w-full h-full">
-        <WorldMapDemo />
+       
       </div>
     </div>
   );
