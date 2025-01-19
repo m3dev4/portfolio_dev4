@@ -10,6 +10,7 @@ import AboutSkill from "../../../components/AboutSkill";
 import { motion } from "framer-motion";
 import localFont from "next/font/local";
 import Header from "../../../components/header/header";
+import { SpotlightPreview } from "../../../components/SpotlightPreview";
 
 gsap.registerPlugin(Flip);
 
@@ -394,10 +395,10 @@ const About = () => {
   }, []);
 
   return (
-    <main className={`${isExplored ? "" : "noscroll"}`}>
+    <main className={`${isExplored ? "overflow-x-hidden" : "noscroll"}`}>
       <header className="frame" ref={frameRef}>
-        <div className="flex  space-between items-center  mx-auto ">
-          <Link href="/" className=" max-sm:ml-[-250px]">
+        <div className="flex space-between items-center  mx-auto ">
+          <Link href="/" className=" absolute top-0 py-9 left-0">
             <span
               className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotesqueMedium.className}`}
             >
@@ -761,6 +762,9 @@ const About = () => {
             expériences utilisateurs à la fois captivantes et performantes.
           </motion.p>
           <AboutSkill />
+          <div className="w-full h-full">
+       <SpotlightPreview />
+      </div>
         </div>
         <footer className="content__footer text-white font-bold">
           <span>Made by @M3dev4</span>

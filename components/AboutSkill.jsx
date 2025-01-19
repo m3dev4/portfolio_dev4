@@ -5,6 +5,7 @@ import { iconTech } from "../constants";
 import { motion } from "framer-motion";
 import localFont from "next/font/local";
 import dynamic from 'next/dynamic';
+import { SpotlightPreview } from "./SpotlightPreview";
 
 // Chargement dynamique de WorldMapDemo
 
@@ -12,10 +13,10 @@ import dynamic from 'next/dynamic';
 const nueveMontrealFontLight = localFont({ src: "../app/fonts/NeueMontreal-Bold.otf"})
 
 // Déplacer les animations en dehors du composant
-const fadeIn = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0 },
-};
+  const fadeIn = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
 
 // Composant pour les compétences pour éviter les re-renders inutiles
 const SkillSection = ({ title, skills }) => (
@@ -50,15 +51,15 @@ const SkillSection = ({ title, skills }) => (
 const InfiniteSlider = () => (
   <div className="overflow-hidden w-full py-5">
     <motion.div
-      className="flex space-x-8"
-      animate={{ x: ["0%", "-50%"] }} // Optimisé pour moins de charge
+      className="flex"
+      animate={{ x: ["0%", "-50%"] }}
       transition={{
         repeat: Infinity,
         duration: 30,
         ease: "linear",
       }}
     >
-      <div className="flex space-x-8">
+      <div className="flex gap-16">
         {iconTech.map((icon, index) => (
           <div key={index} className="flex-shrink-0">
             <Image
@@ -72,7 +73,7 @@ const InfiniteSlider = () => (
           </div>
         ))}
       </div>
-      <div className="flex space-x-8">
+      {/* <div className="flex gap-16">
         {iconTech.map((icon, index) => (
           <div key={`duplicate-${index}`} className="flex-shrink-0">
             <Image
@@ -85,7 +86,7 @@ const InfiniteSlider = () => (
             />
           </div>
         ))}
-      </div>
+      </div> */}
     </motion.div>
   </div>
 );
@@ -145,24 +146,22 @@ const AboutSkill = () => {
             <h5>About</h5>
             <div className="table-row px-5"></div>
           </div>
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
+            <motion.h2
+              initial="hidden"
+              whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            variants={fadeIn}
+              transition={{ duration: 0.5 }}
+              variants={fadeIn}
             className="text-[40px] md:text-[50px] lg:text-[70px] flex-auto normal-case font-serif font-semibold mb-8"
-          >
-            ToolBox
-          </motion.h2>
+            >
+              ToolBox
+            </motion.h2>
 
           <InfiniteSlider />
         </motion.div>
       </div>
 
-      <div className="w-full h-full">
-       
-      </div>
+      
     </div>
   );
 };
