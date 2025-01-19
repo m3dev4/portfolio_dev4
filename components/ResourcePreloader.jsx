@@ -4,7 +4,11 @@ import { useEffect } from 'react';
 const ResourcePreloader = () => {
   useEffect(() => {
     // Précharger les polices
- 
+    const fonts = [
+      "../fonts/MangoGrotesque-Regular.ttf",
+      "../fonts/NeueMontreal-Light.otf",
+      "../fonts/NeueMontreal-Bold.otf"
+    ];
     
     fonts.forEach(font => {
       new FontFace('PreloadFont', `url(${font})`).load();
