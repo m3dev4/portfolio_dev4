@@ -768,7 +768,7 @@ const About = () => {
         </div>
         <footer className="content__footer text-white font-bold">
           <span>Made by @M3dev4</span>
-          ©2024 M.Lo
+          ©2025 M.Lo
         </footer>
       </section>
     </main>
