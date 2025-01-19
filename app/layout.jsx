@@ -1,6 +1,7 @@
 // app/layout.js (Composant serveur)
 
 import ClientLayout from "./clientLayout";
+import ResourcePreloader from '../components/ResourcePreloader';
 
 export const metadata = {
   title: "M3dev4",
@@ -41,8 +42,25 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="fr">
+    <html lang="en">
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/MangoGrotesque-Regular.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/NeueMontreal-Light.otf"
+          as="font"
+          type="font/otf"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body>
+        <ResourcePreloader />
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

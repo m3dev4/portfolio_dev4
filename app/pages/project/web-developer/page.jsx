@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef, useState, Suspense } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./wb.css";
 import "../project.css";
 import Link from "next/link";
-import dynamic from 'next/dynamic';
+import Header from "../../../../components/header/header";
 import localFont from "next/font/local";
 import Image from "next/image";
 import gsap from "gsap";
@@ -33,12 +33,6 @@ const containerVariant = {
     transition: { duration: 0.5, ease: "easeOut" },
   },
 };
-
-// Chargement dynamique des composants lourds
-const Header = dynamic(() => import("../../../../components/header/header"), {
-  loading: () => <div className="h-20"></div>, // Placeholder pendant le chargement
-  ssr: false
-});
 
 const Webdeveloper = () => {
   const contentRef = useRef(null);
@@ -160,17 +154,13 @@ const Webdeveloper = () => {
         viewport={{ once: true }}
         className="overflow-hidden relative flex flex-col items-center justify-center h-screen min-h-10 ctn hero"
       >
-        <div className="self-end flex h-full max-w-[50vw] items-center mb-version justify-center pointer-events-none z-20 right-0">
+        <div className="self-end flex h-full max-w-[50vw] items-center mb-version  justify-center pointer-events-none z-20 right-0 ">
           <Image
             src="/pattern/webdev.png"
-            alt="web dev"
+            alt="wbe dev"
             width={700}
             height={700}
             className="object-cover img-hero h-auto select-none w-full pointer-events-none animate-float"
-            priority
-            loading="eager"
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRg..."
           />
         </div>
         <div className="overflow-hidden absolute mt-4 is-title">
@@ -246,9 +236,7 @@ const Webdeveloper = () => {
         </div>
       </motion.section>
       <section className="grid prj h-auto ctn self-start">
-        <Suspense fallback={<div>Loading projects...</div>}>
-          <WebDevProject />
-        </Suspense>
+        <WebDevProject />
       </section>
       <section className="w-full ">
         <div className="flex items-center flex-col justify-center pb-32 m-auto">
@@ -277,9 +265,6 @@ const Webdeveloper = () => {
                     width={350}
                     height={350}
                     className="absolute inset-0 object-cover m-auto pattern-view animate-rotate"
-                    loading="lazy"
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRg..."
                   />
                   <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
                     Product Design
@@ -331,13 +316,10 @@ const Webdeveloper = () => {
                 >
                   <Image
                     src="/pattern/mobileapp.png"
-                    alt="mobile app"
+                    alt="design"
                     width={350}
                     height={350}
                     className="absolute inset-0 object-cover m-auto pattern-view animate-float"
-                    loading="lazy"
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRg..."
                   />
                   <span className="whitespace-nowrap font-thin text-custom-pink transition-all h-full ">
                     Mobile App
@@ -385,5 +367,4 @@ const Webdeveloper = () => {
   );
 };
 
-// Optimisation du composant avec memo
-export default React.memo(Webdeveloper);
+export default Webdeveloper;

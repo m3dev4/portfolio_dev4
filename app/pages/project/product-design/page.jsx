@@ -365,7 +365,7 @@ const DesignProduct = () => {
       </section>
       <footer className="flex justify-between items-center px-7 text-white font-bold">
         <span>Made by @M3dev4</span>
-        ©2025 M.Lo
+        ©2024 M.Lo
       </footer>
     </main>
   );
