@@ -397,20 +397,20 @@ const About = () => {
   return (
     <main className={`${isExplored ? "overflow-x-hidden" : "noscroll"}`}>
       <header className="frame" ref={frameRef}>
-        <div className="flex space-between items-center  mx-auto ">
-          <Link href="/" className=" absolute top-0 py-9 left-0">
-            <span
-              className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotesqueMedium.className}`}
-            >
-              M.Lo
-            </span>
-          </Link>
-          <div className="absolute top-0 max-sm:-mt-6">
-            <Link href="#">
-            <Header />
+        <header className="fixed flex justify-between items-center left-0 z-50 top-0">
+          <div className="flex  space-between items-center  mx-auto ">
+            <Link href="/" className="mt-8 max-sm:-ml-20">
+              <span
+                className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotesqueMedium.className}`}
+              >
+                M.Lo
+              </span>
             </Link>
+            <div className="absolute top-0 ">
+             <a> <Header /></a>
+            </div>
           </div>
-        </div>
+        </header>
       </header>
       <section className="intro">
         <div className="gride" ref={gridRef}>
@@ -763,8 +763,8 @@ const About = () => {
           </motion.p>
           <AboutSkill />
           <div className="w-full h-full">
-       <SpotlightPreview />
-      </div>
+            <SpotlightPreview />
+          </div>
         </div>
         <footer className="content__footer text-white font-bold">
           <span>Made by @M3dev4</span>

@@ -1,6 +1,20 @@
 {
   "name": "portfolio_dev4",
   "version": "0.1.0",
+  "author": "Mouhamed Lo",
+  "license": "MIT",
+  "homepage": "https://m3dev4.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/m3dev4/portfolio_dev4.git"
+  },
+  "keywords": [
+    "portfolio",
+    "mouhamed lo",
+    "web developer",
+    "mobile developer",
+    "full stack developer"
+  ],
   "private": true,
   "scripts": {
     "dev": "next dev",
