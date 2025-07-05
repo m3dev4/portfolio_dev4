@@ -9,6 +9,7 @@ import CustomCursor from "../../../components/customCursor";
 import { useScroll, motion, useTransform } from "framer-motion";
 import Image from "next/image";
 import gsap from "gsap";
+import { SpinningText } from "components/ui/spinning";
 
 const mangoGrotesqueMedium = localFont({
   src: "../../fonts/MangoGrotesque-Medium.ttf",
@@ -51,7 +52,7 @@ const Project = () => {
             <span
               className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotesqueMedium.className}`}
             >
-              M.Lo
+              <SpinningText>M.LO</SpinningText>
             </span>
           </Link>
           <div className="absolute top-0">

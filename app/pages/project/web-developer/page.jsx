@@ -133,16 +133,16 @@ const Webdeveloper = () => {
   return (
     <main className="bg-[#0e090d] w-full h-full min-h-screen">
       <CustomCursor />
-      <header className="fixed flex justify-between items-center left-0 z-50 top-0">
-        <div className="flex space-between items-center mx-auto ">
-          <Link href="/" className="mt-8 max-sm:-ml-20">
+      <header className="sticky w-full backdrop-blur-sm  h-10 flex justify-between items-center left-0 z-50 top-0">
+        <div className="flex justify-start items-start mx-auto ">
+          <Link href="/" className="mt-8 max-sm:-ml-20 ">
             <span
-              className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotes.className}`}
+              className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden absolute left-0 -z-50 ${mangoGrotes.className}`}
             >
               M.Lo
             </span>
           </Link>
-          <div className="absolute top-0">
+          <div className="absolute top-0 ">
             <Header />
           </div>
         </div>

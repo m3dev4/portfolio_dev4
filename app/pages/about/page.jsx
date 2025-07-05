@@ -10,7 +10,10 @@ import AboutSkill from "../../../components/AboutSkill";
 import { motion } from "framer-motion";
 import localFont from "next/font/local";
 import Header from "../../../components/header/header";
-import { SpotlightPreview } from "../../../components/SpotlightPreview";
+import Experience from "../../../components/experience";
+import { Ripple } from "components/ui/ripple";
+import { VelocityScroll } from "components/ui/velocity";
+import { SpinningText } from "components/ui/spinning";
 
 gsap.registerPlugin(Flip);
 
@@ -403,11 +406,14 @@ const About = () => {
               <span
                 className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotesqueMedium.className}`}
               >
-                M.Lo
+                <SpinningText>M.LO</SpinningText>
               </span>
             </Link>
             <div className="absolute top-0 ">
-             <a> <Header /></a>
+              <a>
+                {" "}
+                <Header />
+              </a>
             </div>
           </div>
         </header>
@@ -738,7 +744,7 @@ const About = () => {
             variants={fadeIn}
             className={`max-w-[700px] text-[1.5rem] ml-auto m-0 leading-[1.4] text-[#f1dada] ${nueveMontrealFont.className}`}
           >
-            Ingénieur logiciel avec 3 ans d'expérience dans la création
+            Ingénieur logiciel avec 2 ans d'expérience dans la création
             d'applications web performantes. Spécialisé dans l'utilisation de
             JavaScript et de ses frameworks comme React et Node.js, je conçois
             des interfaces dynamiques et intègre des animations pour une
@@ -752,18 +758,27 @@ const About = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5 }}
             variants={fadeIn}
-            className={`max-w-[1000px] text-[2rem] max-sm:text-[17px]  max-sm:max-w-[120%] max:sm:pr-20 font-bold text-[#f1dada] ${nueveMontrealFont.className}`}
+            className={`max-w-[1000px] text-[2rem] max-sm:text-[17px] -tracking-tighter  max-sm:max-w-[120%] max:sm:pr-20 font-bold text-[#f1dada] ${nueveMontrealFont.className}`}
           >
-            Je suis né à Dakar, Sénégal, et ma passion pour le développement
-            logiciel a débuté en 2020. Depuis, je me suis spécialisé dans le
-            développement frontend et backend, en particulier dans tout ce qui
-            touche aux aspects visuels des sites web, aux animations, et à
-            l'optimisation des interfaces. Mon objectif est de créer des
-            expériences utilisateurs à la fois captivantes et performantes.
+            Né à Dakar, j'ai commencé mon voyage dans le développement en 2022
+            avec la formation IBM Full Stack sur Coursera. Cette formation
+            intensive de deux ans a été le tremplin de ma carrière en
+            développement web et technologies émergentes.
           </motion.p>
           <AboutSkill />
-          <div className="w-full h-full">
-            <SpotlightPreview />
+          <Experience />
+
+          <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg my-11 bg-background">
+            <Ripple />
+            <div className="absolute left-0 flex flex-col w-full overflow-hidden items-center justify-center">
+              <VelocityScroll >
+                {" "}
+                Continuez à naviguer pour découvrir mes réalisations dans la
+                section "Work".
+              </VelocityScroll>
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div>
+            </div>
           </div>
         </div>
         <footer className="content__footer text-white font-bold">

@@ -38,6 +38,15 @@ const projects = [
     img2: "/images/syntek-illust-2.png",
   },
   {
+    title: "SmartCV",
+    description:
+      "Un générateur de CV moderne, simple et efficace et open-source qui simplifie le processus de création, de mise à jour et de partage de votre CV.",
+    lien: "https://smartcv-74h9.onrender.com/",
+    img: "/images/smartcv_illust_1.png",
+    img2: "/images/smartcv_illust_2.png",
+    img3: "/images/smartcv_illust_3.png",
+  },
+  {
     title: "Conteo",
     description:
       "Conteo est une plateforme immersive dédiée aux passionnés d'histoires. Inspirée de Wattpad, elle offre un espace unique où les lecteurs peuvent découvrir et suivre des récits captivants. Que vous soyez amateur de romance, de science-fiction, de fantasy ou d'aventure, Conteo regorge d'histoires pour tous les goûts. Conteo est conçu pour vous plonger dans des mondes imaginaires riches et variés, tout en rendant la lecture accessible à tous.",
@@ -197,7 +206,7 @@ const WebDevProject = () => {
                   <Image
                     src={project.img}
                     alt={project.title}
-                    width={1080}
+                    width={900}
                     height={1080}
                     className="object-cover "
                   />
@@ -218,7 +227,28 @@ const WebDevProject = () => {
                   <Image
                     src={project.img2}
                     alt={project.title}
-                    width={1080}
+                    width={900}
+                    height={1080}
+                    className="object-cover"
+                  />
+                </motion.div>
+              </motion.div>
+            )}
+            {project.title === "SmartCV" && (
+              <motion.div
+                className="flex self-stretch gap-8 overflow-hidden"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+              >
+                <motion.div
+                  className="rounded-[.5em] relative overflow-hidden w-full"
+                  variants={imageVariants}
+                >
+                  <Image
+                    src={project.img3}
+                    alt={project.title}
+                    width={900}
                     height={1080}
                     className="object-cover"
                   />

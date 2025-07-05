@@ -4,8 +4,7 @@ import Image from "next/image";
 import { iconTech } from "../constants";
 import { motion } from "framer-motion";
 import localFont from "next/font/local";
-import dynamic from 'next/dynamic';
-import { SpotlightPreview } from "./SpotlightPreview";
+
 
 // Chargement dynamique de WorldMapDemo
 

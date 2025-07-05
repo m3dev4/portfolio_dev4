@@ -12,6 +12,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomCursor from "../../../../components/customCursor";
 import { useInView, motion, useScroll, useTransform } from "framer-motion";
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 const mangoGrotes = localFont({
@@ -140,7 +141,6 @@ const MobileApp = () => {
             <span
               className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotes.className}`}
             >
-              M.Lo
             </span>
           </Link>
           <div className="absolute top-0">

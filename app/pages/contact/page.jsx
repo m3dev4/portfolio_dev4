@@ -14,6 +14,7 @@ import Header from ".././../../components/header/header"
 import { BackgroundLines } from "../../../components/ui/background-ilne";
 import { CoverDemo } from "../../../components/faster";
 
+
 const popinsFont = localFont({
   src: "../../fonts/Poppins-Variable.ttf",
 });
@@ -110,7 +111,7 @@ export default function Home() {
             <span
               className={` uppercase px-28 text-[60px] max-sm:absolute max:sm:left-0 text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotesqueMedium.className}`}
             >
-              M.Lo
+             
             </span>
           </Link>
           <div className="absolute top-0">
