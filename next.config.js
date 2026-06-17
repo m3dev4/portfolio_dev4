@@ -19,8 +19,6 @@ const nextConfig = {
     return config;
   },
   experimental: {
-    optimizeFonts: true,
-    optimizeImages: true,
     scrollRestoration: true,
   }
 };

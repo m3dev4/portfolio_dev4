@@ -10,11 +10,7 @@ import AboutSkill from "../../../components/AboutSkill";
 import { motion } from "framer-motion";
 import localFont from "next/font/local";
 import Header from "../../../components/header/header";
-import Experience from "../../../components/experience";
-import { Ripple } from "components/ui/ripple";
-import { VelocityScroll } from "components/ui/velocity";
 import { SpinningText } from "components/ui/spinning";
-
 gsap.registerPlugin(Flip);
 
 const nueveMontrealFont = localFont({
@@ -94,10 +90,7 @@ const About = () => {
   const calculateMappedScale = () => {
     const centerScale = 1;
     const edgeScale = 0.95;
-    return (
-      centerScale -
-      Math.abs((mousePos.x / winsize.width) * 2 - 1) * (centerScale - edgeScale)
-    );
+    return centerScale - Math.abs((mousePos.x / winsize.width) * 2 - 1) * (centerScale - edgeScale);
   };
 
   const calculateMappedBrightness = () => {
@@ -140,11 +133,7 @@ const About = () => {
         if (config[prop]) {
           style[prop].current = mappedValues[prop];
           const amt = prop === "scale" ? style.scaleAmt : style.amt;
-          style[prop].previous = lerp(
-            style[prop].previous,
-            style[prop].current,
-            amt
-          );
+          style[prop].previous = lerp(style[prop].previous, style[prop].current, amt);
         }
       }
 
@@ -152,12 +141,9 @@ const About = () => {
       if (config.translateX) gsapSettings.x = style.translateX.previous;
       if (config.skewX) gsapSettings.skewX = style.skewX.previous;
       if (config.scale) gsapSettings.scale = style.scale.previous;
-      if (config.contrast)
-        gsapSettings.filter = `contrast(${style.contrast.previous}%)`;
+      if (config.contrast) gsapSettings.filter = `contrast(${style.contrast.previous}%)`;
       if (config.brightness)
-        gsapSettings.filter = `${
-          gsapSettings.filter ? gsapSettings.filter + " " : ""
-        }brightness(${style.brightness.previous}%)`;
+        gsapSettings.filter = `${gsapSettings.filter ? gsapSettings.filter + " " : ""}brightness(${style.brightness.previous}%)`;
 
       gsap.set(row, gsapSettings);
     });
@@ -195,8 +181,7 @@ const About = () => {
 
     const middleRowItems = middleRow.querySelectorAll(".row__item");
     const middleItemIndex = Math.floor(middleRowItems.length / 2);
-    const middleItemInner =
-      middleRowItems[middleItemIndex]?.querySelector(".row__item-inner");
+    const middleItemInner = middleRowItems[middleItemIndex]?.querySelector(".row__item-inner");
     const middleItemImage = middleItemInner?.querySelector(".row__item-img");
 
     if (!middleItemInner || !middleItemImage) {
@@ -207,10 +192,7 @@ const About = () => {
     const flipstate = Flip.getState(middleItemInner);
     fullviewRef.current.appendChild(middleItemInner);
 
-    const transContent = getCSSVariableValue(
-      contentRef.current,
-      "--trans-content"
-    );
+    const transContent = getCSSVariableValue(contentRef.current, "--trans-content");
 
     const tl = gsap.timeline();
 
@@ -220,7 +202,7 @@ const About = () => {
         ease: "power4",
         absolute: true,
         onComplete: stopRendering,
-      })
+      }),
     )
       .to(
         gridRef.current,
@@ -229,7 +211,7 @@ const About = () => {
           ease: "power4",
           opacity: 0.01,
         },
-        0
+        0,
       )
       .to(
         middleItemImage,
@@ -238,7 +220,7 @@ const About = () => {
           duration: 3,
           ease: "sine",
         },
-        "<-=0.45"
+        "<-=0.45",
       )
       .to(contentRef.current, {
         y: transContent,
@@ -260,7 +242,7 @@ const About = () => {
           duration: 0.9,
           ease: "power4",
         },
-        "<"
+        "<",
       );
 
     if (enterButtonRef.current) {
@@ -280,36 +262,28 @@ const About = () => {
       const numRows = gridRowsRef.current.length;
       const middleRowIndex = Math.floor(numRows / 2);
 
-      renderedStylesRef.current = Array.from(
-        { length: numRows },
-        (_, index) => {
-          const distanceFromMiddle = Math.abs(index - middleRowIndex);
-          const amt = Math.max(baseAmt - distanceFromMiddle * 0.03, minAmt);
-          const scaleAmt = Math.min(
-            baseAmt + distanceFromMiddle * 0.03,
-            maxAmt
-          );
+      renderedStylesRef.current = Array.from({ length: numRows }, (_, index) => {
+        const distanceFromMiddle = Math.abs(index - middleRowIndex);
+        const amt = Math.max(baseAmt - distanceFromMiddle * 0.03, minAmt);
+        const scaleAmt = Math.min(baseAmt + distanceFromMiddle * 0.03, maxAmt);
 
-          let style = { amt, scaleAmt };
+        let style = { amt, scaleAmt };
 
-          if (config.translateX) style.translateX = { previous: 0, current: 0 };
-          if (config.skewX) style.skewX = { previous: 0, current: 0 };
-          if (config.contrast) style.contrast = { previous: 100, current: 100 };
-          if (config.scale) style.scale = { previous: 1, current: 1 };
-          if (config.brightness)
-            style.brightness = { previous: 100, current: 100 };
+        if (config.translateX) style.translateX = { previous: 0, current: 0 };
+        if (config.skewX) style.skewX = { previous: 0, current: 0 };
+        if (config.contrast) style.contrast = { previous: 100, current: 100 };
+        if (config.scale) style.scale = { previous: 1, current: 1 };
+        if (config.brightness) style.brightness = { previous: 100, current: 100 };
 
-          return style;
-        }
-      );
+        return style;
+      });
 
       // Set initial size of middle image
       const middleRow = gridRowsRef.current[middleRowIndex];
       if (middleRow) {
         const middleRowItems = middleRow.querySelectorAll(".row__item");
         const middleItemIndex = Math.floor(middleRowItems.length / 2);
-        const middleItemImage =
-          middleRowItems[middleItemIndex]?.querySelector(".row__item-img");
+        const middleItemImage = middleRowItems[middleItemIndex]?.querySelector(".row__item-img");
         if (middleItemImage) {
           middleItemImage.classList.add("row__item-img--large");
         }
@@ -347,9 +321,7 @@ const About = () => {
     handleResize();
     window.addEventListener("resize", handleResize);
     window.addEventListener("mousemove", updateMousePosition);
-    window.addEventListener("touchmove", (ev) =>
-      updateMousePosition(ev.touches[0])
-    );
+    window.addEventListener("touchmove", (ev) => updateMousePosition(ev.touches[0]));
 
     startRendering();
     return () => {
@@ -366,7 +338,7 @@ const About = () => {
 
     allImages.forEach((img) => {
       // Vérifie si l'image n'est pas celle à exclure
-      if (!img.style.backgroundImage.includes("/images/med-sn.png")) {
+      if (!img.style.backgroundImage.includes("/images/me.png")) {
         // Position initiale aléatoire
         const randomY = Math.random() * 100 - 50; // Valeur entre -50 et 50
 
@@ -424,291 +396,186 @@ const About = () => {
             {Array.from({ length: 7 }).map((_, i) => (
               <div className="row__item" key={i}>
                 <div className="row__item-inner">
-                  <div
-                    className="row__item-img"
-                    style={{ backgroundImage: `url('/test/img/${i + 1}.jpg')` }}
-                  />
+                  <div className="row__item-img" style={{ backgroundImage: `url('/test/img/${i + 1}.jpg')` }} />
                 </div>
               </div>
             ))}
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/css.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/css.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/html.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/html.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/js.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/js.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/typescript.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/typescript.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/reactjs.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/reactjs.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/nextjs.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/nextjs.png')" }}></div>
               </div>
             </div>
           </div>
           <div className="row">
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/docker.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/docker.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/exjs.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/exjs.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/nodejs.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/nodejs.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/python.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/python.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/db.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/db.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/dbgraph.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/dbgraph.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/postgres.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/postgres.png')" }}></div>
               </div>
             </div>
           </div>
           <div className="row">
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/firebase.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/firebase.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/tailwind.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/tailwind.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/js.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/js.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/images/med-sn.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/images/me.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/typescript.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/typescript.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/html.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/html.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/css.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/css.png')" }}></div>
               </div>
             </div>
           </div>
           <div className="row">
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/python.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/python.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/git.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/git.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/reactjs.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/reactjs.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/nextjs.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/nextjs.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/firebase.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/firebase.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/docker.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/docker.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/exjs.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/exjs.png')" }}></div>
               </div>
             </div>
           </div>
           <div className="row">
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/nodejs.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/nodejs.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/dbgraph'.png)" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/dbgraph'.png)" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/git.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/git.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/tailwind'.png)" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/tailwind'.png)" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/icons/db.png')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/icons/db.png')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/8.jpg')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/test/img/8.jpg')" }}></div>
               </div>
             </div>
             <div class="row__item">
               <div class="row__item-inner">
-                <div
-                  class="row__item-img"
-                  style={{ backgroundImage: "url('/test/img/9.jpg')" }}
-                ></div>
+                <div class="row__item-img" style={{ backgroundImage: "url('/test/img/9.jpg')" }}></div>
               </div>
             </div>
           </div>
@@ -744,13 +611,12 @@ const About = () => {
             variants={fadeIn}
             className={`max-w-[700px] text-[1.5rem] ml-auto m-0 leading-[1.4] text-[#f1dada] ${nueveMontrealFont.className}`}
           >
-            Ingénieur logiciel avec 2 ans d'expérience dans la création
-            d'applications web performantes. Spécialisé dans l'utilisation de
-            JavaScript et de ses frameworks comme React et Node.js, je conçois
-            des interfaces dynamiques et intègre des animations pour une
-            expérience utilisateur fluide et immersive. Je me concentre sur la
-            qualité du code et l'optimisation des performances pour chaque
-            projet.
+            Développeur web en formation à Simplon Sénégal, je construis progressivement une vision complète du développement, de l’analyse
+            et la conception jusqu’à la réalisation d’applications web fonctionnelles. J’ai travaillé sur la modélisation, la structuration
+            de projets, la conception d’interfaces, ainsi que le développement backend avec Python/Django et Node.js. Aujourd’hui, je me
+            spécialise davantage dans l’écosystème JavaScript, avec une attention particulière portée à la création d’interfaces modernes,
+            dynamiques et responsive. Mon objectif est de concevoir des solutions web utiles, propres et évolutives, en alliant logique
+            métier, expérience utilisateur et qualité du code.
           </motion.p>
           <motion.p
             initial="hidden"
@@ -760,30 +626,20 @@ const About = () => {
             variants={fadeIn}
             className={`max-w-[1000px] text-[2rem] max-sm:text-[17px] -tracking-tighter  max-sm:max-w-[120%] max:sm:pr-20 font-bold text-[#f1dada] ${nueveMontrealFont.className}`}
           >
-            Né à Dakar, j'ai commencé mon voyage dans le développement en 2022
-            avec la formation IBM Full Stack sur Coursera. Cette formation
-            intensive de deux ans a été le tremplin de ma carrière en
-            développement web et technologies émergentes.
+            Basé à Dakar, j’ai commencé mon parcours dans le développement web en 2022, animé par l’envie de comprendre comment les idées
+            peuvent devenir des solutions digitales concrètes. Depuis, j’ai progressivement renforcé mes compétences à travers des projets
+            pratiques, en explorant le frontend, le backend et la conception d’applications web. Aujourd’hui, ma formation à Simplon Sénégal
+            me permet d’aller plus loin dans l’analyse, la conception, la structuration de projets et le développement d’applications
+            complètes avec des technologies comme JavaScript, Node.js, Python et Django.
           </motion.p>
           <AboutSkill />
-          <Experience />
+          {/* <Experience /> */}
 
-          <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg my-11 bg-background">
-            <Ripple />
-            <div className="absolute left-0 flex flex-col w-full overflow-hidden items-center justify-center">
-              <VelocityScroll >
-                {" "}
-                Continuez à naviguer pour découvrir mes réalisations dans la
-                section "Work".
-              </VelocityScroll>
-              <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
-              <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div>
-            </div>
-          </div>
+      
         </div>
         <footer className="content__footer text-white font-bold">
           <span>Made by @M3dev4</span>
-          ©2025 M.Lo
+          ©2026 M.Lo
         </footer>
       </section>
     </main>

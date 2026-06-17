@@ -29,7 +29,7 @@ export const metadata = {
     siteName: "Portfolio de Développeur Full Stack",
     images: [
       {
-        url: "/images/m3dev4.ico",
+        url: "/images/logo2.png",
         width: 40,
         height: 40,
       },

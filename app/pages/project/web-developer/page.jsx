@@ -131,7 +131,8 @@ const Webdeveloper = () => {
   const translateX = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
-    <main className="bg-[#0e090d] w-full h-full min-h-screen">
+      <>
+    <main className="bg-[#0e090d] w-full h-full min-h-screen relative">
       <CustomCursor />
       <header className="sticky w-full backdrop-blur-sm  h-10 flex justify-between items-center left-0 z-50 top-0">
         <div className="flex justify-start items-start mx-auto ">
@@ -238,7 +239,7 @@ const Webdeveloper = () => {
       <section className="grid prj h-auto ctn self-start">
         <WebDevProject />
       </section>
-      <section className="w-full ">
+      <section className="w-full h-screen">
         <div className="flex items-center flex-col justify-center pb-32 m-auto">
           <div className="divider divider--center mt-24">
             <div className="divider_line divider_line--left"></div>
@@ -359,11 +360,8 @@ const Webdeveloper = () => {
           </div>
         </div>
       </section>
-      <footer className="flex justify-between items-center px-7 text-white font-bold">
-        <span>Made by @M3dev4</span>
-        ©2025 M.Lo
-      </footer>
     </main>
+    </>
   );
 };
 

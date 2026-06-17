@@ -1,156 +1,106 @@
-/* eslint-disable react/no-unescaped-entities */
-"use client";
-import { useEffect, useRef, useState } from "react";
-import styles from "./page.module.scss";
-import Image from "next/image";
-import Lenis from "@studio-freight/lenis";
-import { useTransform, useScroll, motion } from "framer-motion";
+import React from "react";
 import Link from "next/link";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { SocialMedia } from "../../../constants";
 import localFont from "next/font/local";
-import Header from ".././../../components/header/header"
-import { BackgroundLines } from "../../../components/ui/background-ilne";
-import { CoverDemo } from "../../../components/faster";
-
-
-const popinsFont = localFont({
-  src: "../../fonts/Poppins-Variable.ttf",
-});
 
 const mangoGrotesqueMedium = localFont({
   src: "../../fonts/MangoGrotesque-Medium.ttf",
 });
-const mangoGrotesqueRegular = localFont({
-  src: "../../fonts/MangoGrotesque-Regular.ttf",
-});
-const mangoGrotesqueBold = localFont({
-  src: "../../fonts/MangoGrotesque-Bold.ttf",
-});
 
-const images = [
-  "1.png",
-  "2.png",
-  "11.jpg",
-  "3.png",
-  "4.png",
-  "5.jpg",
-  "6.jpg",
-  "8.jpg",
-  "9.jpg",
-  "10.jpg",
-  "12.jpg",
-];
-
-
-export default function Home() {
-  const picAniamtion = useRef(null);
-  const menuAnimation = useRef(null);
-  const gallery = useRef(null);
-  const [dimension, setDimension] = useState({ width: 0, height: 0 });
-  const [localTime, setLocalTime] = useState(new Date().toLocaleTimeString());
-
-  const { scrollYProgress } = useScroll({
-    target: gallery,
-    offset: ["start end", "end start"],
-  });
-  const { height } = dimension;
-  const y = useTransform(scrollYProgress, [0, 1], [0, height * 2]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, height * 3.3]);
-  const y3 = useTransform(scrollYProgress, [0, 1], [0, height * 1.25]);
-  const y4 = useTransform(scrollYProgress, [0, 1], [0, height * 3]);
-
-  useEffect(() => {
-    const lenis = new Lenis();
-
-    const raf = (time) => {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    };
-
-    const resize = () => {
-      setDimension({ width: window.innerWidth, height: window.innerHeight });
-    };
-
-    window.addEventListener("resize", resize);
-    requestAnimationFrame(raf);
-    resize();
-
-    return () => {
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setLocalTime(new Date().toLocaleTimeString());
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  useGSAP(() => {
-    const tl = gsap.timeline();
-    tl.fromTo(
-      picAniamtion.current,
-      { opacity: 0, x: -50 },
-      { opacity: 1, x: 0, duration: 1, delay: 2, ease: "power2.out" }
-    );
-    tl.fromTo(
-      menuAnimation.current,
-      { opacity: 0, x: 50 },
-      { opacity: 1, x: 0, duration: 1, ease: "power2.out" }
-    );
-  });
-
+const page = () => {
   return (
-    <main className="bg-layout">
-      <header className="fixed flex justify-between items-center left-0 z-50 top-0">
-        <div className="flex  space-between items-center  mx-auto ">
-          <Link href="/" className="mt-8 max-sm:-ml-20">
-            <span
-              className={` uppercase px-28 text-[60px] max-sm:absolute max:sm:left-0 text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotesqueMedium.className}`}
-            >
-             
-            </span>
-          </Link>
-          <div className="absolute top-0">
-          <Header />
+    <div className="relative min-h-screen w-full bg-black overflow-hidden flex flex-col justify-end">
+      {/* Background Image Layer */}
+      <div className="absolute inset-0 z-0">
+        <div
+          style={{
+            backgroundImage: "url('/images/me.png')",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+          }}
+          className="w-full h-full opacity-70"
+        />
+        {/* Subtle gradient overlay to make the bottom card pop more */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+      </div>
+
+      {/* Content Card */}
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mb-6 md:mb-10">
+        <div className="w-full rounded-[2.5rem] bg-neutral-900/30 backdrop-blur-2xl border border-white/10 shadow-2xl overflow-hidden group transition-all duration-700">
+          <div className="flex flex-col md:flex-row items-center justify-center min-h-[350px] md:h-[450px] p-8 md:p-12 relative">
+            {/* Say Hello Section */}
+            <div className="flex-1 flex items-center justify-center w-full">
+              <a
+                href="mailto:mouhamedlo948@gmail.com"
+                className="group/hello flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-500 ease-out"
+              >
+                <span
+                  className={`${mangoGrotesqueMedium.className} text-7xl sm:text-8xl md:text-[10rem] lg:text-[13rem] xl:text-[15rem] text-white tracking-widest drop-shadow-2xl transition-all duration-300 group-hover/hello:text-neutral-300 leading-none`}
+                >
+                  Say Hello
+                </span>
+                <span className="text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] ml-4 md:ml-8 transition-transform duration-300 group-hover/hello:animate-bounce">
+                  👋
+                </span>
+              </a>
+            </div>
+
+            {/* Links Section */}
+            <div className="w-full mt-10 md:mt-0 md:absolute md:bottom-8 md:right-10 flex flex-col items-center md:items-end gap-4 z-20">
+              {/* Navigation */}
+              <div className="flex flex-wrap justify-center md:justify-end gap-6 text-sm uppercase tracking-widest text-neutral-300 font-medium">
+                <Link
+                  href="/"
+                  className="hover:text-white hover:underline underline-offset-4 decoration-white/30 transition-all duration-300"
+                >
+                  Accueil
+                </Link>
+                <Link
+                  href="/about"
+                  className="hover:text-white hover:underline underline-offset-4 decoration-white/30 transition-all duration-300"
+                >
+                  About
+                </Link>
+                <Link
+                  href="/project"
+                  className="hover:text-white hover:underline underline-offset-4 decoration-white/30 transition-all duration-300"
+                >
+                  Project
+                </Link>
+              </div>
+
+              {/* Socials */}
+              <div className="flex flex-wrap justify-center md:justify-end gap-6 text-sm tracking-widest mt-2 md:mt-0">
+                <Link
+                  href=""
+                  className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 hover:scale-105 transition-transform duration-300"
+                >
+                  Instagram
+                </Link>
+                <Link
+                  href=""
+                  className="font-bold text-neutral-400 hover:text-white transition-colors duration-300"
+                >
+                  X
+                </Link>
+                <Link
+                  href=""
+                  className="font-bold text-neutral-400 hover:text-white transition-colors duration-300"
+                >
+                  Github
+                </Link>
+                <Link
+                  href=""
+                  className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 hover:scale-105 transition-transform duration-300"
+                >
+                  LinkedIn
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-        
-      </header>
-      <div className="flex flex-col items-center justify-center pt-60">
-        <BackgroundLines className="bg-layout">
-          <CoverDemo />
-        </BackgroundLines>
       </div>
-      <div className={styles.spacer}></div>
-      <div ref={gallery} className={styles.gallery}>
-        <Column images={[images[0], images[1], images[2]]} y={y} />
-        <Column images={[images[3], images[4], images[5]]} y={y2} />
-        <Column images={[images[6], images[7], images[8]]} y={y3} />
-        <Column images={[images[9], images[10], images[11]]} y={y4} />
-      </div>
-      <div className={styles.spacer}></div>
-      <footer className="flex justify-between items-center px-7 text-white font-bold">
-          <span>Made by @M3dev4</span>
-          ©2024 M.Lo
-        </footer>
-    </main>
-  );
-}
-
-const Column = ({ images, y }) => {
-  return (
-    <motion.div className={styles.column} style={{ y }}>
-      {images.map((src, i) => {
-        return (
-          <div key={i} className={styles.imageContainer}>
-            <Image src={`/images/${src}`} alt="image" fill />
-          </div>
-        );
-      })}
-    </motion.div>
+    </div>
   );
 };
+
+export default page;

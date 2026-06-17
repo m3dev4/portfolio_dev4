@@ -5,17 +5,15 @@ import { iconTech } from "../constants";
 import { motion } from "framer-motion";
 import localFont from "next/font/local";
 
-
 // Chargement dynamique de WorldMapDemo
 
-
-const nueveMontrealFontLight = localFont({ src: "../app/fonts/NeueMontreal-Bold.otf"})
+const nueveMontrealFontLight = localFont({ src: "../app/fonts/NeueMontreal-Bold.otf" });
 
 // Déplacer les animations en dehors du composant
-  const fadeIn = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-  };
+const fadeIn = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0 },
+};
 
 // Composant pour les compétences pour éviter les re-renders inutiles
 const SkillSection = ({ title, skills }) => (
@@ -51,10 +49,10 @@ const InfiniteSlider = () => (
   <div className="overflow-hidden w-full py-5">
     <motion.div
       className="flex"
-      animate={{ x: ["0%", "-50%"] }}
+      animate={{ x: ["0%", "-100%"] }}
       transition={{
         repeat: Infinity,
-        duration: 30,
+        duration: 18,
         ease: "linear",
       }}
     >
@@ -94,20 +92,24 @@ const AboutSkill = () => {
   const skillsData = {
     webDev: {
       title: "Web Development",
-      skills: ["Front-End Development", "Back-End Development", "SEO"]
+      skills: ["Frontend Development", "JavaScript Ecosystem", "Responsive Interfaces"],
     },
     mobileDev: {
       title: "Mobile Development",
-      skills: ["React Native"]
+      skills: ["React Native", "Flutter"],
     },
-    security: {
-      title: "CyberSecurity",
-      skills: ["Pentesting", "Risk analysis and mitigation"]
+    backend: {
+      title: "Backend",
+      skills: ["Python / Django", "Node.js / Express", "API REST & Database"],
+    },
+    software: {
+      title: "Software Design",
+      skills: ["Analysis & Conception", "UML / System Design", "Project Architecture"],
     },
     design: {
       title: "Product Design",
-      skills: ["UX/UI Design", "Prototyping & System Design", "Fluid Developer Handoff"]
-    }
+      skills: ["UX/UI Design", "Prototyping", "Analysis & System Design"],
+    },
   };
 
   return (
@@ -118,8 +120,8 @@ const AboutSkill = () => {
             <h5 className="text-white">About</h5>
             <div className="table-row px-5"></div>
           </div>
-          
-          <div className="flex flex-col md:flex-row justify-evenly items-start py-5 w-full">
+
+          <div className="flex flex-col md:flex-row justify-evenly items-start py-5 gap-8 w-full">
             <motion.h2
               initial="hidden"
               whileInView="visible"
@@ -130,7 +132,7 @@ const AboutSkill = () => {
             >
               Skills
             </motion.h2>
-            
+
             <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 w-full max-w-6xl ${nueveMontrealFontLight.className}`}>
               {Object.values(skillsData).map((section, index) => (
                 <SkillSection key={index} {...section} />
@@ -145,22 +147,20 @@ const AboutSkill = () => {
             <h5>About</h5>
             <div className="table-row px-5"></div>
           </div>
-            <motion.h2
-              initial="hidden"
-              whileInView="visible"
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              variants={fadeIn}
+            transition={{ duration: 0.5 }}
+            variants={fadeIn}
             className="text-[40px] md:text-[50px] lg:text-[70px] flex-auto normal-case font-serif font-semibold mb-8"
-            >
-              ToolBox
-            </motion.h2>
+          >
+            ToolBox
+          </motion.h2>
 
           <InfiniteSlider />
         </motion.div>
       </div>
-
-      
     </div>
   );
 };

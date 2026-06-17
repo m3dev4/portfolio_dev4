@@ -11,7 +11,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomCursor from "../../../../components/customCursor";
 import { useInView, motion, useScroll, useTransform } from "framer-motion";
-
+import DesignProjects from "../../../../components/designProject";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,8 +21,6 @@ const mangoGrotes = localFont({
 const ppNueve = localFont({
   src: "../../../fonts/NeueMontreal-Light.otf",
 });
-
-const projects = [];
 
 const DesignProduct = () => {
   const contentRef = useRef(null);
@@ -140,9 +138,7 @@ const DesignProduct = () => {
           <Link href="/" className="mt-8 max-sm:-ml-20">
             <span
               className={` uppercase px-28 text-[60px] text-custom-pink pointer-events-auto text-nowrap overflow-hidden relative ${mangoGrotes.className}`}
-            >
-              
-            </span>
+            ></span>
           </Link>
           <div className="absolute top-0">
             <Header />
@@ -237,16 +233,11 @@ const DesignProduct = () => {
           </div>
         </div>
       </motion.section>
-      <section className="grid  h-auto  self-start">
-        <div className="flex items-center flex-col justify-start pb-32 m-auto">
-          {projects.length === 0 ? (
-            <p className="text-center  w-full text-custom-pink text-lg mt-8">
-              Des projets arrivent bientôt ! 😉
-            </p>
-          ) : null}
-        </div>
+      <section className="grid prj h-auto ctn self-start">
+        <DesignProjects />
       </section>
-      <section className="w-full">
+
+      <section className="w-full h-screen">
         <div className="flex items-center flex-col justify-center  m-auto">
           <div className="divider divider--center ">
             <div className="divider_line divider_line--left"></div>
@@ -364,10 +355,6 @@ const DesignProduct = () => {
           </div>
         </div>
       </section>
-      <footer className="flex justify-between items-center px-7 text-white font-bold">
-        <span>Made by @M3dev4</span>
-        ©2024 M.Lo
-      </footer>
     </main>
   );
 };
